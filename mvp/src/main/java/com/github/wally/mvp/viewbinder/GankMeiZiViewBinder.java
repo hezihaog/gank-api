@@ -37,7 +37,7 @@ public class GankMeiZiViewBinder extends ItemViewBinder<GankMeiZiListBean.MeiZi,
     protected void onBindViewHolder(@NonNull final ViewHolder holder, @NonNull final GankMeiZiListBean.MeiZi meiZi) {
         Glide.with(holder.itemView.getContext())
                 .load(meiZi.getUrl())
-                .placeholder(R.drawable.shape_item_decoration)
+                .placeholder(R.drawable.ic_default_image)
                 .crossFade()
                 .into(holder.mImageView);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
