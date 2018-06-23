@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 
 import com.bumptech.glide.Glide;
+import com.github.wally.base.util.StatusBarUtil;
 import com.github.wally.mvp.R;
 import com.github.wally.mvp.base.BaseMvpFragment;
 import com.github.wally.mvp.base.BasePresenter;
@@ -40,17 +41,6 @@ public class GankMeiZiDetailFragment extends BaseMvpFragment<GankMeiZiDetailCont
     private boolean isHideToolBar = false;
 
     @Override
-    public int onLayoutId() {
-        return R.layout.fragment_gank_meizi_detail;
-    }
-
-    @Override
-    public void onFindView(View rootView) {
-        super.onFindView(rootView);
-        mImageView = getView().findViewById(R.id.image_iv);
-    }
-
-    @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         Disposable disposable = Observable
@@ -63,6 +53,23 @@ public class GankMeiZiDetailFragment extends BaseMvpFragment<GankMeiZiDetailCont
                     }
                 });
         ((BasePresenter) mPresenter).addSubscription(disposable);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        StatusBarUtil.showStatusBar(getActivity());
+    }
+
+    @Override
+    public int onLayoutId() {
+        return R.layout.fragment_gank_meizi_detail;
+    }
+
+    @Override
+    public void onFindView(View rootView) {
+        super.onFindView(rootView);
+        mImageView = getView().findViewById(R.id.image_iv);
     }
 
     @Override
@@ -98,16 +105,20 @@ public class GankMeiZiDetailFragment extends BaseMvpFragment<GankMeiZiDetailCont
     }
 
     private void toggleToolBar() {
+        //隐藏
         if (!isHideToolBar) {
             mToolbar.animate()
                     .translationY(-mToolbar.getHeight())
                     .setInterpolator(new AccelerateInterpolator())
                     .start();
+            StatusBarUtil.hideStatusBar(getActivity());
         } else {
+            //显示
             mToolbar.animate()
                     .translationY(0)
                     .setInterpolator(new AccelerateInterpolator())
                     .start();
+            StatusBarUtil.showStatusBar(getActivity());
         }
         isHideToolBar = !isHideToolBar;
     }
