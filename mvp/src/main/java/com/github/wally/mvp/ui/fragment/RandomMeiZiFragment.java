@@ -3,6 +3,7 @@ package com.github.wally.mvp.ui.fragment;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
@@ -64,7 +65,13 @@ public class RandomMeiZiFragment extends BaseMvpListFragment<RandomMeiZiListCont
     @Override
     public void onBindViewContent() {
         super.onBindViewContent();
-        ToolBarHelper toolBarHelper = ToolBarHelper.newBuilder(getView(), R.id.tool_bar)
+        ToolBarHelper toolBarHelper = ToolBarHelper.newBuilder(getView(), R.id.tool_bar, new ToolBarHelper.ConfigCallbackAdapter() {
+            @Override
+            public void onConfigBefore(Toolbar toolbar) {
+                super.onConfigBefore(toolbar);
+                ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
+            }
+        })
                 .withNavigationIconDrawable(R.drawable.ic_action_back)
                 .withNavigationIconOnClick(new View.OnClickListener() {
                     @Override

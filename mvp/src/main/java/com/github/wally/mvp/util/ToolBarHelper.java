@@ -14,6 +14,7 @@ import android.view.View;
  */
 public class ToolBarHelper {
     private View rootView;
+    private ConfigCallback configCallback;
     private int toolBarId;
     private Drawable navigationIconDrawable;
     private View.OnClickListener navigationIconOnClick;
@@ -27,19 +28,22 @@ public class ToolBarHelper {
         this.toolBarId = builder.toolBarId;
         this.navigationIconDrawable = builder.navigationIconDrawable;
         this.navigationIconOnClick = builder.navigationIconOnClick;
+        this.configCallback = builder.configCallback;
     }
 
     private void apply() {
         Toolbar toolbar = this.rootView.findViewById(toolBarId);
+        this.toolbar = toolbar;
+        configCallback.onConfigBefore(toolbar);
         if (navigationIconDrawable != null) {
             toolbar.setNavigationIcon(navigationIconDrawable);
             toolbar.setNavigationOnClickListener(navigationIconOnClick);
         }
-        this.toolbar = toolbar;
+        configCallback.onConfigAfter(toolbar);
     }
 
-    public static Builder newBuilder(View rootView, int toolBarId) {
-        return new Builder(rootView, toolBarId);
+    public static Builder newBuilder(View rootView, int toolBarId, ConfigCallback configCallback) {
+        return new Builder(rootView, toolBarId, configCallback);
     }
 
     public static class Builder {
@@ -52,6 +56,10 @@ public class ToolBarHelper {
          */
         private int toolBarId;
         /**
+         * 配置之前的一个回调，通常用于将ToolBar绑定在Activity的actionBar上
+         */
+        private ConfigCallback configCallback;
+        /**
          * 左边的导航Icon图标
          */
         private Drawable navigationIconDrawable;
@@ -60,9 +68,10 @@ public class ToolBarHelper {
          */
         private View.OnClickListener navigationIconOnClick;
 
-        public Builder(View rootView, int toolBarId) {
+        public Builder(View rootView, int toolBarId, ConfigCallback configCallback) {
             this.rootView = rootView;
             this.toolBarId = toolBarId;
+            this.configCallback = configCallback;
         }
 
         public Builder withNavigationIconDrawable(Drawable navigationIconDrawable) {
@@ -108,5 +117,36 @@ public class ToolBarHelper {
             apply();
         }
         return toolbar;
+    }
+
+    /**
+     * 配置回调
+     */
+    public interface ConfigCallback {
+        /**
+         * 配置开始前回调
+         */
+        void onConfigBefore(Toolbar toolbar);
+
+        /**
+         * 配置结束后回调
+         */
+        void onConfigAfter(Toolbar toolbar);
+    }
+
+    /**
+     * 配置回调空实现
+     */
+    public static class ConfigCallbackAdapter implements ConfigCallback {
+
+        @Override
+        public void onConfigBefore(Toolbar toolbar) {
+
+        }
+
+        @Override
+        public void onConfigAfter(Toolbar toolbar) {
+
+        }
     }
 }

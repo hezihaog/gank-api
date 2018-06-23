@@ -2,6 +2,7 @@ package com.github.wally.mvp.ui.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
@@ -61,13 +62,18 @@ public class GankMeiZiDetailFragment extends BaseMvpFragment<GankMeiZiDetailCont
                         toggleToolBar();
                     }
                 });
-        ((BasePresenter)mPresenter).addSubscription(disposable);
+        ((BasePresenter) mPresenter).addSubscription(disposable);
     }
 
     @Override
     public void onBindViewContent() {
         super.onBindViewContent();
-        ToolBarHelper toolBarHelper = ToolBarHelper.newBuilder(getView(), R.id.tool_bar)
+        ToolBarHelper toolBarHelper = ToolBarHelper.newBuilder(getView(), R.id.tool_bar, new ToolBarHelper.ConfigCallbackAdapter() {
+            @Override
+            public void onConfigBefore(Toolbar toolbar) {
+                ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+            }
+        })
                 .withNavigationIconDrawable(R.drawable.ic_action_back)
                 .withNavigationIconOnClick(new View.OnClickListener() {
                     @Override

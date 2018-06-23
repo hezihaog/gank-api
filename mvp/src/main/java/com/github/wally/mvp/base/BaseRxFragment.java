@@ -43,7 +43,10 @@ public abstract class BaseRxFragment extends SwipeBackFragment implements Layout
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(onLayoutId(), container, false);
+        View layout = inflater.inflate(onLayoutId(), container, false);
+        //设置为true才能回调onCreateOptionsMenu
+        setHasOptionsMenu(true);
+        return layout;
     }
 
     /**

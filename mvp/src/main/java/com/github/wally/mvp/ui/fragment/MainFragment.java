@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -45,7 +46,13 @@ public class MainFragment extends BaseRxFragment {
     @Override
     public void onBindViewContent() {
         super.onBindViewContent();
-        ToolBarHelper toolBarHelper = ToolBarHelper.newBuilder(getView(), R.id.tool_bar)
+        ToolBarHelper toolBarHelper = ToolBarHelper.newBuilder(getView(), R.id.tool_bar, new ToolBarHelper.ConfigCallbackAdapter() {
+            @Override
+            public void onConfigBefore(Toolbar toolbar) {
+                super.onConfigBefore(toolbar);
+                ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
+            }
+        })
                 .withNavigationIconDrawable(R.drawable.ic_action_menu)
                 .withNavigationIconOnClick(new View.OnClickListener() {
                     @Override
@@ -54,9 +61,8 @@ public class MainFragment extends BaseRxFragment {
                     }
                 })
                 .build();
-        Toolbar toolbar = toolBarHelper.getToolbar();
         //透明状态栏适配ToolBar
-        ImmersionBar.with(this).titleBar(toolbar);
+        ImmersionBar.with(MainFragment.this).titleBar(toolBarHelper.getToolbar());
         mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {

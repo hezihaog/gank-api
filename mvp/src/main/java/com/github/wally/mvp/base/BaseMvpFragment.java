@@ -39,8 +39,6 @@ public abstract class BaseMvpFragment<P extends IPresenter<V>, V extends IBaseVi
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View layout = super.onCreateView(inflater, container, savedInstanceState);
-        //设置为true才能回调onCreateOptionsMenu
-        setHasOptionsMenu(true);
         return attachToSwipeBack(layout);
     }
 
