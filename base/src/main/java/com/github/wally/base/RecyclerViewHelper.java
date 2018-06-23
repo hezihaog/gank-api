@@ -3,6 +3,8 @@ package com.github.wally.base;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 
+import com.github.wally.base.adapter.ListScrollImageRequestListener;
+
 import java.util.ArrayList;
 
 import me.drakeet.multitype.MultiTypeAdapter;
@@ -102,6 +104,8 @@ public class RecyclerViewHelper {
                 }
             }
         });
+        //增加列表惯性滚动时，暂停请求，停止和拽托时恢复请求
+        mRecyclerView.addOnScrollListener(new ListScrollImageRequestListener());
     }
 
     /**

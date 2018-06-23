@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 
 import com.bumptech.glide.Glide;
+import com.github.wally.base.util.ImageDisplayUtil;
 import com.github.wally.base.util.StatusBarUtil;
 import com.github.wally.mvp.R;
 import com.github.wally.mvp.base.BaseMvpFragment;
@@ -17,6 +18,7 @@ import com.github.wally.mvp.http.IoToMainScheduler;
 import com.github.wally.mvp.mvp.contract.GankMeiZiDetailContract;
 import com.github.wally.mvp.mvp.presenter.GankMeiZiDetailPresenter;
 import com.github.wally.mvp.util.ToolBarHelper;
+import com.github.wally.mvp.widget.RotateCircleProgressBar;
 import com.gyf.barlibrary.ImmersionBar;
 
 import java.util.concurrent.TimeUnit;
@@ -38,6 +40,8 @@ import uk.co.senab.photoview.PhotoViewAttacher;
 public class GankMeiZiDetailFragment extends BaseMvpFragment<GankMeiZiDetailContract.Presenter, GankMeiZiDetailContract.View> implements GankMeiZiDetailContract.View {
     private PhotoView mImageView;
     private Toolbar mToolbar;
+    private RotateCircleProgressBar mLoadingView;
+
     private boolean isHideToolBar = false;
 
     @Override
@@ -69,7 +73,8 @@ public class GankMeiZiDetailFragment extends BaseMvpFragment<GankMeiZiDetailCont
     @Override
     public void onFindView(View rootView) {
         super.onFindView(rootView);
-        mImageView = getView().findViewById(R.id.image_iv);
+        mImageView = findView(R.id.image_iv);
+        mLoadingView = findView(R.id.loading_iv);
     }
 
     @Override
@@ -141,7 +146,15 @@ public class GankMeiZiDetailFragment extends BaseMvpFragment<GankMeiZiDetailCont
 
     @Override
     public void showMeiZiDetail(DisplayMeiZiImageBean bean) {
-        Glide.with(getActivity()).load(bean.getUrl()).into(mImageView);
+        mLoadingView.setVisibility(View.VISIBLE);
+        ImageDisplayUtil.display(getActivity(), bean.getUrl(), mImageView
+                , new ImageDisplayUtil.DisplayCallbackAdapter() {
+                    @Override
+                    public void onReady() {
+                        super.onReady();
+                        mLoadingView.setVisibility(View.GONE);
+                    }
+                });
     }
 
     @Override

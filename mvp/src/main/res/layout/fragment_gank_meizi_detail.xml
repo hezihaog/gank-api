@@ -11,5 +11,11 @@
         android:layout_height="match_parent"
         android:adjustViewBounds="true" />
 
+    <com.github.wally.mvp.widget.RotateCircleProgressBar
+        android:id="@+id/loading_iv"
+        android:layout_width="33dp"
+        android:layout_height="33dp"
+        android:layout_centerInParent="true"/>
+
     <include layout="@layout/layout_tool_bar" />
 </RelativeLayout>
