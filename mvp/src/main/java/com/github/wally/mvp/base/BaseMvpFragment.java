@@ -32,14 +32,13 @@ public abstract class BaseMvpFragment<P extends IPresenter<V>, V extends IBaseVi
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        onLayoutBefore();
         mWaitDialogHelper = WaitDialogHelper.create(activity);
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View layout = inflater.inflate(onLayoutId(), container, false);
+        View layout = super.onCreateView(inflater, container, savedInstanceState);
         //设置为true才能回调onCreateOptionsMenu
         setHasOptionsMenu(true);
         return attachToSwipeBack(layout);
@@ -49,9 +48,6 @@ public abstract class BaseMvpFragment<P extends IPresenter<V>, V extends IBaseVi
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mPresenter.attachView((V) this);
-        onFindView(view);
-        onBindViewContent();
-        onLayoutAfter();
     }
 
     @Override
@@ -69,10 +65,6 @@ public abstract class BaseMvpFragment<P extends IPresenter<V>, V extends IBaseVi
 
     public P getPresenter() {
         return mPresenter;
-    }
-
-    public <W extends View> W findView(int id) {
-        return getView().findViewById(id);
     }
 
     @Override

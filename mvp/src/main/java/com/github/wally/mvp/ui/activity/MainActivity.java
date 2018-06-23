@@ -5,6 +5,7 @@ import android.os.Bundle;
 import com.github.wally.mvp.R;
 import com.github.wally.mvp.base.BaseRxActivity;
 import com.github.wally.mvp.ui.fragment.GankMeiZiListFragment;
+import com.github.wally.mvp.ui.fragment.MainFragment;
 import com.gyf.barlibrary.ImmersionBar;
 
 import me.yokeyword.fragmentation.anim.DefaultVerticalAnimator;
@@ -18,7 +19,7 @@ public class MainActivity extends BaseRxActivity {
         setContentView(R.layout.activity_main);
         ImmersionBar.with(this).init();
         if (findFragment(GankMeiZiListFragment.class) == null) {
-            loadRootFragment(R.id.root, new GankMeiZiListFragment());
+            loadRootFragment(R.id.root, new MainFragment());
         }
     }
 

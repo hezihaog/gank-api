@@ -4,7 +4,9 @@ import android.os.Bundle;
 import android.support.annotation.CheckResult;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.trello.rxlifecycle2.LifecycleProvider;
 import com.trello.rxlifecycle2.LifecycleTransformer;
@@ -38,6 +40,12 @@ public abstract class BaseRxFragment extends SwipeBackFragment implements Layout
         }
     }
 
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        return inflater.inflate(onLayoutId(), container, false);
+    }
+
     /**
      * 子类复写该方法返回true开启侧滑返回
      */
@@ -45,6 +53,9 @@ public abstract class BaseRxFragment extends SwipeBackFragment implements Layout
         return false;
     }
 
+    public <W extends View> W findView(int id) {
+        return getView().findViewById(id);
+    }
 
     @Override
     public void onLayoutBefore() {
@@ -91,6 +102,7 @@ public abstract class BaseRxFragment extends SwipeBackFragment implements Layout
     public void onAttach(android.app.Activity activity) {
         super.onAttach(activity);
         lifecycleSubject.onNext(FragmentEvent.ATTACH);
+        onLayoutBefore();
     }
 
     @Override
@@ -103,6 +115,9 @@ public abstract class BaseRxFragment extends SwipeBackFragment implements Layout
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         lifecycleSubject.onNext(FragmentEvent.CREATE_VIEW);
+        onFindView(view);
+        onBindViewContent();
+        onLayoutAfter();
     }
 
     @Override

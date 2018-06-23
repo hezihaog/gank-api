@@ -2,7 +2,6 @@ package com.github.wally.mvp.ui.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
@@ -15,6 +14,7 @@ import com.github.wally.mvp.bean.gank.DisplayMeiZiImageBean;
 import com.github.wally.mvp.http.IoToMainScheduler;
 import com.github.wally.mvp.mvp.contract.GankMeiZiDetailContract;
 import com.github.wally.mvp.mvp.presenter.GankMeiZiDetailPresenter;
+import com.github.wally.mvp.util.ToolBarHelper;
 import com.gyf.barlibrary.ImmersionBar;
 
 import java.util.concurrent.TimeUnit;
@@ -46,7 +46,6 @@ public class GankMeiZiDetailFragment extends BaseMvpFragment<GankMeiZiDetailCont
     @Override
     public void onFindView(View rootView) {
         super.onFindView(rootView);
-        mToolbar = getView().findViewById(R.id.tool_bar);
         mImageView = getView().findViewById(R.id.image_iv);
     }
 
@@ -68,14 +67,16 @@ public class GankMeiZiDetailFragment extends BaseMvpFragment<GankMeiZiDetailCont
     @Override
     public void onBindViewContent() {
         super.onBindViewContent();
-        ((AppCompatActivity) getActivity()).setSupportActionBar(mToolbar);
-        mToolbar.setNavigationIcon(R.drawable.ic_action_back);
-        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getActivity().onBackPressed();
-            }
-        });
+        ToolBarHelper toolBarHelper = ToolBarHelper.newBuilder(getView(), R.id.tool_bar)
+                .withNavigationIconDrawable(R.drawable.ic_action_back)
+                .withNavigationIconOnClick(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        getActivity().onBackPressed();
+                    }
+                })
+                .build();
+        mToolbar = toolBarHelper.getToolbar();
         ImmersionBar.with(this).titleBar(mToolbar);
         //长按点击事件
         mImageView.setOnPhotoTapListener(new PhotoViewAttacher.OnPhotoTapListener() {

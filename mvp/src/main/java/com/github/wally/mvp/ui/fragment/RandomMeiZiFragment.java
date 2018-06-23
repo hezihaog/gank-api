@@ -5,6 +5,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.github.wally.base.RecyclerViewHelper;
@@ -17,8 +18,10 @@ import com.github.wally.mvp.constants.GankRandomCategory;
 import com.github.wally.mvp.http.IDataSource;
 import com.github.wally.mvp.mvp.contract.RandomMeiZiListContract;
 import com.github.wally.mvp.mvp.presenter.GankRandomMeiZiListPresenter;
+import com.github.wally.mvp.util.ToolBarHelper;
 import com.github.wally.mvp.viewbinder.GankRandomMeiZiViewBinder;
 import com.github.wally.mvp.widget.RecyclerViewItemDecoration;
+import com.gyf.barlibrary.ImmersionBar;
 
 import me.drakeet.multitype.ClassLinker;
 import me.drakeet.multitype.ItemViewBinder;
@@ -61,6 +64,17 @@ public class RandomMeiZiFragment extends BaseMvpListFragment<RandomMeiZiListCont
     @Override
     public void onBindViewContent() {
         super.onBindViewContent();
+        ToolBarHelper toolBarHelper = ToolBarHelper.newBuilder(getView(), R.id.tool_bar)
+                .withNavigationIconDrawable(R.drawable.ic_action_back)
+                .withNavigationIconOnClick(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        getActivity().onBackPressed();
+                    }
+                })
+                .build();
+        Toolbar toolbar = toolBarHelper.getToolbar();
+        ImmersionBar.with(this).titleBar(toolbar);
         mRefreshBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -1,20 +1,11 @@
 package com.github.wally.mvp.ui.fragment;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 
 import com.github.wally.base.RecyclerViewHelper;
@@ -27,13 +18,10 @@ import com.github.wally.mvp.bean.gank.GankMeiZiListBean;
 import com.github.wally.mvp.http.IDataSource;
 import com.github.wally.mvp.mvp.contract.GankMeiZiListContract;
 import com.github.wally.mvp.mvp.presenter.GankMeiZiListPresenter;
-import com.github.wally.mvp.util.UIHelper;
 import com.github.wally.mvp.viewbinder.GankMeiZiViewBinder;
 import com.github.wally.mvp.widget.RecyclerViewItemDecoration;
-import com.gyf.barlibrary.ImmersionBar;
 
 import me.drakeet.multitype.MultiTypeAdapter;
-import me.yokeyword.fragmentation.SupportActivity;
 
 /**
  * Package: com.github.wally.mvp.ui.fragment
@@ -45,10 +33,7 @@ import me.yokeyword.fragmentation.SupportActivity;
  */
 public class GankMeiZiListFragment extends BaseMvpListFragment<GankMeiZiListContract.Presenter, GankMeiZiListContract.View> implements GankMeiZiListContract.View {
     private int mLastListPosition;
-
     private FloatingActionButton mFloatingActionButton;
-    private DrawerLayout mDrawerLayout;
-    private NavigationView mNavigationView;
 
     @Override
     public int onLayoutId() {
@@ -56,16 +41,14 @@ public class GankMeiZiListFragment extends BaseMvpListFragment<GankMeiZiListCont
     }
 
     @Override
-    protected GankMeiZiListContract.Presenter onCreatePresenter() {
-        return new GankMeiZiListPresenter();
+    public void onFindView(View rootView) {
+        super.onFindView(rootView);
+        mFloatingActionButton = findView(R.id.floating_action_btn);
     }
 
     @Override
-    public void onFindView(View rootView) {
-        super.onFindView(rootView);
-        mDrawerLayout = findView(R.id.drawer_layout);
-        mNavigationView = findView(R.id.navigation_view);
-        mFloatingActionButton = findView(R.id.floating_action_btn);
+    protected GankMeiZiListContract.Presenter onCreatePresenter() {
+        return new GankMeiZiListPresenter();
     }
 
     @Override
@@ -92,34 +75,6 @@ public class GankMeiZiListFragment extends BaseMvpListFragment<GankMeiZiListCont
                 getRecyclerViewHelper().moveToTop();
             }
         });
-        mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.random_mei_zi:
-                        UIHelper.showRandomMeiZiList((SupportActivity) getActivity());
-                        break;
-                    default:
-                        break;
-                }
-                mDrawerLayout.closeDrawer(GravityCompat.START);
-                return false;
-            }
-        });
-    }
-
-    @Override
-    protected void setupToolBar(Toolbar toolbar) {
-        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
-        toolbar.setNavigationIcon(R.drawable.ic_action_menu);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mDrawerLayout.openDrawer(GravityCompat.START);
-            }
-        });
-        //透明状态栏适配ToolBar
-        ImmersionBar.with(this).titleBar(toolbar);
     }
 
     @Override
@@ -200,35 +155,5 @@ public class GankMeiZiListFragment extends BaseMvpListFragment<GankMeiZiListCont
     @Override
     public void showError(Throwable throwable) {
 
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.tool_bar_menu, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_search:
-                return true;
-            case R.id.random_mei_zi:
-                UIHelper.showRandomMeiZiList((SupportActivity) getActivity());
-                return true;
-            default:
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public boolean onBackPressedSupport() {
-        if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
-            mDrawerLayout.closeDrawer(GravityCompat.START);
-            return true;
-        } else {
-            return super.onBackPressedSupport();
-        }
     }
 }
