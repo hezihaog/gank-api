@@ -1,6 +1,8 @@
 package com.github.wally.mvp.ui.fragment;
 
+import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -17,6 +19,7 @@ import android.view.View;
 
 import com.github.wally.base.RecyclerViewHelper;
 import com.github.wally.base.RecyclerViewScrollHelper;
+import com.github.wally.base.util.PositionUtil;
 import com.github.wally.base.widget.recyclerview.manager.FastScrollStaggeredGridLayoutManager;
 import com.github.wally.mvp.R;
 import com.github.wally.mvp.base.BaseMvpListFragment;
@@ -41,6 +44,8 @@ import me.yokeyword.fragmentation.SupportActivity;
  * Email: hezihao@linghit.com
  */
 public class GankMeiZiListFragment extends BaseMvpListFragment<GankMeiZiListContract.Presenter, GankMeiZiListContract.View> implements GankMeiZiListContract.View {
+    private int mLastListPosition;
+
     private FloatingActionButton mFloatingActionButton;
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
@@ -61,6 +66,21 @@ public class GankMeiZiListFragment extends BaseMvpListFragment<GankMeiZiListCont
         mDrawerLayout = findView(R.id.drawer_layout);
         mNavigationView = findView(R.id.navigation_view);
         mFloatingActionButton = findView(R.id.floating_action_btn);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt("key_position", mLastListPosition);
+    }
+
+    @Override
+    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+        super.onViewStateRestored(savedInstanceState);
+        if (savedInstanceState != null) {
+            mLastListPosition = savedInstanceState.getInt("key_position");
+            getRecyclerView().scrollToPosition(mLastListPosition);
+        }
     }
 
     @Override
@@ -140,6 +160,16 @@ public class GankMeiZiListFragment extends BaseMvpListFragment<GankMeiZiListCont
             public void onScrolledToDown() {
                 super.onScrolledToDown();
                 mFloatingActionButton.show();
+            }
+        });
+        getRecyclerView().addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    //停止时，保存位置
+                    mLastListPosition = PositionUtil.getCurrentPosition(getRecyclerView());
+                }
             }
         });
     }
