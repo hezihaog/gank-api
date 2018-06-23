@@ -44,8 +44,8 @@ public abstract class BaseMvpFragment<P extends IPresenter<V>, V extends IBaseVi
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
         mPresenter.attachView((V) this);
+        super.onViewCreated(view, savedInstanceState);
     }
 
     @Override

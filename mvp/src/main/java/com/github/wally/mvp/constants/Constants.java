@@ -16,7 +16,17 @@ public class Constants {
         public static final String GANK_DOMAIN = "http://gank.io/api/";
     }
 
+    /**
+     * 跳转使用的Key
+     */
     public static class Key {
         public static final String GANK_MEIZI_BEAN = "key_gank_meizi_bean";
+    }
+
+    /**
+     * 默认配置
+     */
+    public static class Config {
+        public static final int size = 15;
     }
 }

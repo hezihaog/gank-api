@@ -50,7 +50,7 @@ public class MainFragment extends BaseRxFragment {
             @Override
             public void onConfigBefore(Toolbar toolbar) {
                 super.onConfigBefore(toolbar);
-                ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
+                ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
             }
         })
                 .withNavigationIconDrawable(R.drawable.ic_action_menu)
@@ -90,6 +90,7 @@ public class MainFragment extends BaseRxFragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_search:
+                UIHelper.showSearchCategory((SupportActivity) getActivity());
                 return true;
             case R.id.random_mei_zi:
                 UIHelper.showRandomMeiZiList((SupportActivity) getActivity());

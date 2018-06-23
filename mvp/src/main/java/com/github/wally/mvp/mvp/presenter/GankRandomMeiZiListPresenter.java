@@ -2,7 +2,7 @@ package com.github.wally.mvp.mvp.presenter;
 
 import com.github.wally.mvp.base.BasePresenter;
 import com.github.wally.mvp.bean.gank.GankRandomListBean;
-import com.github.wally.mvp.constants.GankRandomCategory;
+import com.github.wally.mvp.enums.GankRandomCategory;
 import com.github.wally.mvp.http.IDataSource;
 import com.github.wally.mvp.mvp.contract.RandomMeiZiListContract;
 import com.github.wally.mvp.mvp.model.GankRandomMeiZiListModel;

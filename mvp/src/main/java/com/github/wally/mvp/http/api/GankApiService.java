@@ -3,6 +3,7 @@ package com.github.wally.mvp.http.api;
 
 import com.github.wally.mvp.bean.gank.GankMeiZiListBean;
 import com.github.wally.mvp.bean.gank.GankRandomListBean;
+import com.github.wally.mvp.bean.gank.GankSearchBean;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;
@@ -36,4 +37,15 @@ public interface GankApiService {
      */
     @GET("random/data/{category}/{size}")
     Observable<GankRandomListBean> getRandomContent(@Path("category") String category, @Path("size") int size);
+
+    /**
+     * 搜索特定类型的记录
+     *
+     * @param category 分类的名字
+     * @param count    一页多少调
+     * @param page     请求的页码
+     * @return 数据源
+     */
+    @GET("search/query/listview/category/{category}/count/{count}/page/{page}")
+    Observable<GankSearchBean> getSearchCategoryList(@Path("category") String category, @Path("count") int count, @Path("page") int page);
 }

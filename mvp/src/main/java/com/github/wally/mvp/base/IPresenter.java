@@ -9,7 +9,13 @@ package com.github.wally.mvp.base;
  * Email: hezihao@linghit.com
  */
 public interface IPresenter<V extends IBaseView> {
+    /**
+     * 给Presenter注释V层视图
+     */
     void attachView(V view);
 
+    /**
+     * 给Presenter移除V层视图
+     */
     void detachView();
 }

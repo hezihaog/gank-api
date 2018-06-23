@@ -4,7 +4,7 @@ import com.github.wally.mvp.base.IBaseModel;
 import com.github.wally.mvp.base.IBaseView;
 import com.github.wally.mvp.base.IPresenter;
 import com.github.wally.mvp.bean.gank.GankRandomListBean;
-import com.github.wally.mvp.constants.GankRandomCategory;
+import com.github.wally.mvp.enums.GankRandomCategory;
 import com.github.wally.mvp.http.IDataSource;
 
 import io.reactivex.Observable;

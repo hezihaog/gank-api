@@ -15,7 +15,7 @@ import com.github.wally.base.widget.recyclerview.manager.FastScrollStaggeredGrid
 import com.github.wally.mvp.R;
 import com.github.wally.mvp.base.BaseMvpListFragment;
 import com.github.wally.mvp.bean.gank.GankRandomListBean;
-import com.github.wally.mvp.constants.GankRandomCategory;
+import com.github.wally.mvp.enums.GankRandomCategory;
 import com.github.wally.mvp.http.IDataSource;
 import com.github.wally.mvp.mvp.contract.RandomMeiZiListContract;
 import com.github.wally.mvp.mvp.presenter.GankRandomMeiZiListPresenter;

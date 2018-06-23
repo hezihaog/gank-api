@@ -1,4 +1,4 @@
-package com.github.wally.mvp.constants;
+package com.github.wally.mvp.enums;
 
 /**
  * Package: com.github.wally.mvp.constants
