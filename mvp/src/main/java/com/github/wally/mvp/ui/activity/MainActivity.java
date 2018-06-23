@@ -8,7 +8,7 @@ import com.github.wally.mvp.ui.fragment.GankMeiZiListFragment;
 import com.github.wally.mvp.ui.fragment.MainFragment;
 import com.gyf.barlibrary.ImmersionBar;
 
-import me.yokeyword.fragmentation.anim.DefaultVerticalAnimator;
+import me.yokeyword.fragmentation.anim.DefaultHorizontalAnimator;
 import me.yokeyword.fragmentation.anim.FragmentAnimator;
 
 public class MainActivity extends BaseRxActivity {
@@ -31,6 +31,6 @@ public class MainActivity extends BaseRxActivity {
 
     @Override
     public FragmentAnimator onCreateFragmentAnimator() {
-        return new DefaultVerticalAnimator();
+        return new DefaultHorizontalAnimator();
     }
 }
