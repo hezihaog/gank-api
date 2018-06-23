@@ -19,7 +19,7 @@ import com.github.wally.mvp.util.WaitDialogHelper;
  * Email: hezihao@linghit.com
  */
 public abstract class BaseMvpFragment<P extends IPresenter<V>, V extends IBaseView>
-        extends BaseRxFragment implements LayoutCallback, IBaseView {
+        extends BaseRxFragment implements IBaseView {
     protected P mPresenter;
     private WaitDialogHelper mWaitDialogHelper;
 
@@ -73,26 +73,6 @@ public abstract class BaseMvpFragment<P extends IPresenter<V>, V extends IBaseVi
 
     public <W extends View> W findView(int id) {
         return getView().findViewById(id);
-    }
-
-    @Override
-    public void onLayoutBefore() {
-
-    }
-
-    @Override
-    public void onLayoutAfter() {
-
-    }
-
-    @Override
-    public void onFindView(View rootView) {
-
-    }
-
-    @Override
-    public void onBindViewContent() {
-
     }
 
     @Override

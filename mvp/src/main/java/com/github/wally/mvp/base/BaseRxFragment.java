@@ -21,10 +21,10 @@ import me.yokeyword.fragmentation_swipeback.SwipeBackFragment;
  * FileName: BaseRxSwipeBackFragment
  * Date: on 2018/6/17  上午1:19
  * Auther: zihe
- * Descirbe:
+ * Descirbe:基础RxFragment
  * Email: hezihao@linghit.com
  */
-public class BaseRxFragment extends SwipeBackFragment implements LifecycleProvider<FragmentEvent> {
+public abstract class BaseRxFragment extends SwipeBackFragment implements LayoutCallback, LifecycleProvider<FragmentEvent> {
     private final BehaviorSubject<FragmentEvent> lifecycleSubject = BehaviorSubject.create();
 
     @Override
@@ -43,6 +43,27 @@ public class BaseRxFragment extends SwipeBackFragment implements LifecycleProvid
      */
     protected boolean setupSwipeBackEnable() {
         return false;
+    }
+
+
+    @Override
+    public void onLayoutBefore() {
+
+    }
+
+    @Override
+    public void onLayoutAfter() {
+
+    }
+
+    @Override
+    public void onFindView(View rootView) {
+
+    }
+
+    @Override
+    public void onBindViewContent() {
+
     }
 
     @Override
