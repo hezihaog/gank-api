@@ -8,7 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.github.wally.mvp.R;
-import com.github.wally.mvp.adapter.PageFragmentAdapter;
+import com.github.wally.mvp.adapter.PageFragmentStateAdapter;
 import com.github.wally.mvp.base.BaseMvpFragment;
 import com.github.wally.mvp.base.BasePresenter;
 import com.github.wally.mvp.enums.GankSearchCategory;
@@ -42,7 +42,7 @@ public class GankSearchFragment extends BaseMvpFragment<GankSearchContract.Prese
 
     private List<String> mTabTitles;
     private List<Fragment> mFragments;
-    private PageFragmentAdapter mPageAdapter;
+    private PageFragmentStateAdapter mPageAdapter;
 
     @Override
     protected boolean setupSwipeBackEnable() {
@@ -80,7 +80,7 @@ public class GankSearchFragment extends BaseMvpFragment<GankSearchContract.Prese
                     }
                 }).build();
         ImmersionBar.with(this).titleBar(mToolbar);
-        mPageAdapter = new PageFragmentAdapter(getChildFragmentManager());
+        mPageAdapter = new PageFragmentStateAdapter(getChildFragmentManager());
         mViewPager.setAdapter(mPageAdapter);
         //Tab较多，要切换为可混动的模式
         mTabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);

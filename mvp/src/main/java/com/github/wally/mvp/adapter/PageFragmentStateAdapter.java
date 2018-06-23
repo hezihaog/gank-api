@@ -16,11 +16,11 @@ import java.util.List;
  * Descirbe:
  * Email: hezihao@linghit.com
  */
-public class PageFragmentAdapter extends FragmentStatePagerAdapter {
+public class PageFragmentStateAdapter extends FragmentStatePagerAdapter {
     private List<Fragment> mFragments = new ArrayList<Fragment>();
     private List<String> mTitles = new ArrayList<String>();
 
-    public PageFragmentAdapter(FragmentManager fm) {
+    public PageFragmentStateAdapter(FragmentManager fm) {
         super(fm);
     }
 

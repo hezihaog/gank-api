@@ -3,6 +3,7 @@ package com.github.wally.mvp.ui.fragment;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.RecyclerView;
 
 import com.github.wally.base.RecyclerViewHelper;
@@ -64,21 +65,27 @@ public class GankSearchCategoryListFragment extends BaseMvpListFragment<GankSear
     }
 
     @Override
+    protected void onRecyclerViewReady(RecyclerView recyclerView) {
+        super.onRecyclerViewReady(recyclerView);
+        recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), RecyclerView.VERTICAL));
+    }
+
+    @Override
     protected void onRegisterRecyclerViewTypeMapper(MultiTypeAdapter adapter) {
         adapter.register(GankSearchBean.Msg.class)
-        .to(new GankSearchAllCategoryViewBinder())
-        .withClassLinker(new ClassLinker<GankSearchBean.Msg>() {
-            @NonNull
-            @Override
-            public Class<? extends ItemViewBinder<GankSearchBean.Msg, ?>> index(int position, @NonNull GankSearchBean.Msg msg) {
+                .to(new GankSearchAllCategoryViewBinder())
+                .withClassLinker(new ClassLinker<GankSearchBean.Msg>() {
+                    @NonNull
+                    @Override
+                    public Class<? extends ItemViewBinder<GankSearchBean.Msg, ?>> index(int position, @NonNull GankSearchBean.Msg msg) {
 //                if (GankSearchCategory.ALL.equals(msg.getType())) {
 //                    return GankSearchAllCategoryViewBinder.class;
 //                }
 //                return null;
-                // TODO: 2018/6/24 后续加上类型分类的不同条目类
-                return GankSearchAllCategoryViewBinder.class;
-            }
-        });
+                        // TODO: 2018/6/24 后续加上类型分类的不同条目类
+                        return GankSearchAllCategoryViewBinder.class;
+                    }
+                });
     }
 
     @Override
