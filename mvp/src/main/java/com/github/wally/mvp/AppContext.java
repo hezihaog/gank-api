@@ -3,6 +3,7 @@ package com.github.wally.mvp;
 import android.app.Application;
 import android.content.Context;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.github.wally.mvp.http.cache.Repository;
 
 /**
@@ -25,6 +26,12 @@ public class AppContext extends Application {
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
         mRepository = Repository.init(getFilesDir());
+        //打印日志
+        if (BuildConfig.DEBUG) {
+            ARouter.openLog();
+            ARouter.openDebug();
+        }
+        ARouter.init(this);
     }
 
     public static AppContext getInstance() {
