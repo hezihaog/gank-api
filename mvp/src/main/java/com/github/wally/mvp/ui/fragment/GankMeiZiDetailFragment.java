@@ -15,7 +15,7 @@ import com.github.wally.mvp.base.BasePresenter;
 import com.github.wally.mvp.bean.gank.DisplayMeiZiImageBean;
 import com.github.wally.mvp.dagger.AppComponent;
 import com.github.wally.mvp.dagger.DaggerToastComponent;
-import com.github.wally.mvp.http.IoToMainScheduler;
+import com.github.wally.mvp.http.scheduler.SchedulerUtils;
 import com.github.wally.mvp.mvp.contract.GankMeiZiDetailContract;
 import com.github.wally.mvp.mvp.presenter.GankMeiZiDetailPresenter;
 import com.github.wally.mvp.util.ToolBarHelper;
@@ -50,7 +50,7 @@ public class GankMeiZiDetailFragment extends BaseMvpFragment<GankMeiZiDetailCont
         super.onActivityCreated(savedInstanceState);
         Disposable disposable = Observable
                 .timer(500, TimeUnit.MILLISECONDS)
-                .compose(new IoToMainScheduler<Long>())
+                .compose(SchedulerUtils.INSTANCE.<Long>ioToMain())
                 .subscribe(new Consumer<Long>() {
                     @Override
                     public void accept(Long aLong) throws Exception {
