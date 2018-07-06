@@ -69,7 +69,7 @@ public class RandomMeiZiFragment extends BaseMvpListFragment<RandomMeiZiListCont
             @Override
             public void onConfigBefore(Toolbar toolbar) {
                 super.onConfigBefore(toolbar);
-                ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
+                ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
             }
         })
                 .withNavigationIconDrawable(R.drawable.ic_action_back)
@@ -163,7 +163,6 @@ public class RandomMeiZiFragment extends BaseMvpListFragment<RandomMeiZiListCont
 
     @Override
     public void showRandomMeiZiList(IDataSource<GankRandomListBean> bean, boolean isRefresh) {
-        getRecyclerViewHelper().updateDataSource(isRefresh, bean.getData().getResults());
-        getRecyclerViewHelper().setHasNext(bean.hasNext());
+        getRecyclerViewHelper().updateDataSource(isRefresh, bean.getData().getResults(), bean.hasNext());
     }
 }

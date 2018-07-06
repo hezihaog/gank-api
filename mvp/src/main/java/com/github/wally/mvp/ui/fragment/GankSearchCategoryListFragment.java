@@ -105,8 +105,7 @@ public class GankSearchCategoryListFragment extends BaseMvpListFragment<GankSear
 
     @Override
     public void showSearchCategoryList(IDataSource<GankSearchBean> dataSource, boolean isRefresh) {
-        getRecyclerViewHelper().setHasNext(dataSource.hasNext());
-        getRecyclerViewHelper().updateDataSource(isRefresh, dataSource.getData().getResults());
+        getRecyclerViewHelper().updateDataSource(isRefresh, dataSource.getData().getResults(), dataSource.hasNext());
     }
 
     @Override

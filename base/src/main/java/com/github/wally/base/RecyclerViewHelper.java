@@ -137,7 +137,7 @@ public class RecyclerViewHelper {
     /**
      * 更新数据集，在更新数据时调用
      */
-    public void updateDataSource(boolean isRefresh, ArrayList newDataSource) {
+    public void updateDataSource(boolean isRefresh, ArrayList newDataSource, boolean hasNext) {
         if (listDatas == null) {
             listDatas = new ArrayList();
         }
@@ -152,6 +152,7 @@ public class RecyclerViewHelper {
             mAdapter.notifyItemRangeInserted(mAdapter.getItemCount() - 1, listDatas.size());
         }
         finishLoading();
+        setHasNext(hasNext);
     }
 
     /**

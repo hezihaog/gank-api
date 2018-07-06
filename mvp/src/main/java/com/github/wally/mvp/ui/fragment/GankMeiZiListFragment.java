@@ -148,8 +148,7 @@ public class GankMeiZiListFragment extends BaseMvpListFragment<GankMeiZiListCont
     @Override
     public void showMeiZiList(IDataSource<GankMeiZiListBean> meiziGankBean, boolean isRefresh) {
         //必须调用设置数据集的方法进行更新数据
-        getRecyclerViewHelper().updateDataSource(isRefresh, meiziGankBean.getData().getResults());
-        getRecyclerViewHelper().setHasNext(meiziGankBean.hasNext());
+        getRecyclerViewHelper().updateDataSource(isRefresh, meiziGankBean.getData().getResults(), meiziGankBean.hasNext());
     }
 
     @Override
