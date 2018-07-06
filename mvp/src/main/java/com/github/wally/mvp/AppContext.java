@@ -2,6 +2,7 @@ package com.github.wally.mvp;
 
 import android.app.Application;
 import android.content.Context;
+import android.support.multidex.MultiDex;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.github.wally.mvp.http.cache.Repository;
@@ -23,15 +24,21 @@ public class AppContext extends Application {
     }
 
     @Override
-    protected void attachBaseContext(Context base) {
-        super.attachBaseContext(base);
-        mRepository = Repository.init(getFilesDir());
+    public void onCreate() {
+        super.onCreate();
         //打印日志
         if (BuildConfig.DEBUG) {
             ARouter.openLog();
             ARouter.openDebug();
         }
         ARouter.init(this);
+    }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        mRepository = Repository.init(getFilesDir());
+        MultiDex.install(this);
     }
 
     public static AppContext getInstance() {

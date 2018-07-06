@@ -12,6 +12,7 @@ android {
         versionCode 100
         versionName "1.0.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
 
         javaCompileOptions {
             annotationProcessorOptions {
@@ -43,7 +44,7 @@ dependencies {
     //dagger2依赖
     implementation 'com.google.dagger:dagger:2.14.1'
     //dagger2指定注解处理器
-    implementation 'com.google.dagger:dagger-compiler:2.14.1'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.14.1'
     //dagger2添加Android缺失部分的javax注解
     compileOnly 'org.glassfish:javax.annotation:10.0-b28'
 }
