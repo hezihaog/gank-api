@@ -29,7 +29,7 @@ public class UIHelper {
      */
     public static void showMeiZiDetail(SupportActivity activity, DisplayMeiZiImageBean bean) {
         Bundle args = new Bundle();
-        args.putSerializable(Constants.Key.GANK_MEIZI_BEAN, bean);
+        args.putSerializable(Constants.Key.INSTANCE.getGANK_MEIZI_BEAN(), bean);
         GankMeiZiDetailFragment fragment = FragmentFactory.INSTANCE.newInstance(activity, GankMeiZiDetailFragment.class, args);
         activity.start(fragment);
     }

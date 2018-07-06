@@ -93,12 +93,12 @@ public class GankSearchCategoryListFragment extends BaseMvpListFragment<GankSear
         return RecyclerViewHelper.create(refreshLayout, recyclerView, adapter, new RecyclerViewHelper.OnLoadListener() {
             @Override
             public void onSwipeRefresh(int page, boolean isFirst) {
-                getPresenter().getSearchCategoryList(page, Constants.Config.size, mCategory, true);
+                getPresenter().getSearchCategoryList(page, Constants.Config.INSTANCE.getSize(), mCategory, true);
             }
 
             @Override
             public void onLoadMore(int page, boolean isFirst) {
-                getPresenter().getSearchCategoryList(page, Constants.Config.size, mCategory, false);
+                getPresenter().getSearchCategoryList(page, Constants.Config.INSTANCE.getSize(), mCategory, false);
             }
         });
     }

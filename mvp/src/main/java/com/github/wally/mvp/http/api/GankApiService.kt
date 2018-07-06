@@ -1,13 +1,13 @@
-package com.github.wally.mvp.http.api;
+package com.github.wally.mvp.http.api
 
 
-import com.github.wally.mvp.bean.gank.GankMeiZiListBean;
-import com.github.wally.mvp.bean.gank.GankRandomListBean;
-import com.github.wally.mvp.bean.gank.GankSearchBean;
+import com.github.wally.mvp.bean.gank.GankMeiZiListBean
+import com.github.wally.mvp.bean.gank.GankRandomListBean
+import com.github.wally.mvp.bean.gank.GankSearchBean
 
-import io.reactivex.Observable;
-import retrofit2.http.GET;
-import retrofit2.http.Path;
+import io.reactivex.Observable
+import retrofit2.http.GET
+import retrofit2.http.Path
 
 /**
  * Package: com.github.wally.mvp.api
@@ -17,7 +17,7 @@ import retrofit2.http.Path;
  * Descirbe:
  * Email: hezihao@linghit.com
  */
-public interface GankApiService {
+interface GankApiService {
     /**
      * 请求福利图片列表
      *
@@ -26,7 +26,7 @@ public interface GankApiService {
      * @return 数据源
      */
     @GET("data/福利/{size}/{num}")
-    Observable<GankMeiZiListBean> getMeizi(@Path("size") int size, @Path("num") int num);
+    fun getMeizi(@Path("size") size: Int, @Path("num") num: Int): Observable<GankMeiZiListBean>
 
     /**
      * 随机内容
@@ -36,7 +36,7 @@ public interface GankApiService {
      * @return 数据源
      */
     @GET("random/data/{category}/{size}")
-    Observable<GankRandomListBean> getRandomContent(@Path("category") String category, @Path("size") int size);
+    fun getRandomContent(@Path("category") category: String, @Path("size") size: Int): Observable<GankRandomListBean>
 
     /**
      * 搜索特定类型的记录
@@ -47,5 +47,5 @@ public interface GankApiService {
      * @return 数据源
      */
     @GET("search/query/listview/category/{category}/count/{count}/page/{page}")
-    Observable<GankSearchBean> getSearchCategoryList(@Path("category") String category, @Path("count") int count, @Path("page") int page);
+    fun getSearchCategoryList(@Path("category") category: String, @Path("count") count: Int, @Path("page") page: Int): Observable<GankSearchBean>
 }

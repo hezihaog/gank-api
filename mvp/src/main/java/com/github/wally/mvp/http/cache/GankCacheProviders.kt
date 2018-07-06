@@ -1,14 +1,12 @@
-package com.github.wally.mvp.http.cache;
+package com.github.wally.mvp.http.cache
 
-import com.github.wally.mvp.bean.gank.GankMeiZiListBean;
-import com.github.wally.mvp.bean.gank.GankSearchBean;
-
-import java.util.concurrent.TimeUnit;
-
-import io.reactivex.Observable;
-import io.rx_cache2.DynamicKey;
-import io.rx_cache2.DynamicKeyGroup;
-import io.rx_cache2.LifeCache;
+import com.github.wally.mvp.bean.gank.GankMeiZiListBean
+import com.github.wally.mvp.bean.gank.GankSearchBean
+import io.reactivex.Observable
+import io.rx_cache2.DynamicKey
+import io.rx_cache2.DynamicKeyGroup
+import io.rx_cache2.LifeCache
+import java.util.concurrent.TimeUnit
 
 
 /**
@@ -19,7 +17,7 @@ import io.rx_cache2.LifeCache;
  * Descirbe:RxCache提供者
  * Email: hezihao@linghit.com
  */
-public interface GankCacheProviders {
+interface GankCacheProviders {
     /**
      * 缓存妹子图片列表
      *
@@ -27,7 +25,7 @@ public interface GankCacheProviders {
      * @param numQuerieds 因为存在分页，这里需要传入一个DynamicKey的实例，标识他是一个动态变化的参数，并且只能传一个，否则多页也只会缓存一页
      */
     @LifeCache(duration = 2, timeUnit = TimeUnit.MINUTES)
-    Observable<GankMeiZiListBean> getMeizi(Observable<GankMeiZiListBean> origin, DynamicKey numQuerieds);
+    fun getMeizi(origin: Observable<GankMeiZiListBean>, numQuerieds: DynamicKey): Observable<GankMeiZiListBean>
 
     /**
      * 缓存搜索类型列表
@@ -36,5 +34,5 @@ public interface GankCacheProviders {
      * @param numAndCategoryQuerieds 每次页码会变动，这里还会变动的还有分类，当有2个动态Key时，需要声明为Group组，第一个参数是页码，第二个就是分类了
      */
     @LifeCache(duration = 2, timeUnit = TimeUnit.MINUTES)
-    Observable<GankSearchBean> getSearchCategoryList(Observable<GankSearchBean> origin, DynamicKeyGroup numAndCategoryQuerieds);
+    fun getSearchCategoryList(origin: Observable<GankSearchBean>, numAndCategoryQuerieds: DynamicKeyGroup): Observable<GankSearchBean>
 }

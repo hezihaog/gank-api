@@ -124,7 +124,7 @@ public class GankMeiZiListFragment extends BaseMvpListFragment<GankMeiZiListCont
                 if (getRecyclerView() != null) {
                     if (newState == RecyclerView.SCROLL_STATE_IDLE) {
                         //停止时，保存位置
-                        mLastListPosition = PositionUtil.getCurrentPosition(getRecyclerView());
+                        mLastListPosition = PositionUtil.INSTANCE.getCurrentPosition(getRecyclerView());
                     }
                 }
             }

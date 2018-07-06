@@ -21,8 +21,8 @@ import io.reactivex.Observable
 class GankRandomMeiZiListModel : IBaseModel, RandomMeiZiListContract.Model {
 
     override fun requestRandomMeiZiList(category: GankRandomCategory, size: Int): Observable<IDataSource<GankRandomListBean>> {
-        return RetrofitManager.getInstance()
-                .gankApiService
+        return RetrofitManager.instance
+                .gankApiService!!
                 .getRandomContent(category.category, size)
                 .map { gankRandomListBean ->
                     //随机妹子图是没有下一页的，所以直接将hasNext设置为false
