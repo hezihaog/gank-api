@@ -11,8 +11,6 @@ import com.github.wally.base.widget.recyclerview.manager.FastScrollLinearLayoutM
 import com.github.wally.mvp.base.BaseMvpListFragment;
 import com.github.wally.mvp.bean.gank.GankSearchBean;
 import com.github.wally.mvp.constants.Constants;
-import com.github.wally.mvp.dagger.AppComponent;
-import com.github.wally.mvp.dagger.DaggerToastComponent;
 import com.github.wally.mvp.enums.GankSearchCategory;
 import com.github.wally.mvp.http.IDataSource;
 import com.github.wally.mvp.mvp.contract.GankSearchCategoryListContract;
@@ -42,15 +40,6 @@ public class GankSearchCategoryListFragment extends BaseMvpListFragment<GankSear
         GankSearchCategoryListFragment fragment = new GankSearchCategoryListFragment();
         fragment.setArguments(args);
         return fragment;
-    }
-
-    @Override
-    protected void setupActivityComponent(AppComponent appComponent) {
-        DaggerToastComponent
-                .builder()
-                .appComponent(appComponent)
-                .build()
-                .inject(this);
     }
 
     @Override

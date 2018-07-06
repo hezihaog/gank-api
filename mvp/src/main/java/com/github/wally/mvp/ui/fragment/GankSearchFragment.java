@@ -11,8 +11,6 @@ import com.github.wally.mvp.R;
 import com.github.wally.mvp.adapter.PageFragmentStateAdapter;
 import com.github.wally.mvp.base.BaseMvpFragment;
 import com.github.wally.mvp.base.BasePresenter;
-import com.github.wally.mvp.dagger.AppComponent;
-import com.github.wally.mvp.dagger.DaggerToastComponent;
 import com.github.wally.mvp.enums.GankSearchCategory;
 import com.github.wally.mvp.mvp.contract.GankSearchContract;
 import com.github.wally.mvp.mvp.presenter.GankSearchPresenter;
@@ -45,15 +43,6 @@ public class GankSearchFragment extends BaseMvpFragment<GankSearchContract.Prese
     private List<String> mTabTitles;
     private List<Fragment> mFragments;
     private PageFragmentStateAdapter mPageAdapter;
-
-    @Override
-    protected void setupActivityComponent(AppComponent appComponent) {
-        DaggerToastComponent
-                .builder()
-                .appComponent(appComponent)
-                .build()
-                .inject(this);
-    }
 
     @Override
     protected boolean setupSwipeBackEnable() {

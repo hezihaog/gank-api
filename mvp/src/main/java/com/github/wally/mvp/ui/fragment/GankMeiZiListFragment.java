@@ -15,8 +15,6 @@ import com.github.wally.base.widget.recyclerview.manager.FastScrollStaggeredGrid
 import com.github.wally.mvp.R;
 import com.github.wally.mvp.base.BaseMvpListFragment;
 import com.github.wally.mvp.bean.gank.GankMeiZiListBean;
-import com.github.wally.mvp.dagger.AppComponent;
-import com.github.wally.mvp.dagger.DaggerToastComponent;
 import com.github.wally.mvp.http.IDataSource;
 import com.github.wally.mvp.mvp.contract.GankMeiZiListContract;
 import com.github.wally.mvp.mvp.presenter.GankMeiZiListPresenter;
@@ -77,15 +75,6 @@ public class GankMeiZiListFragment extends BaseMvpListFragment<GankMeiZiListCont
                 getRecyclerViewHelper().moveToTop();
             }
         });
-    }
-
-    @Override
-    protected void setupActivityComponent(AppComponent appComponent) {
-        DaggerToastComponent
-                .builder()
-                .appComponent(appComponent)
-                .build()
-                .inject(this);
     }
 
     @Override

@@ -15,8 +15,6 @@ import com.github.wally.base.widget.recyclerview.manager.FastScrollStaggeredGrid
 import com.github.wally.mvp.R;
 import com.github.wally.mvp.base.BaseMvpListFragment;
 import com.github.wally.mvp.bean.gank.GankRandomListBean;
-import com.github.wally.mvp.dagger.AppComponent;
-import com.github.wally.mvp.dagger.DaggerToastComponent;
 import com.github.wally.mvp.enums.GankRandomCategory;
 import com.github.wally.mvp.http.IDataSource;
 import com.github.wally.mvp.mvp.contract.RandomMeiZiListContract;
@@ -41,15 +39,6 @@ import me.drakeet.multitype.MultiTypeAdapter;
 public class RandomMeiZiFragment extends BaseMvpListFragment<RandomMeiZiListContract.Presenter, RandomMeiZiListContract.View>
         implements RandomMeiZiListContract.View {
     private FloatingActionButton mRefreshBtn;
-
-    @Override
-    protected void setupActivityComponent(AppComponent appComponent) {
-        DaggerToastComponent
-                .builder()
-                .appComponent(appComponent)
-                .build()
-                .inject(this);
-    }
 
     @Override
     protected boolean setupSwipeBackEnable() {

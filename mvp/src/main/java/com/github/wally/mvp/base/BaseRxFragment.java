@@ -8,8 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.github.wally.mvp.AppContext;
-import com.github.wally.mvp.dagger.AppComponent;
 import com.trello.rxlifecycle2.LifecycleProvider;
 import com.trello.rxlifecycle2.LifecycleTransformer;
 import com.trello.rxlifecycle2.RxLifecycle;
@@ -40,10 +38,7 @@ public abstract class BaseRxFragment extends SwipeBackFragment implements Layout
         } else {
             setSwipeBackEnable(false);
         }
-        setupActivityComponent(AppContext.getInstance().getAppComponent());
     }
-
-    protected abstract void setupActivityComponent(AppComponent appComponent);
 
     @Nullable
     @Override

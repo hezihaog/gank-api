@@ -5,10 +5,6 @@ import android.content.Context;
 import android.support.multidex.MultiDex;
 
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.github.wally.mvp.dagger.AppComponent;
-import com.github.wally.mvp.dagger.AppModule;
-import com.github.wally.mvp.dagger.DaggerAppComponent;
-import com.github.wally.mvp.dagger.ToastModule;
 import com.github.wally.mvp.http.cache.Repository;
 import com.haoge.easyandroid.EasyAndroid;
 
@@ -23,7 +19,6 @@ import com.haoge.easyandroid.EasyAndroid;
 public class AppContext extends Application {
     private Repository mRepository;
     private static AppContext mInstance;
-    private AppComponent mComponent;
 
     public AppContext() {
         mInstance = this;
@@ -39,19 +34,6 @@ public class AppContext extends Application {
         }
         ARouter.init(this);
         EasyAndroid.init(this);
-        initAppComponent();
-    }
-
-    private void initAppComponent() {
-        mComponent = DaggerAppComponent
-                .builder()
-                .toastModule(new ToastModule())
-                .appModule(new AppModule(this))
-                .build();
-    }
-
-    public AppComponent getAppComponent() {
-        return this.mComponent;
     }
 
     @Override

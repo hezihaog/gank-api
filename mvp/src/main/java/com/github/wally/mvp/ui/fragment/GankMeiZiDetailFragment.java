@@ -13,8 +13,6 @@ import com.github.wally.mvp.R;
 import com.github.wally.mvp.base.BaseMvpFragment;
 import com.github.wally.mvp.base.BasePresenter;
 import com.github.wally.mvp.bean.gank.DisplayMeiZiImageBean;
-import com.github.wally.mvp.dagger.AppComponent;
-import com.github.wally.mvp.dagger.DaggerToastComponent;
 import com.github.wally.mvp.http.scheduler.SchedulerUtils;
 import com.github.wally.mvp.mvp.contract.GankMeiZiDetailContract;
 import com.github.wally.mvp.mvp.presenter.GankMeiZiDetailPresenter;
@@ -58,15 +56,6 @@ public class GankMeiZiDetailFragment extends BaseMvpFragment<GankMeiZiDetailCont
                     }
                 });
         ((BasePresenter) mPresenter).addSubscription(disposable);
-    }
-
-    @Override
-    protected void setupActivityComponent(AppComponent appComponent) {
-        DaggerToastComponent
-                .builder()
-                .appComponent(appComponent)
-                .build()
-                .inject(this);
     }
 
     @Override

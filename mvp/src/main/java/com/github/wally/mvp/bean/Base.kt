@@ -1,6 +1,6 @@
-package com.github.wally.mvp.bean;
+package com.github.wally.mvp.bean
 
-import java.io.Serializable;
+import java.io.Serializable
 
 /**
  * Package: com.github.wally.training.bean
@@ -10,5 +10,4 @@ import java.io.Serializable;
  * Descirbe:
  * Email: hezihao@linghit.com
  */
-public class Base implements Serializable {
-}
+open class Base : Serializable
