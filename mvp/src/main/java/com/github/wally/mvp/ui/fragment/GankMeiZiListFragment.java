@@ -135,12 +135,12 @@ public class GankMeiZiListFragment extends BaseMvpListFragment<GankMeiZiListCont
         return RecyclerViewHelper.create(refreshLayout, recyclerView, adapter, new RecyclerViewHelper.OnLoadListener() {
             @Override
             public void onSwipeRefresh(int page, boolean isFirst) {
-                mPresenter.getMeiZiList(page, 15, true);
+                getPresenter().getMeiZiList(page, 15, true);
             }
 
             @Override
             public void onLoadMore(int page, boolean isFirst) {
-                mPresenter.getMeiZiList(page, 15, false);
+                getPresenter().getMeiZiList(page, 15, false);
             }
         });
     }

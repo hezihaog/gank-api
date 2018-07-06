@@ -31,12 +31,12 @@ public class GankSearchCategoryListPresenter extends BasePresenter<GankSearchCat
                 .subscribe(new Consumer<IDataSource<GankSearchBean>>() {
                     @Override
                     public void accept(IDataSource<GankSearchBean> dataSource) throws Exception {
-                        mRootView.showSearchCategoryList(dataSource, isRefresh);
+                        getMRootView().showSearchCategoryList(dataSource, isRefresh);
                     }
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-                        mRootView.showError(throwable);
+                        getMRootView().showError(throwable);
                     }
                 });
     }

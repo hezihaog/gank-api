@@ -1,4 +1,4 @@
-package com.github.wally.mvp.base;
+package com.github.wally.mvp.base
 
 /**
  * Package: com.github.wally.mvp.base
@@ -8,14 +8,14 @@ package com.github.wally.mvp.base;
  * Descirbe:
  * Email: hezihao@linghit.com
  */
-public interface IPresenter<V extends IBaseView> {
+interface IPresenter<V : IBaseView> {
     /**
      * 给Presenter注释V层视图
      */
-    void attachView(V view);
+    fun attachView(view: V)
 
     /**
      * 给Presenter移除V层视图
      */
-    void detachView();
+    fun detachView()
 }

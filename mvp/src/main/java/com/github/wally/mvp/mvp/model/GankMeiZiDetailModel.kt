@@ -19,12 +19,13 @@ import io.reactivex.ObservableOnSubscribe
 class GankMeiZiDetailModel : GankMeiZiDetailContract.Model {
     override fun requestMeiZiDetail(bundle: Bundle): Observable<DisplayMeiZiImageBean> {
         return Observable.create(ObservableOnSubscribe<DisplayMeiZiImageBean> { emitter ->
-            val bean = bundle.get(Constants.Key.GANK_MEIZI_BEAN) as DisplayMeiZiImageBean
-            if (bean != null) {
+            val bean: DisplayMeiZiImageBean
+            try {
+                bean = bundle.get(Constants.Key.GANK_MEIZI_BEAN) as DisplayMeiZiImageBean
                 emitter.onNext(bean)
                 emitter.onComplete()
-            } else {
-                emitter.onError(NullPointerException("没有传递数据到详情页面"))
+            } catch (e: Exception) {
+                emitter.onError(e)
             }
         })
                 .compose(SchedulerUtils.ioToMain())

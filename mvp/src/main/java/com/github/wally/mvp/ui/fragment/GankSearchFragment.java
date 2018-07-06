@@ -90,7 +90,7 @@ public class GankSearchFragment extends BaseMvpFragment<GankSearchContract.Prese
     @Override
     public void onLayoutAfter() {
         super.onLayoutAfter();
-        mPresenter.requestSearchCategoryList();
+        getPresenter().requestSearchCategoryList();
     }
 
     @Override

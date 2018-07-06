@@ -55,7 +55,7 @@ public class GankMeiZiDetailFragment extends BaseMvpFragment<GankMeiZiDetailCont
                         toggleToolBar();
                     }
                 });
-        ((BasePresenter) mPresenter).addSubscription(disposable);
+        ((BasePresenter) getPresenter()).addSubscription(disposable);
     }
 
     @Override
@@ -140,7 +140,7 @@ public class GankMeiZiDetailFragment extends BaseMvpFragment<GankMeiZiDetailCont
     @Override
     public void onLayoutAfter() {
         super.onLayoutAfter();
-        mPresenter.getMeiZiDetail(getArguments());
+        getPresenter().getMeiZiDetail(getArguments());
     }
 
     @Override

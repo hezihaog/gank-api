@@ -1,4 +1,4 @@
-package com.github.wally.mvp.base;
+package com.github.wally.mvp.base
 
 /**
  * Package: com.github.wally.mvp.base
@@ -8,6 +8,4 @@ package com.github.wally.mvp.base;
  * Descirbe:
  * Email: hezihao@linghit.com
  */
-public interface ListLayoutCallback {
-
-}
+interface ListLayoutCallback

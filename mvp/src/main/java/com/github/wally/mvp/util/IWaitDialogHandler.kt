@@ -1,4 +1,4 @@
-package com.github.wally.mvp.util;
+package com.github.wally.mvp.util
 
 /**
  * Package: com.github.wally.mvp.util
@@ -8,8 +8,8 @@ package com.github.wally.mvp.util;
  * Descirbe:
  * Email: hezihao@linghit.com
  */
-public interface IWaitDialogHandler {
-    void showWaitDialog();
+interface IWaitDialogHandler {
+    fun showWaitDialog()
 
-    void hideWaitDialog();
+    fun hideWaitDialog()
 }

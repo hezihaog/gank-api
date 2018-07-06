@@ -37,12 +37,12 @@ public class GankMeiZiDetailPresenter extends BasePresenter<GankMeiZiDetailContr
                 .subscribe(new Consumer<DisplayMeiZiImageBean>() {
                     @Override
                     public void accept(DisplayMeiZiImageBean bean) throws Exception {
-                        mRootView.showMeiZiDetail(bean);
+                        getMRootView().showMeiZiDetail(bean);
                     }
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-                        mRootView.showError(throwable);
+                        getMRootView().showError(throwable);
                     }
                 });
     }

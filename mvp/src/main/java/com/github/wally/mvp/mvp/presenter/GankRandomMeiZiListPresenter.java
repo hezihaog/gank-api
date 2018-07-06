@@ -31,13 +31,13 @@ public class GankRandomMeiZiListPresenter extends BasePresenter<RandomMeiZiListC
                 .doOnError(new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-                        mRootView.showError(throwable);
+                        getMRootView().showError(throwable);
                     }
                 })
                 .subscribe(new Consumer<IDataSource<GankRandomListBean>>() {
                     @Override
                     public void accept(IDataSource<GankRandomListBean> gankRandomListBeanDataSource) throws Exception {
-                        mRootView.showRandomMeiZiList(gankRandomListBeanDataSource, isRefresh);
+                        getMRootView().showRandomMeiZiList(gankRandomListBeanDataSource, isRefresh);
                     }
                 });
         addSubscription(disposable);

@@ -33,12 +33,12 @@ public class GankSearchPresenter extends BasePresenter<GankSearchContract.View>
                 .subscribe(new Consumer<List<GankSearchCategory>>() {
                     @Override
                     public void accept(List<GankSearchCategory> categoryList) throws Exception {
-                        mRootView.allocSearchCategory(categoryList);
+                        getMRootView().allocSearchCategory(categoryList);
                     }
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-                        mRootView.showError(throwable);
+                        getMRootView().showError(throwable);
                     }
                 }, new Action() {
                     @Override

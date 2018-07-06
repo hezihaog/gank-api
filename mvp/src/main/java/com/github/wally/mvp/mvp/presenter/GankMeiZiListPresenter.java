@@ -30,12 +30,12 @@ public class GankMeiZiListPresenter extends BasePresenter<GankMeiZiListContract.
                 .subscribe(new Consumer<IDataSource<GankMeiZiListBean>>() {
                     @Override
                     public void accept(IDataSource<GankMeiZiListBean> gankMeiZiListBeanIDataSource) {
-                        mRootView.showMeiZiList(gankMeiZiListBeanIDataSource, isRefresh);
+                        getMRootView().showMeiZiList(gankMeiZiListBeanIDataSource, isRefresh);
                     }
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-                        mRootView.showError(throwable);
+                        getMRootView().showError(throwable);
                     }
                 });
         addSubscription(disposable);
