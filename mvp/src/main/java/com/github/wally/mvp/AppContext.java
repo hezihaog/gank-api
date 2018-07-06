@@ -6,6 +6,7 @@ import android.support.multidex.MultiDex;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.github.wally.mvp.http.cache.Repository;
+import com.haoge.easyandroid.EasyAndroid;
 
 /**
  * Package: com.github.wally.mvp
@@ -32,6 +33,7 @@ public class AppContext extends Application {
             ARouter.openDebug();
         }
         ARouter.init(this);
+        EasyAndroid.init(this);
     }
 
     @Override
