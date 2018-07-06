@@ -13,6 +13,8 @@ import android.view.View;
 
 import com.github.wally.mvp.R;
 import com.github.wally.mvp.base.BaseRxFragment;
+import com.github.wally.mvp.dagger.AppComponent;
+import com.github.wally.mvp.dagger.DaggerToastComponent;
 import com.github.wally.mvp.util.ToolBarHelper;
 import com.github.wally.mvp.util.UIHelper;
 import com.gyf.barlibrary.ImmersionBar;
@@ -34,6 +36,15 @@ public class MainFragment extends BaseRxFragment {
     @Override
     public int onLayoutId() {
         return R.layout.fragment_main;
+    }
+
+    @Override
+    protected void setupActivityComponent(AppComponent appComponent) {
+        DaggerToastComponent
+                .builder()
+                .appComponent(appComponent)
+                .build()
+                .inject(this);
     }
 
     @Override

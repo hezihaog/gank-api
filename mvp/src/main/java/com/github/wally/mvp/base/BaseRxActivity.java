@@ -6,6 +6,8 @@ import android.support.annotation.CheckResult;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import com.github.wally.mvp.AppContext;
+import com.github.wally.mvp.dagger.AppComponent;
 import com.trello.rxlifecycle2.LifecycleProvider;
 import com.trello.rxlifecycle2.LifecycleTransformer;
 import com.trello.rxlifecycle2.RxLifecycle;
@@ -24,8 +26,10 @@ import me.yokeyword.fragmentation.SupportActivity;
  * Descirbe:
  * Email: hezihao@linghit.com
  */
-public class BaseRxActivity extends SupportActivity implements LifecycleProvider<ActivityEvent> {
+public abstract class BaseRxActivity extends SupportActivity implements LifecycleProvider<ActivityEvent> {
     private final BehaviorSubject<ActivityEvent> lifecycleSubject = BehaviorSubject.create();
+
+    protected abstract void setupActivityComponent(AppComponent appComponent);
 
     @Override
     @NonNull
@@ -53,6 +57,7 @@ public class BaseRxActivity extends SupportActivity implements LifecycleProvider
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         lifecycleSubject.onNext(ActivityEvent.CREATE);
+        setupActivityComponent(AppContext.getInstance().getAppComponent());
     }
 
     @Override
