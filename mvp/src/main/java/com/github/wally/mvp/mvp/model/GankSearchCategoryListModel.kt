@@ -19,8 +19,8 @@ import io.reactivex.Observable
  */
 class GankSearchCategoryListModel : GankSearchCategoryListContract.Model {
     override fun requestSearchCategoryList(page: Int, count: Int, category: GankSearchCategory?): Observable<IDataSource<GankSearchBean>> {
-        return AppContext.getInstance()
-                .repository
+        return AppContext.instance!!
+                .repository!!
                 .getSearchCategoryList(category?.getCategory(), count, page)
                 .map { gankSearchBean ->
                     BaseDataSource(gankSearchBean,
