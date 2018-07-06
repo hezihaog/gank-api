@@ -3,7 +3,6 @@ package com.github.wally.mvp.mvp.model
 import com.github.wally.mvp.enums.GankSearchCategory
 import com.github.wally.mvp.mvp.contract.GankSearchContract
 import com.github.wally.mvp.util.SearchCategoryHelper
-
 import io.reactivex.Observable
 
 /**
@@ -15,7 +14,6 @@ import io.reactivex.Observable
  * Email: hezihao@linghit.com
  */
 class GankSearchModel : GankSearchContract.Model {
-    override fun getSearchCategoryList(): Observable<List<GankSearchCategory>> {
-        return SearchCategoryHelper.getSearchCategory()
-    }
+    override val searchCategoryList: Observable<ArrayList<GankSearchCategory>>
+        get() = SearchCategoryHelper.searchCategory
 }

@@ -20,6 +20,10 @@ public class PositionUtil {
      */
     public static int getCurrentPosition(RecyclerView recyclerView) {
         View view = recyclerView.getLayoutManager().getChildAt(0);
-        return recyclerView.getLayoutManager().getPosition(view);
+        if (view != null) {
+            return recyclerView.getLayoutManager().getPosition(view);
+        } else {
+            return -1;
+        }
     }
 }

@@ -3,6 +3,7 @@ package com.github.wally.mvp.mvp.model
 import com.github.wally.mvp.base.IBaseModel
 import com.github.wally.mvp.bean.gank.GankRandomListBean
 import com.github.wally.mvp.enums.GankRandomCategory
+import com.github.wally.mvp.http.BaseDataSource
 import com.github.wally.mvp.http.IDataSource
 import com.github.wally.mvp.http.RetrofitManager
 import com.github.wally.mvp.http.scheduler.SchedulerUtils

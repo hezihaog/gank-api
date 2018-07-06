@@ -36,6 +36,6 @@ interface GankSearchContract {
         /**
          * 获取搜索分类列表
          */
-        val searchCategoryList: Observable<List<GankSearchCategory>>
+        val searchCategoryList: Observable<ArrayList<GankSearchCategory>>
     }
 }
