@@ -1,6 +1,7 @@
 package com.github.wally.mvp
 
 import org.junit.Test
+import java.util.*
 import java.util.function.Consumer
 
 /**
@@ -63,6 +64,42 @@ class KotlinTest {
         //降序
         list = list.sortedDescending();
         println(list)
+    }
+
+    /**
+     * when代替switch
+     */
+    @Test
+    fun testWhen() {
+        val value = Random().nextInt(5)
+        when (value) {
+            1,2 -> println("value == 1 || value == 2")
+            3 -> println("value == 3")
+            else -> println("value == else value")
+        }
+    }
+
+    @Test
+    fun testNullSafe() {
+        //变量赋值为null，不能直接使用，编译器报错
+//        var value : Int = null
+//        value.toString()
+        //除非声明为可空类型，这时候就要自己解决空指针了
+//        var value : Int? = null
+//        value.toString()
+        //获取自己判空
+//        var value : Int? = null
+//        if (value != null) {
+//            //自动转型
+//            value.toString()
+//        }
+
+        var value : Int? = null
+        //这里变量为null。可以指定空时，值为null字符串
+//        var finalValue = value.toString() ?: "null"
+        //或者不写，默认就为null字符串
+        var finalValue = value.toString()
+        println(finalValue)
     }
 
     interface OnClickListener {

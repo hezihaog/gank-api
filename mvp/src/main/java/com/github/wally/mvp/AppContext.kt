@@ -20,16 +20,13 @@ class AppContext : Application() {
     var repository: Repository? = null
         private set
 
-    init {
-        instance = this
-    }
-
     companion object {
         var instance: AppContext? = null
     }
 
     override fun onCreate() {
         super.onCreate()
+        instance = this
         //打印日志
         if (BuildConfig.DEBUG) {
             ARouter.openLog()
