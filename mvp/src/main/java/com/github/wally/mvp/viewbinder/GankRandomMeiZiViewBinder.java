@@ -41,6 +41,13 @@ public class GankRandomMeiZiViewBinder extends ItemViewBinder<GankRandomListBean
 
     @Override
     protected void onBindViewHolder(@NonNull final ViewHolder holder, @NonNull final GankRandomListBean.MeiZi meiZi) {
+        int position = getPosition(holder);
+        if (position % 2 == 0) {
+            holder.mImageView.setOriginalSize(50, 70);
+        } else {
+            holder.mImageView.setOriginalSize(50, 80);
+        }
+        holder.mImageView.requestLayout();
         Glide.with(holder.itemView.getContext())
                 .load(meiZi.getUrl())
                 .placeholder(R.drawable.ic_default_image)

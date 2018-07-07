@@ -1,13 +1,10 @@
 package com.github.wally.mvp.ui.activity
 
 import android.os.Bundle
-
 import com.github.wally.mvp.R
 import com.github.wally.mvp.base.BaseRxActivity
-import com.github.wally.mvp.ui.fragment.GankMeiZiListFragment
 import com.github.wally.mvp.ui.fragment.MainFragment
 import com.gyf.barlibrary.ImmersionBar
-
 import me.yokeyword.fragmentation.anim.DefaultHorizontalAnimator
 import me.yokeyword.fragmentation.anim.FragmentAnimator
 
@@ -17,7 +14,7 @@ class MainActivity : BaseRxActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         ImmersionBar.with(this).init()
-        if (findFragment(GankMeiZiListFragment::class.java) == null) {
+        if (findFragment(MainFragment::class.java) == null) {
             loadRootFragment(R.id.root, MainFragment())
         }
     }

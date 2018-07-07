@@ -22,7 +22,6 @@ import com.github.wally.mvp.mvp.contract.RandomMeiZiListContract;
 import com.github.wally.mvp.mvp.presenter.GankRandomMeiZiListPresenter;
 import com.github.wally.mvp.util.ToolBarHelper;
 import com.github.wally.mvp.viewbinder.GankRandomMeiZiViewBinder;
-import com.github.wally.mvp.widget.RecyclerViewItemDecoration;
 import com.gyf.barlibrary.ImmersionBar;
 
 import me.drakeet.multitype.ClassLinker;
@@ -144,6 +143,19 @@ public class RandomMeiZiFragment extends BaseMvpListFragment<RandomMeiZiListCont
                 mRefreshBtn.show();
             }
         });
+        getRecyclerView().addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (getRecyclerView() != null) {
+                    if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                        //停止时，保存位置
+                        ((FastScrollStaggeredGridLayoutManager) getRecyclerView().getLayoutManager())
+                                .invalidateSpanAssignments();
+                    }
+                }
+            }
+        });
     }
 
     @Override
@@ -154,7 +166,8 @@ public class RandomMeiZiFragment extends BaseMvpListFragment<RandomMeiZiListCont
     @Override
     protected void onRecyclerViewReady(RecyclerView recyclerView) {
         super.onRecyclerViewReady(recyclerView);
-        recyclerView.addItemDecoration(new RecyclerViewItemDecoration(12));
+        FastScrollStaggeredGridLayoutManager layoutManager = (FastScrollStaggeredGridLayoutManager) recyclerView.getLayoutManager();
+        layoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_NONE);
     }
 
     @Override

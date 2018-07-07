@@ -19,7 +19,6 @@ import com.github.wally.mvp.http.IDataSource;
 import com.github.wally.mvp.mvp.contract.GankMeiZiListContract;
 import com.github.wally.mvp.mvp.presenter.GankMeiZiListPresenter;
 import com.github.wally.mvp.viewbinder.GankMeiZiViewBinder;
-import com.github.wally.mvp.widget.RecyclerViewItemDecoration;
 
 import me.drakeet.multitype.MultiTypeAdapter;
 
@@ -91,7 +90,8 @@ public class GankMeiZiListFragment extends BaseMvpListFragment<GankMeiZiListCont
     @Override
     protected void onRecyclerViewReady(RecyclerView recyclerView) {
         super.onRecyclerViewReady(recyclerView);
-        recyclerView.addItemDecoration(new RecyclerViewItemDecoration(12));
+        FastScrollStaggeredGridLayoutManager layoutManager = (FastScrollStaggeredGridLayoutManager) recyclerView.getLayoutManager();
+        layoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_NONE);
     }
 
     @Override
@@ -125,6 +125,8 @@ public class GankMeiZiListFragment extends BaseMvpListFragment<GankMeiZiListCont
                     if (newState == RecyclerView.SCROLL_STATE_IDLE) {
                         //停止时，保存位置
                         mLastListPosition = PositionUtil.INSTANCE.getCurrentPosition(getRecyclerView());
+                        ((FastScrollStaggeredGridLayoutManager) getRecyclerView().getLayoutManager())
+                                .invalidateSpanAssignments();
                     }
                 }
             }
