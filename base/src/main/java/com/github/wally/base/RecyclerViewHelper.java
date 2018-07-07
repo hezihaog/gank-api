@@ -155,6 +155,10 @@ public class RecyclerViewHelper {
         setHasNext(hasNext);
     }
 
+    public ArrayList getListDatas() {
+        return listDatas;
+    }
+
     /**
      * 结束刷新时调用
      */

@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
 import com.github.wally.mvp.R;
+import com.github.wally.mvp.base.BaseRxActivity;
 import com.github.wally.mvp.bean.gank.DisplayMeiZiImageBean;
 import com.github.wally.mvp.bean.gank.GankRandomListBean;
 import com.github.wally.mvp.util.UIHelper;
@@ -25,6 +26,11 @@ import me.yokeyword.fragmentation.SupportActivity;
  * Email: hezihao@linghit.com
  */
 public class GankRandomMeiZiViewBinder extends ItemViewBinder<GankRandomListBean.MeiZi, GankRandomMeiZiViewBinder.ViewHolder> {
+    private BaseRxActivity mActivity;
+
+    public GankRandomMeiZiViewBinder(BaseRxActivity activity) {
+        this.mActivity = activity;
+    }
 
     @NonNull
     @Override
@@ -57,7 +63,7 @@ public class GankRandomMeiZiViewBinder extends ItemViewBinder<GankRandomListBean
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                UIHelper.showMeiZiDetail((SupportActivity) (holder.itemView.getContext()), bean);
+                UIHelper.INSTANCE.showMeiZiDetail((SupportActivity) (holder.itemView.getContext()), bean);
             }
         });
     }

@@ -68,7 +68,7 @@ public class MainFragment extends BaseRxFragment {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.random_mei_zi:
-                        UIHelper.showRandomMeiZiList((SupportActivity) getActivity());
+                        UIHelper.INSTANCE.showRandomMeiZiList((SupportActivity) getActivity());
                         break;
                     default:
                         break;
@@ -90,10 +90,10 @@ public class MainFragment extends BaseRxFragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_search:
-                UIHelper.showSearchCategory((SupportActivity) getActivity());
+                UIHelper.INSTANCE.showSearchCategory((SupportActivity) getActivity());
                 return true;
             case R.id.random_mei_zi:
-                UIHelper.showRandomMeiZiList((SupportActivity) getActivity());
+                UIHelper.INSTANCE.showRandomMeiZiList((SupportActivity) getActivity());
                 return true;
             default:
                 break;

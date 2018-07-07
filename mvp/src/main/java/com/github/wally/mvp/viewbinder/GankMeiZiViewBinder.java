@@ -57,7 +57,7 @@ public class GankMeiZiViewBinder extends ItemViewBinder<GankMeiZiListBean.MeiZi,
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                UIHelper.showMeiZiDetail((SupportActivity) (holder.itemView.getContext()), bean);
+                UIHelper.INSTANCE.showMeiZiDetail((SupportActivity) (holder.itemView.getContext()), bean);
             }
         });
     }
