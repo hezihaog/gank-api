@@ -4,6 +4,7 @@ package com.github.wally.mvp.http.api
 import com.github.wally.mvp.bean.gank.GankMeiZiListBean
 import com.github.wally.mvp.bean.gank.GankRandomListBean
 import com.github.wally.mvp.bean.gank.GankSearchBean
+import com.github.wally.mvp.constants.Constants
 
 import io.reactivex.Observable
 import retrofit2.http.GET
@@ -26,7 +27,7 @@ interface GankApiService {
      * @return 数据源
      */
     @GET("data/福利/{size}/{num}")
-    fun getMeizi(@Path("size") size: Int, @Path("num") num: Int): Observable<GankMeiZiListBean>
+    fun getMeizi(@Path("size") size: Int = Constants.Config.size, @Path("num") num: Int = Constants.Config.page): Observable<GankMeiZiListBean>
 
     /**
      * 随机内容
@@ -36,7 +37,7 @@ interface GankApiService {
      * @return 数据源
      */
     @GET("random/data/{category}/{size}")
-    fun getRandomContent(@Path("category") category: String, @Path("size") size: Int): Observable<GankRandomListBean>
+    fun getRandomContent(@Path("category") category: String, @Path("size") size: Int = Constants.Config.size): Observable<GankRandomListBean>
 
     /**
      * 搜索特定类型的记录
@@ -47,5 +48,5 @@ interface GankApiService {
      * @return 数据源
      */
     @GET("search/query/listview/category/{category}/count/{count}/page/{page}")
-    fun getSearchCategoryList(@Path("category") category: String, @Path("count") count: Int, @Path("page") page: Int): Observable<GankSearchBean>
+    fun getSearchCategoryList(@Path("category") category: String, @Path("count") count: Int = Constants.Config.size, @Path("page") page: Int = Constants.Config.page): Observable<GankSearchBean>
 }

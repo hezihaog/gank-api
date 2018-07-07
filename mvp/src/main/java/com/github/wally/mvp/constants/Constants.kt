@@ -27,6 +27,7 @@ class Constants {
      * 默认配置
      */
     object Config {
+        val page = 1
         val size = 15
     }
 }
