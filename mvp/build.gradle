@@ -51,4 +51,7 @@ dependencies {
     implementation "android.arch.lifecycle:reactivestreams:$lifecycle_version"
     // optional - Test helpers for LiveData
     testImplementation "android.arch.core:core-testing:$lifecycle_version"
+    implementation 'com.qmuiteam:qmuilint:1.0.1'
+    implementation 'com.qmuiteam:arch:0.1.1'
+    implementation 'com.qmuiteam:qmui:1.1.3'
 }
