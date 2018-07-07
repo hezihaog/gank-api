@@ -44,19 +44,16 @@ internal class GankMeiZiViewBinder : ItemViewBinder<GankMeiZiListBean.MeiZi, Gan
                 .crossFade()
                 .into(holder.mImageView)
         holder.itemView.setOnClickListener {
-            val bean = DisplayMeiZiImageBean()
-            try {
-                bean.id = meiZi.id
-                bean.createdAt = meiZi.createdAt
-                bean.desc = meiZi.desc
-                bean.publishedAt = meiZi.publishedAt
-                bean.source = meiZi.source
-                bean.type = meiZi.type
-                bean.url = meiZi.url
-                bean.used = meiZi.used
-                bean.who = meiZi.who
-            } catch (e: Exception) {
-                e.printStackTrace()
+            val bean = DisplayMeiZiImageBean().apply {
+                id = meiZi.id
+                createdAt = meiZi.createdAt
+                desc = meiZi.desc
+                publishedAt = meiZi.publishedAt
+                source = meiZi.source
+                type = meiZi.type
+                url = meiZi.url
+                used = meiZi.used
+                who = meiZi.who
             }
             UIHelper.showMeiZiDetail(holder.itemView.context as SupportActivity, bean)
         }
