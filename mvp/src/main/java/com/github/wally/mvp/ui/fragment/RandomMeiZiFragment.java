@@ -14,7 +14,6 @@ import com.github.wally.base.RecyclerViewScrollHelper;
 import com.github.wally.base.widget.recyclerview.manager.FastScrollStaggeredGridLayoutManager;
 import com.github.wally.mvp.R;
 import com.github.wally.mvp.base.BaseMvpListFragment;
-import com.github.wally.mvp.base.BaseRxActivity;
 import com.github.wally.mvp.bean.gank.GankRandomListBean;
 import com.github.wally.mvp.enums.GankRandomCategory;
 import com.github.wally.mvp.http.IDataSource;
@@ -98,7 +97,7 @@ public class RandomMeiZiFragment extends BaseMvpListFragment<RandomMeiZiListCont
     @Override
     protected void onRegisterRecyclerViewTypeMapper(MultiTypeAdapter adapter) {
         adapter.register(GankRandomListBean.MeiZi.class)
-                .to(new GankRandomMeiZiViewBinder((BaseRxActivity) getActivity()))
+                .to(new GankRandomMeiZiViewBinder())
                 .withClassLinker(new ClassLinker<GankRandomListBean.MeiZi>() {
 
                     @NonNull
