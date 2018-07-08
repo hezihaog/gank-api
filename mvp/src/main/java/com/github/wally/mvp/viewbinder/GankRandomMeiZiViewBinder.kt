@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.github.wally.mvp.R
 import com.github.wally.mvp.bean.gank.DisplayMeiZiImageBean
 import com.github.wally.mvp.bean.gank.GankRandomListBean
@@ -39,6 +40,7 @@ internal class GankRandomMeiZiViewBinder : ItemViewBinder<GankRandomListBean.Mei
         Glide.with(holder.itemView.context)
                 .load(meiZi.url)
                 .placeholder(R.drawable.ic_default_image)
+                .skipMemoryCache(true).diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(holder.mImageView)
         holder.itemView.setOnClickListener {
             val bean = DisplayMeiZiImageBean().apply {
