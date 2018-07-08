@@ -1,7 +1,12 @@
 package com.github.wally.mvp.ui.fragment;
 
+import android.net.Uri;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 
@@ -9,13 +14,21 @@ import com.github.wally.base.util.ImageDisplayUtil;
 import com.github.wally.base.util.StatusBarUtil;
 import com.github.wally.mvp.R;
 import com.github.wally.mvp.base.BaseMvpFragment;
+import com.github.wally.mvp.base.BasePresenter;
 import com.github.wally.mvp.bean.gank.DisplayMeiZiImageBean;
 import com.github.wally.mvp.mvp.contract.GankMeiZiDetailContract;
 import com.github.wally.mvp.mvp.presenter.GankMeiZiDetailPresenter;
+import com.github.wally.mvp.util.ImageDownloadUtil;
 import com.github.wally.mvp.util.ToolBarHelper;
 import com.github.wally.mvp.widget.RotateCircleProgressBar;
 import com.gyf.barlibrary.ImmersionBar;
+import com.haoge.easyandroid.easy.EasyToast;
 
+import java.io.File;
+
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Action;
+import io.reactivex.functions.Consumer;
 import uk.co.senab.photoview.PhotoView;
 import uk.co.senab.photoview.PhotoViewAttacher;
 
@@ -33,6 +46,7 @@ public class GankMeiZiDetailFragment extends BaseMvpFragment<GankMeiZiDetailCont
     private RotateCircleProgressBar mLoadingView;
 
     private boolean isHideToolBar = false;
+    private DisplayMeiZiImageBean mImageBean;
 
     @Override
     public void onDestroy() {
@@ -121,6 +135,7 @@ public class GankMeiZiDetailFragment extends BaseMvpFragment<GankMeiZiDetailCont
 
     @Override
     public void showMeiZiDetail(DisplayMeiZiImageBean bean) {
+        this.mImageBean = bean;
         mLoadingView.setVisibility(View.VISIBLE);
         ImageDisplayUtil.display(getActivity(), bean.getUrl(), mImageView
                 , new ImageDisplayUtil.DisplayCallbackAdapter() {
@@ -135,5 +150,62 @@ public class GankMeiZiDetailFragment extends BaseMvpFragment<GankMeiZiDetailCont
     @Override
     public void showError(Throwable throwable) {
 
+    }
+
+    /**
+     * 保存图片到相册
+     */
+    private void saveImageToGallery() {
+        if (mImageBean != null) {
+            Disposable disposable = ImageDownloadUtil
+                    .saveImageAndGetPathObservable(getActivity(), mImageBean.getUrl(), mImageBean.getCreatedAt())
+                    .doOnSubscribe(new Consumer<Disposable>() {
+                        @Override
+                        public void accept(Disposable disposable) throws Exception {
+                            showLoading("保存中，请稍后...");
+                        }
+                    })
+                    .doOnTerminate(new Action() {
+                        @Override
+                        public void run() throws Exception {
+                            hideLoading();
+                        }
+                    })
+                    .subscribe(new Consumer<Uri>() {
+                        @Override
+                        public void accept(Uri uri) throws Exception {
+                            File appDir = new File(Environment.getExternalStorageDirectory(), "Meizhi");
+                            String msg = String.format(getString(R.string.picture_has_save_to),
+                                    appDir.getAbsolutePath());
+                            EasyToast.Companion.newBuilder().build().show(msg);
+                        }
+                    }, new Consumer<Throwable>() {
+                        @Override
+                        public void accept(Throwable throwable) throws Exception {
+                            EasyToast.Companion.newBuilder().build().show("再试试...");
+                        }
+                    });
+            ((BasePresenter)getPresenter()).addSubscription(disposable);
+        }
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_detail, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_share:
+                return true;
+            case R.id.action_save:
+                saveImageToGallery();
+                return true;
+            default:
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

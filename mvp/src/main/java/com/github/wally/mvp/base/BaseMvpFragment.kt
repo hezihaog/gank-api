@@ -53,9 +53,9 @@ abstract class BaseMvpFragment<P : IPresenter<V>, V : IBaseView> : BaseRxFragmen
      */
     protected abstract fun onCreatePresenter(): P
 
-    override fun showLoading() {
+    override fun showLoading(msg: String?) {
         if (mWaitDialogHelper != null) {
-            mWaitDialogHelper!!.showWaitDialog()
+            mWaitDialogHelper!!.showWaitDialog(msg)
         }
     }
 

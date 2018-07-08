@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">gank.api</string>
+    <string name="picture_has_save_to">图片已保存至 %s 文件夹</string>
 </resources>

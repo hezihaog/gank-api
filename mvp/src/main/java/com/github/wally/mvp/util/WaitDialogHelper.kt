@@ -37,7 +37,7 @@ class WaitDialogHelper private constructor(private val mActivity: Activity?) : I
         })
     }
 
-    override fun showWaitDialog() {
+    override fun showWaitDialog(msg: String?) {
         val runnable = Runnable {
             if (mActivity == null || mActivity.isFinishing) {
                 return@Runnable
@@ -46,6 +46,7 @@ class WaitDialogHelper private constructor(private val mActivity: Activity?) : I
                 mDialog = ProgressDialog(mActivity)
             }
             if (!mDialog!!.isShowing) {
+                mDialog?.setMessage(msg.toString() ?: "")
                 mDialog!!.show()
             }
         }

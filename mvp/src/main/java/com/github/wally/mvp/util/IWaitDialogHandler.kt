@@ -9,7 +9,7 @@ package com.github.wally.mvp.util
  * Email: hezihao@linghit.com
  */
 interface IWaitDialogHandler {
-    fun showWaitDialog()
+    fun showWaitDialog(msg: String? = "")
 
     fun hideWaitDialog()
 }

@@ -12,7 +12,7 @@ interface IBaseView {
     /**
      * 显示加载中
      */
-    fun showLoading()
+    fun showLoading(msg: String? = "")
 
     /**
      * 隐藏加载中
