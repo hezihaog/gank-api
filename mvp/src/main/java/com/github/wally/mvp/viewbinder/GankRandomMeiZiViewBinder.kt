@@ -39,7 +39,6 @@ internal class GankRandomMeiZiViewBinder : ItemViewBinder<GankRandomListBean.Mei
         Glide.with(holder.itemView.context)
                 .load(meiZi.url)
                 .placeholder(R.drawable.ic_default_image)
-                .crossFade()
                 .into(holder.mImageView)
         holder.itemView.setOnClickListener {
             val bean = DisplayMeiZiImageBean().apply {

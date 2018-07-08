@@ -7,6 +7,7 @@ import com.github.wally.mvp.constants.Constants
 import com.github.wally.mvp.ui.fragment.GankMeiZiDetailFragment
 import com.github.wally.mvp.ui.fragment.GankSearchFragment
 import com.github.wally.mvp.ui.fragment.RandomMeiZiFragment
+import com.haoge.easyandroid.easy.EasyBundle
 
 import me.yokeyword.fragmentation.SupportActivity
 
@@ -25,8 +26,7 @@ object UIHelper {
      * @param bean 妹子图显示需要的素材
      */
     fun showMeiZiDetail(activity: SupportActivity, bean: DisplayMeiZiImageBean) {
-        val args = Bundle()
-        args.putSerializable(Constants.Key.GANK_MEIZI_BEAN, bean)
+        val args :Bundle = EasyBundle.create().put(Constants.Key.GANK_MEIZI_BEAN to bean).bundle
         val fragment = FragmentFactory.newInstance(activity, GankMeiZiDetailFragment::class.java, args)
         activity.start(fragment)
     }

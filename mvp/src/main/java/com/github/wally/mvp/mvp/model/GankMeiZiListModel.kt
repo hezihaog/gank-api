@@ -23,7 +23,7 @@ class GankMeiZiListModel : GankMeiZiListContract.Model {
         return AppContext.instance?.repository!!
                 .getMeizi(size, page)
                 .map { gankMeiZiListBean ->
-                    val hasNext = gankMeiZiListBean.results.size >= size
+                    val hasNext = gankMeiZiListBean.results!!.size >= size
                     BaseDataSource(gankMeiZiListBean, hasNext)
                 }
                 .compose(SchedulerUtils.ioToMain())

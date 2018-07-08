@@ -1,6 +1,7 @@
 package com.github.wally.mvp.bean.gank;
 
-import com.github.wally.mvp.bean.Base;
+import android.os.Parcel;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ import java.util.ArrayList;
 public class GankRandomListBean extends GankBase {
     private ArrayList<MeiZi> results;
 
-    public static class MeiZi extends Base {
+    public static class MeiZi implements android.os.Parcelable {
         @SerializedName(value = "_id")
         private String id;
         private String createdAt;
@@ -99,6 +100,51 @@ public class GankRandomListBean extends GankBase {
         public void setWho(String who) {
             this.who = who;
         }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeString(this.id);
+            dest.writeString(this.createdAt);
+            dest.writeString(this.desc);
+            dest.writeString(this.publishedAt);
+            dest.writeString(this.source);
+            dest.writeString(this.type);
+            dest.writeString(this.url);
+            dest.writeString(this.used);
+            dest.writeString(this.who);
+        }
+
+        public MeiZi() {
+        }
+
+        protected MeiZi(Parcel in) {
+            this.id = in.readString();
+            this.createdAt = in.readString();
+            this.desc = in.readString();
+            this.publishedAt = in.readString();
+            this.source = in.readString();
+            this.type = in.readString();
+            this.url = in.readString();
+            this.used = in.readString();
+            this.who = in.readString();
+        }
+
+        public static final Creator<MeiZi> CREATOR = new Creator<MeiZi>() {
+            @Override
+            public MeiZi createFromParcel(Parcel source) {
+                return new MeiZi(source);
+            }
+
+            @Override
+            public MeiZi[] newArray(int size) {
+                return new MeiZi[size];
+            }
+        };
     }
 
     public ArrayList<MeiZi> getResults() {
@@ -108,4 +154,37 @@ public class GankRandomListBean extends GankBase {
     public void setResults(ArrayList<MeiZi> results) {
         this.results = results;
     }
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        super.writeToParcel(dest, flags);
+        dest.writeList(this.results);
+    }
+
+    public GankRandomListBean() {
+    }
+
+    protected GankRandomListBean(Parcel in) {
+        super(in);
+        this.results = new ArrayList<MeiZi>();
+        in.readList(this.results, MeiZi.class.getClassLoader());
+    }
+
+    public static final Creator<GankRandomListBean> CREATOR = new Creator<GankRandomListBean>() {
+        @Override
+        public GankRandomListBean createFromParcel(Parcel source) {
+            return new GankRandomListBean(source);
+        }
+
+        @Override
+        public GankRandomListBean[] newArray(int size) {
+            return new GankRandomListBean[size];
+        }
+    };
 }

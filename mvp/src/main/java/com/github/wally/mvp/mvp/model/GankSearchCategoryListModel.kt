@@ -24,7 +24,7 @@ class GankSearchCategoryListModel : GankSearchCategoryListContract.Model {
                 .getSearchCategoryList(category?.getCategory(), count, page)
                 .map { gankSearchBean ->
                     BaseDataSource(gankSearchBean,
-                            gankSearchBean.results.size >= count)
+                            gankSearchBean.results!!.size >= count)
                 }
                 .compose(SchedulerUtils.ioToMain())
     }

@@ -1,7 +1,5 @@
 package com.github.wally.mvp.ui.fragment;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -11,20 +9,13 @@ import com.github.wally.base.util.ImageDisplayUtil;
 import com.github.wally.base.util.StatusBarUtil;
 import com.github.wally.mvp.R;
 import com.github.wally.mvp.base.BaseMvpFragment;
-import com.github.wally.mvp.base.BasePresenter;
 import com.github.wally.mvp.bean.gank.DisplayMeiZiImageBean;
-import com.github.wally.mvp.http.scheduler.SchedulerUtils;
 import com.github.wally.mvp.mvp.contract.GankMeiZiDetailContract;
 import com.github.wally.mvp.mvp.presenter.GankMeiZiDetailPresenter;
 import com.github.wally.mvp.util.ToolBarHelper;
 import com.github.wally.mvp.widget.RotateCircleProgressBar;
 import com.gyf.barlibrary.ImmersionBar;
 
-import java.util.concurrent.TimeUnit;
-
-import io.reactivex.Observable;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
 import uk.co.senab.photoview.PhotoView;
 import uk.co.senab.photoview.PhotoViewAttacher;
 
@@ -42,21 +33,6 @@ public class GankMeiZiDetailFragment extends BaseMvpFragment<GankMeiZiDetailCont
     private RotateCircleProgressBar mLoadingView;
 
     private boolean isHideToolBar = false;
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        Disposable disposable = Observable
-                .timer(500, TimeUnit.MILLISECONDS)
-                .compose(SchedulerUtils.INSTANCE.<Long>ioToMain())
-                .subscribe(new Consumer<Long>() {
-                    @Override
-                    public void accept(Long aLong) throws Exception {
-                        toggleToolBar();
-                    }
-                });
-        ((BasePresenter) getPresenter()).addSubscription(disposable);
-    }
 
     @Override
     public void onDestroy() {

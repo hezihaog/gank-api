@@ -1,6 +1,7 @@
 package com.github.wally.mvp.bean.gank;
 
-import com.github.wally.mvp.bean.Base;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /**
  * Package: com.github.wally.mvp.bean.gank
@@ -10,7 +11,7 @@ import com.github.wally.mvp.bean.Base;
  * Descirbe:
  * Email: hezihao@linghit.com
  */
-public class DisplayMeiZiImageBean extends Base {
+public class DisplayMeiZiImageBean implements Parcelable {
     private String id;
     private String createdAt;
     private String desc;
@@ -92,4 +93,50 @@ public class DisplayMeiZiImageBean extends Base {
     public void setWho(String who) {
         this.who = who;
     }
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.id);
+        dest.writeString(this.createdAt);
+        dest.writeString(this.desc);
+        dest.writeString(this.publishedAt);
+        dest.writeString(this.source);
+        dest.writeString(this.type);
+        dest.writeString(this.url);
+        dest.writeString(this.used);
+        dest.writeString(this.who);
+    }
+
+    public DisplayMeiZiImageBean() {
+    }
+
+    protected DisplayMeiZiImageBean(Parcel in) {
+        this.id = in.readString();
+        this.createdAt = in.readString();
+        this.desc = in.readString();
+        this.publishedAt = in.readString();
+        this.source = in.readString();
+        this.type = in.readString();
+        this.url = in.readString();
+        this.used = in.readString();
+        this.who = in.readString();
+    }
+
+    public static final Parcelable.Creator<DisplayMeiZiImageBean> CREATOR = new Parcelable.Creator<DisplayMeiZiImageBean>() {
+        @Override
+        public DisplayMeiZiImageBean createFromParcel(Parcel source) {
+            return new DisplayMeiZiImageBean(source);
+        }
+
+        @Override
+        public DisplayMeiZiImageBean[] newArray(int size) {
+            return new DisplayMeiZiImageBean[size];
+        }
+    };
 }

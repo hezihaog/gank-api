@@ -1,5 +1,7 @@
 package com.github.wally.mvp.bean.gank;
 
+import android.os.Parcel;
+
 import java.util.ArrayList;
 
 /**
@@ -13,7 +15,7 @@ import java.util.ArrayList;
 public class GankSearchBean extends GankBase {
     private ArrayList<Msg> results;
 
-    public static class Msg {
+    public static class Msg implements android.os.Parcelable {
         /**
          * 解释
          */
@@ -98,6 +100,48 @@ public class GankSearchBean extends GankBase {
         public void setWho(String who) {
             this.who = who;
         }
+
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeString(this.desc);
+            dest.writeString(this.ganhuo_id);
+            dest.writeString(this.publishedAt);
+            dest.writeString(this.readability);
+            dest.writeString(this.type);
+            dest.writeString(this.url);
+            dest.writeString(this.who);
+        }
+
+        public Msg() {
+        }
+
+        protected Msg(Parcel in) {
+            this.desc = in.readString();
+            this.ganhuo_id = in.readString();
+            this.publishedAt = in.readString();
+            this.readability = in.readString();
+            this.type = in.readString();
+            this.url = in.readString();
+            this.who = in.readString();
+        }
+
+        public static final Creator<Msg> CREATOR = new Creator<Msg>() {
+            @Override
+            public Msg createFromParcel(Parcel source) {
+                return new Msg(source);
+            }
+
+            @Override
+            public Msg[] newArray(int size) {
+                return new Msg[size];
+            }
+        };
     }
 
     public ArrayList<Msg> getResults() {
@@ -107,4 +151,37 @@ public class GankSearchBean extends GankBase {
     public void setResults(ArrayList<Msg> results) {
         this.results = results;
     }
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        super.writeToParcel(dest, flags);
+        dest.writeList(this.results);
+    }
+
+    public GankSearchBean() {
+    }
+
+    protected GankSearchBean(Parcel in) {
+        super(in);
+        this.results = new ArrayList<Msg>();
+        in.readList(this.results, Msg.class.getClassLoader());
+    }
+
+    public static final Creator<GankSearchBean> CREATOR = new Creator<GankSearchBean>() {
+        @Override
+        public GankSearchBean createFromParcel(Parcel source) {
+            return new GankSearchBean(source);
+        }
+
+        @Override
+        public GankSearchBean[] newArray(int size) {
+            return new GankSearchBean[size];
+        }
+    };
 }
