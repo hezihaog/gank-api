@@ -4,9 +4,9 @@ import android.os.Bundle
 
 import com.github.wally.mvp.bean.gank.DisplayMeiZiImageBean
 import com.github.wally.mvp.constants.Constants
-import com.github.wally.mvp.ui.fragment.GankMeiZiDetailFragment
-import com.github.wally.mvp.ui.fragment.GankSearchFragment
-import com.github.wally.mvp.ui.fragment.RandomMeiZiFragment
+import com.github.wally.mvp.mvp.view.GankMeiZiDetailFragment
+import com.github.wally.mvp.mvp.view.GankSearchFragment
+import com.github.wally.mvp.mvp.view.RandomMeiZiFragment
 import com.haoge.easyandroid.easy.EasyBundle
 
 import me.yokeyword.fragmentation.SupportActivity

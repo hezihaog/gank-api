@@ -1,4 +1,4 @@
-package com.github.wally.mvp.ui.fragment
+package com.github.wally.mvp.mvp.view
 
 import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment

@@ -1,4 +1,4 @@
-package com.github.wally.mvp.ui.fragment;
+package com.github.wally.mvp.mvp.view;
 
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;

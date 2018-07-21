@@ -1,4 +1,4 @@
-package com.github.wally.mvp.ui.fragment;
+package com.github.wally.mvp.mvp.view;
 
 import android.net.Uri;
 import android.os.Environment;
