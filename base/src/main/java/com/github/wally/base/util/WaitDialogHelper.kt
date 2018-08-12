@@ -7,7 +7,7 @@ import android.os.Looper
 import com.github.wally.base.adapter.ActivityLifecycleCallbacksAdapter
 
 /**
- * Package: com.github.wally.mvp.util
+ * Package: com.github.wally.gank.util
  * FileName: WaitDialogHelper
  * Date: on 2018/6/17  下午10:33
  * Auther: zihe

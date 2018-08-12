@@ -5,7 +5,7 @@ import android.app.Application
 import android.os.Bundle
 
 /**
- * Package: com.github.wally.mvp.adapter
+ * Package: com.github.wally.gank.adapter
  * FileName: ActivityLifecycleCallbacksAdapter
  * Date: on 2018/6/17  下午10:37
  * Auther: zihe

@@ -15,7 +15,7 @@ import io.reactivex.subjects.BehaviorSubject
 import me.yokeyword.fragmentation.SupportActivity
 
 /**
- * Package: com.github.wally.mvp.base
+ * Package: com.github.wally.gank.base
  * FileName: BaseRxActivity
  * Date: on 2018/6/16  上午12:08
  * Auther: zihe

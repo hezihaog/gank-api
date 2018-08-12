@@ -22,7 +22,7 @@ import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
 /**
- * Package: com.github.wally.mvp.util
+ * Package: com.github.wally.gank.util
  * FileName: ImageDownloadUtil
  * Date: on 2018/7/8  上午9:36
  * Auther: zihe

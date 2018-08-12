@@ -6,7 +6,7 @@ import android.support.v4.app.FragmentStatePagerAdapter
 import java.util.*
 
 /**
- * Package: com.github.wally.mvp.adapter
+ * Package: com.github.wally.gank.adapter
  * FileName: FragmentPageAdapter
  * Date: on 2018/6/23  下午11:22
  * Auther: zihe

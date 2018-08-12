@@ -3,7 +3,7 @@ package com.github.wally.base.base
 import android.view.View
 
 /**
- * Package: com.github.wally.mvp.base
+ * Package: com.github.wally.gank.base
  * FileName: LayoutCallback
  * Date: on 2018/6/17  上午8:53
  * Auther: zihe

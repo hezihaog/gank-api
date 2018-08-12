@@ -10,7 +10,7 @@ import com.github.wally.base.RecyclerViewHelper
 import me.drakeet.multitype.MultiTypeAdapter
 
 /**
- * Package: com.github.wally.mvp.base
+ * Package: com.github.wally.gank.base
  * FileName: BaseMvpListFragment
  * Date: on 2018/6/18  上午12:16
  * Auther: zihe

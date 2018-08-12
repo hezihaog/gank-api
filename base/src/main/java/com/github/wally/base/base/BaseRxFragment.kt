@@ -17,7 +17,7 @@ import io.reactivex.subjects.BehaviorSubject
 import me.yokeyword.fragmentation_swipeback.SwipeBackFragment
 
 /**
- * Package: com.github.wally.mvp.base
+ * Package: com.github.wally.gank.base
  * FileName: BaseRxSwipeBackFragment
  * Date: on 2018/6/17  上午1:19
  * Auther: zihe

@@ -1,7 +1,7 @@
 package com.github.wally.base.http;
 
 /**
- * Package: com.github.wally.mvp.http
+ * Package: com.github.wally.gank.http
  * FileName: BaseDataSource
  * Date: on 2018/6/23  上午8:21
  * Auther: zihe

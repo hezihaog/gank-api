@@ -9,7 +9,7 @@ import com.github.wally.base.util.WaitDialogHelper
 
 
 /**
- * Package: com.github.wally.mvp.base
+ * Package: com.github.wally.gank.base
  * FileName: BaseFragment
  * Date: on 2018/6/17  上午8:52
  * Auther: zihe

@@ -186,8 +186,12 @@ public class RecyclerViewHelper {
         this.mRecyclerViewScrollHelper.addScrollListener(scrollListener);
     }
 
-    public void moveToTop() {
+    public void smoothMoveToTop() {
         this.mRecyclerView.smoothScrollToPosition(0);
+    }
+
+    public void moveToTop() {
+        this.mRecyclerView.scrollToPosition(0);
     }
 
     /**

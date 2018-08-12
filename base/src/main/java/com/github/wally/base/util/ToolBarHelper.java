@@ -5,7 +5,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 /**
- * Package: com.github.wally.mvp.util
+ * Package: com.github.wally.gank.util
  * FileName: ToolBarHelper
  * Date: on 2018/6/23  下午2:38
  * Auther: zihe
