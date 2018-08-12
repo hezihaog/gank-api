@@ -1,4 +1,4 @@
-package com.github.wally.mvp.util;
+package com.github.wally.base.util;
 
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.Toolbar;

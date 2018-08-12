@@ -1,4 +1,4 @@
-package com.github.wally.mvp.util;
+package com.github.wally.base.util;
 
 import android.content.Context;
 import android.content.Intent;

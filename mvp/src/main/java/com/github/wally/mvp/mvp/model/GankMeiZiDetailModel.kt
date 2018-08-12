@@ -3,7 +3,7 @@ package com.github.wally.mvp.mvp.model
 import android.os.Bundle
 import com.github.wally.mvp.bean.gank.DisplayMeiZiImageBean
 import com.github.wally.mvp.constants.Constants
-import com.github.wally.mvp.http.scheduler.SchedulerUtils
+import com.github.wally.base.http.scheduler.SchedulerUtils
 import com.github.wally.mvp.mvp.contract.GankMeiZiDetailContract
 import io.reactivex.Observable
 import io.reactivex.ObservableOnSubscribe

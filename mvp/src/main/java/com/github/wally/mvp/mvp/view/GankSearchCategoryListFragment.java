@@ -4,15 +4,16 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.github.wally.base.RecyclerViewHelper;
-import com.github.wally.base.widget.recyclerview.manager.FastScrollLinearLayoutManager;
-import com.github.wally.mvp.base.BaseMvpListFragment;
+import com.github.wally.base.base.BaseMvpListFragment;
+import com.github.wally.base.http.IDataSource;
+import com.github.wally.base.widget.recyclerview.manager.delegate.FastScrollDelegate;
 import com.github.wally.mvp.bean.gank.GankSearchBean;
 import com.github.wally.mvp.constants.Constants;
 import com.github.wally.mvp.enums.GankSearchCategory;
-import com.github.wally.mvp.http.IDataSource;
 import com.github.wally.mvp.mvp.contract.GankSearchCategoryListContract;
 import com.github.wally.mvp.mvp.presenter.GankSearchCategoryListPresenter;
 import com.github.wally.mvp.viewbinder.GankSearchAllCategoryViewBinder;
@@ -61,7 +62,12 @@ public class GankSearchCategoryListFragment extends BaseMvpListFragment<GankSear
 
     @Override
     protected RecyclerView.LayoutManager onSetupRecyclerViewLayoutManager() {
-        return new FastScrollLinearLayoutManager(getActivity());
+        return new LinearLayoutManager(getActivity()) {
+            @Override
+            public void smoothScrollToPosition(RecyclerView recyclerView, RecyclerView.State state, int position) {
+                new FastScrollDelegate().smoothScrollToPosition(recyclerView, this, position);
+            }
+        };
     }
 
     @Override

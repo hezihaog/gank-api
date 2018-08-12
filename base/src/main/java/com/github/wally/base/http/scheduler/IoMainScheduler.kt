@@ -1,4 +1,4 @@
-package com.github.wally.mvp.http.scheduler
+package com.github.wally.base.http.scheduler
 
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers

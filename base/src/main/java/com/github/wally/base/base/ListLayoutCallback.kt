@@ -1,4 +1,4 @@
-package com.github.wally.mvp.base
+package com.github.wally.base.base
 
 /**
  * Package: com.github.wally.mvp.base

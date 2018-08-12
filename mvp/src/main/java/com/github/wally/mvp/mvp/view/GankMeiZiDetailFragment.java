@@ -13,13 +13,13 @@ import android.view.animation.AccelerateInterpolator;
 import com.github.wally.base.util.ImageDisplayUtil;
 import com.github.wally.base.util.StatusBarUtil;
 import com.github.wally.mvp.R;
-import com.github.wally.mvp.base.BaseMvpFragment;
-import com.github.wally.mvp.base.BasePresenter;
+import com.github.wally.base.base.BaseMvpFragment;
+import com.github.wally.base.base.BasePresenter;
 import com.github.wally.mvp.bean.gank.DisplayMeiZiImageBean;
 import com.github.wally.mvp.mvp.contract.GankMeiZiDetailContract;
 import com.github.wally.mvp.mvp.presenter.GankMeiZiDetailPresenter;
-import com.github.wally.mvp.util.ImageDownloadUtil;
-import com.github.wally.mvp.util.ToolBarHelper;
+import com.github.wally.base.util.ImageDownloadUtil;
+import com.github.wally.base.util.ToolBarHelper;
 import com.github.wally.mvp.widget.RotateCircleProgressBar;
 import com.gyf.barlibrary.ImmersionBar;
 import com.haoge.easyandroid.easy.EasyToast;
@@ -49,9 +49,9 @@ public class GankMeiZiDetailFragment extends BaseMvpFragment<GankMeiZiDetailCont
     private DisplayMeiZiImageBean mImageBean;
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
+    public boolean onBackPressedSupport() {
         StatusBarUtil.showStatusBar(getActivity());
+        return super.onBackPressedSupport();
     }
 
     @Override

@@ -1,7 +1,7 @@
 package com.github.wally.mvp.mvp.presenter
 
 import android.os.Bundle
-import com.github.wally.mvp.base.BasePresenter
+import com.github.wally.base.base.BasePresenter
 import com.github.wally.mvp.mvp.contract.GankMeiZiDetailContract
 import com.github.wally.mvp.mvp.model.GankMeiZiDetailModel
 

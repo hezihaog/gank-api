@@ -7,13 +7,13 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.View
 import com.github.wally.mvp.R
-import com.github.wally.mvp.adapter.PageFragmentStateAdapter
-import com.github.wally.mvp.base.BaseMvpFragment
-import com.github.wally.mvp.base.BasePresenter
+import com.github.wally.base.adapter.PageFragmentStateAdapter
+import com.github.wally.base.base.BaseMvpFragment
+import com.github.wally.base.base.BasePresenter
 import com.github.wally.mvp.enums.GankSearchCategory
 import com.github.wally.mvp.mvp.contract.GankSearchContract
 import com.github.wally.mvp.mvp.presenter.GankSearchPresenter
-import com.github.wally.mvp.util.ToolBarHelper
+import com.github.wally.base.util.ToolBarHelper
 import com.gyf.barlibrary.ImmersionBar
 import io.reactivex.Observable
 import java.util.*

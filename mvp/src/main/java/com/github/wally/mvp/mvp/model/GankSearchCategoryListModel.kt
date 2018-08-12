@@ -3,9 +3,9 @@ package com.github.wally.mvp.mvp.model
 import com.github.wally.mvp.AppContext
 import com.github.wally.mvp.bean.gank.GankSearchBean
 import com.github.wally.mvp.enums.GankSearchCategory
-import com.github.wally.mvp.http.BaseDataSource
-import com.github.wally.mvp.http.IDataSource
-import com.github.wally.mvp.http.scheduler.SchedulerUtils
+import com.github.wally.base.http.BaseDataSource
+import com.github.wally.base.http.IDataSource
+import com.github.wally.base.http.scheduler.SchedulerUtils
 import com.github.wally.mvp.mvp.contract.GankSearchCategoryListContract
 import io.reactivex.Observable
 

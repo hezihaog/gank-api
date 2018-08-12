@@ -30,7 +30,9 @@ import android.support.v4.view.ViewPropertyAnimatorListener;
 import android.util.AttributeSet;
 import android.view.View;
 
-// FAB 行为控制器
+/**
+ * FAB行为控制器
+ */
 public class ScaleDownShowBehavior extends FloatingActionButton.Behavior {
     public ScaleDownShowBehavior(Context context, AttributeSet attrs) {
         super();
@@ -40,21 +42,24 @@ public class ScaleDownShowBehavior extends FloatingActionButton.Behavior {
     public boolean onStartNestedScroll(CoordinatorLayout coordinatorLayout,
                                        FloatingActionButton child, View directTargetChild,
                                        View target, int nestedScrollAxes) {
-        if (nestedScrollAxes == ViewCompat.SCROLL_AXIS_VERTICAL){
+        if (nestedScrollAxes == ViewCompat.SCROLL_AXIS_VERTICAL) {
             return true;
         }
         return super.onStartNestedScroll(coordinatorLayout, child, directTargetChild,
                 target, nestedScrollAxes);
     }
 
-    private boolean isAnimateIng = false;   // 是否正在动画
-    private boolean isShow = true;  // 是否已经显示
+    //是否正在动画
+    private boolean isAnimateIng = false;
+    //是否已经显示
+    private boolean isShow = true;
 
     @Override
     public void onNestedScroll(CoordinatorLayout coordinatorLayout, FloatingActionButton child,
                                View target, int dxConsumed, int dyConsumed,
                                int dxUnconsumed, int dyUnconsumed) {
-        if ((dyConsumed > 0 || dyUnconsumed > 0) && !isAnimateIng && isShow) {// 手指上滑，隐藏FAB
+        //手指上滑，隐藏FAB
+        if ((dyConsumed > 0 || dyUnconsumed > 0) && !isAnimateIng && isShow) {
             AnimatorUtil.translateHide(child, new StateListener() {
                 @Override
                 public void onAnimationStart(View view) {
@@ -63,13 +68,14 @@ public class ScaleDownShowBehavior extends FloatingActionButton.Behavior {
                 }
             });
         } else if ((dyConsumed < 0 || dyUnconsumed < 0 && !isAnimateIng && !isShow)) {
+            //手指下滑，显示FAB
             AnimatorUtil.translateShow(child, new StateListener() {
                 @Override
                 public void onAnimationStart(View view) {
                     super.onAnimationStart(view);
                     isShow = true;
                 }
-            });// 手指下滑，显示FAB
+            });
         }
     }
 

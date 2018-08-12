@@ -1,4 +1,4 @@
-package com.github.wally.mvp.base
+package com.github.wally.base.base
 
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable

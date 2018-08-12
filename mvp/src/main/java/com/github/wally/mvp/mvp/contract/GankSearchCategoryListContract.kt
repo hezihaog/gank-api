@@ -1,11 +1,11 @@
 package com.github.wally.mvp.mvp.contract
 
-import com.github.wally.mvp.base.IBaseModel
-import com.github.wally.mvp.base.IBaseView
-import com.github.wally.mvp.base.IPresenter
+import com.github.wally.base.base.IBaseModel
+import com.github.wally.base.base.IBaseView
+import com.github.wally.base.base.IPresenter
 import com.github.wally.mvp.bean.gank.GankSearchBean
 import com.github.wally.mvp.enums.GankSearchCategory
-import com.github.wally.mvp.http.IDataSource
+import com.github.wally.base.http.IDataSource
 
 import io.reactivex.Observable
 

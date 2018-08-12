@@ -1,11 +1,11 @@
-package com.github.wally.mvp.base
+package com.github.wally.base.base
 
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.RecyclerView
 import android.view.View
+import com.github.wally.base.R
 
 import com.github.wally.base.RecyclerViewHelper
-import com.github.wally.mvp.R
 
 import me.drakeet.multitype.MultiTypeAdapter
 

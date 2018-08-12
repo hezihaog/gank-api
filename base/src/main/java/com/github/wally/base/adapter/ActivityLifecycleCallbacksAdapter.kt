@@ -1,4 +1,4 @@
-package com.github.wally.mvp.adapter
+package com.github.wally.base.adapter
 
 import android.app.Activity
 import android.app.Application

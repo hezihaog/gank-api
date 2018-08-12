@@ -2,9 +2,9 @@ package com.github.wally.mvp.mvp.contract
 
 import android.os.Bundle
 
-import com.github.wally.mvp.base.IBaseModel
-import com.github.wally.mvp.base.IBaseView
-import com.github.wally.mvp.base.IPresenter
+import com.github.wally.base.base.IBaseModel
+import com.github.wally.base.base.IBaseView
+import com.github.wally.base.base.IPresenter
 import com.github.wally.mvp.bean.gank.DisplayMeiZiImageBean
 
 import io.reactivex.Observable

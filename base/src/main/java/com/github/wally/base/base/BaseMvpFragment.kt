@@ -1,12 +1,12 @@
-package com.github.wally.mvp.base
+package com.github.wally.base.base
 
 import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.github.wally.base.util.WaitDialogHelper
 
-import com.github.wally.mvp.util.WaitDialogHelper
 
 /**
  * Package: com.github.wally.mvp.base

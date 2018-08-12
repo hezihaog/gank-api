@@ -1,6 +1,7 @@
 package com.github.wally.mvp.util
 
 import android.os.Bundle
+import com.github.wally.base.util.FragmentFactory
 
 import com.github.wally.mvp.bean.gank.DisplayMeiZiImageBean
 import com.github.wally.mvp.constants.Constants

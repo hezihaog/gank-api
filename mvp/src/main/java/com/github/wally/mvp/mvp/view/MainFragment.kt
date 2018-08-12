@@ -11,8 +11,8 @@ import android.view.MenuItem
 import android.view.View
 
 import com.github.wally.mvp.R
-import com.github.wally.mvp.base.BaseRxFragment
-import com.github.wally.mvp.util.ToolBarHelper
+import com.github.wally.base.base.BaseRxFragment
+import com.github.wally.base.util.ToolBarHelper
 import com.github.wally.mvp.util.UIHelper
 import com.gyf.barlibrary.ImmersionBar
 

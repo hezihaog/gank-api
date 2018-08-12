@@ -1,8 +1,8 @@
 package com.github.wally.mvp.mvp.contract
 
-import com.github.wally.mvp.base.IBaseModel
-import com.github.wally.mvp.base.IBaseView
-import com.github.wally.mvp.base.IPresenter
+import com.github.wally.base.base.IBaseModel
+import com.github.wally.base.base.IBaseView
+import com.github.wally.base.base.IPresenter
 import com.github.wally.mvp.enums.GankSearchCategory
 
 import io.reactivex.Observable

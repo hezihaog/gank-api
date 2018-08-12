@@ -10,12 +10,12 @@ import android.view.View;
 
 import com.github.wally.base.RecyclerViewHelper;
 import com.github.wally.base.RecyclerViewScrollHelper;
+import com.github.wally.base.base.BaseMvpListFragment;
+import com.github.wally.base.http.IDataSource;
 import com.github.wally.base.util.PositionUtil;
-import com.github.wally.base.widget.recyclerview.manager.FastScrollStaggeredGridLayoutManager;
+import com.github.wally.base.widget.recyclerview.manager.delegate.FastScrollDelegate;
 import com.github.wally.mvp.R;
-import com.github.wally.mvp.base.BaseMvpListFragment;
 import com.github.wally.mvp.bean.gank.GankMeiZiListBean;
-import com.github.wally.mvp.http.IDataSource;
 import com.github.wally.mvp.mvp.contract.GankMeiZiListContract;
 import com.github.wally.mvp.mvp.presenter.GankMeiZiListPresenter;
 import com.github.wally.mvp.viewbinder.GankMeiZiViewBinder;
@@ -84,13 +84,18 @@ public class GankMeiZiListFragment extends BaseMvpListFragment<GankMeiZiListCont
 
     @Override
     protected RecyclerView.LayoutManager onSetupRecyclerViewLayoutManager() {
-        return new FastScrollStaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        return new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL) {
+            @Override
+            public void smoothScrollToPosition(RecyclerView recyclerView, RecyclerView.State state, int position) {
+                new FastScrollDelegate().smoothScrollToPosition(recyclerView, this, position);
+            }
+        };
     }
 
     @Override
     protected void onRecyclerViewReady(RecyclerView recyclerView) {
         super.onRecyclerViewReady(recyclerView);
-        FastScrollStaggeredGridLayoutManager layoutManager = (FastScrollStaggeredGridLayoutManager) recyclerView.getLayoutManager();
+        StaggeredGridLayoutManager layoutManager = (StaggeredGridLayoutManager) recyclerView.getLayoutManager();
         layoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_NONE);
     }
 
@@ -125,7 +130,7 @@ public class GankMeiZiListFragment extends BaseMvpListFragment<GankMeiZiListCont
                     if (newState == RecyclerView.SCROLL_STATE_IDLE) {
                         //停止时，保存位置
                         mLastListPosition = PositionUtil.INSTANCE.getCurrentPosition(getRecyclerView());
-                        ((FastScrollStaggeredGridLayoutManager) getRecyclerView().getLayoutManager())
+                        ((StaggeredGridLayoutManager) getRecyclerView().getLayoutManager())
                                 .invalidateSpanAssignments();
                     }
                 }

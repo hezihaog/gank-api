@@ -1,10 +1,10 @@
-package com.github.wally.mvp.util
+package com.github.wally.base.util
 
 import android.app.Activity
 import android.app.ProgressDialog
 import android.os.Handler
 import android.os.Looper
-import com.github.wally.mvp.adapter.ActivityLifecycleCallbacksAdapter
+import com.github.wally.base.adapter.ActivityLifecycleCallbacksAdapter
 
 /**
  * Package: com.github.wally.mvp.util

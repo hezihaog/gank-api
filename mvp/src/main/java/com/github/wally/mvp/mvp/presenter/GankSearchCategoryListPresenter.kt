@@ -1,6 +1,6 @@
 package com.github.wally.mvp.mvp.presenter
 
-import com.github.wally.mvp.base.BasePresenter
+import com.github.wally.base.base.BasePresenter
 import com.github.wally.mvp.enums.GankSearchCategory
 import com.github.wally.mvp.mvp.contract.GankSearchCategoryListContract
 import com.github.wally.mvp.mvp.model.GankSearchCategoryListModel
