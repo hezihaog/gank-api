@@ -1,4 +1,4 @@
-package com.github.wally.base.widget.recyclerview.manager.sticky;
+package com.github.wally.base.widget.recyclerview.manager.sticky.base;
 
 import android.view.View;
 

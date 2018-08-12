@@ -4,7 +4,9 @@ import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 
-import com.github.wally.base.widget.recyclerview.manager.delegate.FastScrollLayoutManagerDelegate;
+import com.github.wally.base.widget.recyclerview.manager.delegate.FastScrollDelegate;
+import com.github.wally.base.widget.recyclerview.manager.sticky.base.StickyHeaders;
+import com.github.wally.base.widget.recyclerview.manager.sticky.base.StickyHeadersGridLayoutManager;
 
 
 /**
@@ -30,7 +32,7 @@ public class FastScrollStickyHeadersGridLayoutManager<T extends RecyclerView.Ada
 
     @Override
     public void smoothScrollToPosition(RecyclerView recyclerView, RecyclerView.State state, int position) {
-        FastScrollLayoutManagerDelegate delegate = new FastScrollLayoutManagerDelegate();
+        FastScrollDelegate delegate = new FastScrollDelegate();
         delegate.smoothScrollToPosition(recyclerView, this, position);
     }
 }

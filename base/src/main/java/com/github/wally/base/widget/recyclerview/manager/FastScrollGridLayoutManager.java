@@ -5,7 +5,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 
-import com.github.wally.base.widget.recyclerview.manager.delegate.FastScrollLayoutManagerDelegate;
+import com.github.wally.base.widget.recyclerview.manager.delegate.FastScrollDelegate;
 
 
 /**
@@ -31,7 +31,7 @@ public class FastScrollGridLayoutManager extends GridLayoutManager {
 
     @Override
     public void smoothScrollToPosition(RecyclerView recyclerView, RecyclerView.State state, int position) {
-        FastScrollLayoutManagerDelegate delegate = new FastScrollLayoutManagerDelegate();
+        FastScrollDelegate delegate = new FastScrollDelegate();
         delegate.smoothScrollToPosition(recyclerView, this, position);
     }
 }

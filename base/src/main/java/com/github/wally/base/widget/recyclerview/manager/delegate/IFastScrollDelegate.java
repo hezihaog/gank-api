@@ -10,7 +10,7 @@ import android.support.v7.widget.RecyclerView;
  * Descirbe:快速滚动代理
  * Email: hezihao@linghit.com
  */
-public interface IFastScrollLayoutManagerDelegate {
+public interface IFastScrollDelegate {
     /**
      * 快速滚动
      *

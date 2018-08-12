@@ -13,7 +13,7 @@ import android.util.DisplayMetrics;
  * Descirbe:快速滚动代理
  * Email: hezihao@linghit.com
  */
-public class FastScrollLayoutManagerDelegate implements IFastScrollLayoutManagerDelegate {
+public class FastScrollDelegate implements IFastScrollDelegate {
 
     @Override
     public void smoothScrollToPosition(RecyclerView recyclerView, final RecyclerView.SmoothScroller.ScrollVectorProvider provider, int position) {

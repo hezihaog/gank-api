@@ -1,4 +1,4 @@
-package com.github.wally.base.widget.recyclerview.manager.sticky;
+package com.github.wally.base.widget.recyclerview.manager.sticky.base;
 
 import android.content.Context;
 import android.graphics.PointF;
@@ -6,8 +6,8 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -17,14 +17,14 @@ import java.util.List;
 
 /**
  * Created by jay on 2017/12/4 上午10:57
- * <p>
+ *
  * Adds sticky headers capabilities to your {@link RecyclerView.Adapter}. It must implement {@link StickyHeaders} to
  * indicate which items are headers.
  *
  * @link https://github.com/Doist/RecyclerViewExtensions/blob/master/StickyHeaders
  */
-public class StickyHeadersGridLayoutManager<T extends RecyclerView.Adapter & StickyHeaders>
-        extends GridLayoutManager {
+public class StickyHeadersStaggeredGridLayoutManager<T extends RecyclerView.Adapter & StickyHeaders>
+        extends StaggeredGridLayoutManager {
     private T mAdapter;
 
     private float mTranslationX;
@@ -34,6 +34,7 @@ public class StickyHeadersGridLayoutManager<T extends RecyclerView.Adapter & Sti
     private List<Integer> mHeaderPositions = new ArrayList<>(0);
     private RecyclerView.AdapterDataObserver mHeaderPositionsObserver = new HeaderPositionsAdapterDataObserver();
 
+    private static final int INVALID_OFFSET = Integer.MIN_VALUE;
     // Sticky header's ViewHolder and dirty state.
     private View mStickyHeader;
     private int mStickyHeaderPosition = RecyclerView.NO_POSITION;
@@ -41,16 +42,12 @@ public class StickyHeadersGridLayoutManager<T extends RecyclerView.Adapter & Sti
     private int mPendingScrollPosition = RecyclerView.NO_POSITION;
     private int mPendingScrollOffset = 0;
 
-    public StickyHeadersGridLayoutManager(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public StickyHeadersStaggeredGridLayoutManager(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
-    public StickyHeadersGridLayoutManager(Context context, int spanCount) {
-        super(context, spanCount);
-    }
-
-    public StickyHeadersGridLayoutManager(Context context, int spanCount, int orientation, boolean reverseLayout) {
-        super(context, spanCount, orientation, reverseLayout);
+    public StickyHeadersStaggeredGridLayoutManager(int spanCount, int orientation) {
+        super(spanCount, orientation);
     }
 
     /**
