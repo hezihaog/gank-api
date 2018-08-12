@@ -33,6 +33,8 @@ def lifecycle_version = "1.1.1"
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation project(':base')
+    api 'com.android.support:design:27.1.1'
+    api 'com.android.support:cardview-v7:27.1.1'
     implementation 'com.android.support.constraint:constraint-layout:1.1.2'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
@@ -41,18 +43,7 @@ dependencies {
     //arouter
     implementation 'com.alibaba:arouter-api:1.3.1'
     annotationProcessor 'com.alibaba:arouter-compiler:1.1.4'
-    implementation "org.jetbrains.anko:anko:$anko_version"
     implementation 'androidx.core:core-ktx:0.3'
-    // ViewModel and LiveData
-    implementation "android.arch.lifecycle:extensions:$lifecycle_version"
-    annotationProcessor "android.arch.lifecycle:compiler:$lifecycle_version"
-    // optional - ReactiveStreams support for LiveData
-    implementation "android.arch.lifecycle:reactivestreams:$lifecycle_version"
-    // optional - Test helpers for LiveData
-    testImplementation "android.arch.core:core-testing:$lifecycle_version"
-//    implementation 'com.qmuiteam:qmuilint:1.0.1'
-//    implementation 'com.qmuiteam:arch:0.1.1'
-//    implementation 'com.qmuiteam:qmui:1.1.3'
     //okhttp3-interceptor
     api 'com.squareup.okhttp3:logging-interceptor:3.10.0'
     //retrofit
@@ -62,11 +53,14 @@ dependencies {
     // 支持Gson解析
     api 'com.squareup.retrofit2:converter-gson:2.4.0'
     //photo view
-    api 'com.github.chrisbanes:PhotoView:1.3.1'
+    api 'com.github.chrisbanes:PhotoView:2.1.4'
     api 'com.google.guava:guava:25.1-android'
     api 'com.android.support:multidex:1.0.3'
     //recycler view分割线
     api 'com.github.magiepooh:recycler-itemdecoration:1.1.1@aar'
-    api 'com.android.support:design:27.1.1'
-    api 'com.android.support:cardview-v7:27.1.1'
+    //For Lifecycles, LiveData, and ViewModel
+    implementation "android.arch.lifecycle:extensions:$lifecycle_version"
+    implementation "android.arch.lifecycle:viewmodel:$lifecycle_version"
+    implementation "android.arch.lifecycle:livedata:$lifecycle_version"
+    annotationProcessor "android.arch.lifecycle:compiler:$lifecycle_version"
 }

@@ -9,17 +9,20 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
+import android.widget.ImageView;
 
-import com.github.wally.base.util.ImageDisplayUtil;
-import com.github.wally.base.util.StatusBarUtil;
-import com.github.wally.gank.R;
+import com.github.chrisbanes.photoview.OnPhotoTapListener;
+import com.github.chrisbanes.photoview.PhotoView;
 import com.github.wally.base.base.BaseMvpFragment;
 import com.github.wally.base.base.BasePresenter;
+import com.github.wally.base.util.ImageDisplayUtil;
+import com.github.wally.base.util.ImageDownloadUtil;
+import com.github.wally.base.util.StatusBarUtil;
+import com.github.wally.base.util.ToolBarHelper;
+import com.github.wally.gank.R;
 import com.github.wally.gank.bean.gank.DisplayMeiZiImageBean;
 import com.github.wally.gank.mvp.contract.GankMeiZiDetailContract;
 import com.github.wally.gank.mvp.presenter.GankMeiZiDetailPresenter;
-import com.github.wally.base.util.ImageDownloadUtil;
-import com.github.wally.base.util.ToolBarHelper;
 import com.github.wally.gank.widget.RotateCircleProgressBar;
 import com.gyf.barlibrary.ImmersionBar;
 import com.haoge.easyandroid.easy.EasyToast;
@@ -29,8 +32,6 @@ import java.io.File;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
-import uk.co.senab.photoview.PhotoView;
-import uk.co.senab.photoview.PhotoViewAttacher;
 
 /**
  * Package: com.github.wally.gank.ui.fragment
@@ -86,14 +87,11 @@ public class GankMeiZiDetailFragment extends BaseMvpFragment<GankMeiZiDetailCont
         mToolbar = toolBarHelper.getToolbar();
         ImmersionBar.with(this).titleBar(mToolbar);
         //长按点击事件
-        mImageView.setOnPhotoTapListener(new PhotoViewAttacher.OnPhotoTapListener() {
-            @Override
-            public void onPhotoTap(View view, float x, float y) {
-                toggleToolBar();
-            }
+        mImageView.setOnPhotoTapListener(new OnPhotoTapListener() {
 
             @Override
-            public void onOutsidePhotoTap() {
+            public void onPhotoTap(ImageView view, float x, float y) {
+                toggleToolBar();
             }
         });
     }
