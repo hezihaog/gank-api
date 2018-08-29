@@ -13,10 +13,11 @@ import com.github.wally.base.base.BaseMvpFragment
 import com.github.wally.base.base.BasePresenter
 import com.github.wally.base.util.ImageDisplayUtil
 import com.github.wally.base.util.ImageDownloadUtil
-import com.github.wally.base.util.StatusBarUtil
 import com.github.wally.base.util.ToolBarHelper
 import com.github.wally.gank.R
 import com.github.wally.gank.bean.gank.DisplayMeiZiImageBean
+import com.github.wally.gank.ext.hideStatusBar
+import com.github.wally.gank.ext.showStatusBar
 import com.github.wally.gank.mvp.contract.GankMeiZiDetailContract
 import com.github.wally.gank.mvp.presenter.GankMeiZiDetailPresenter
 import com.github.wally.gank.widget.RotateCircleProgressBar
@@ -41,7 +42,7 @@ class GankMeiZiDetailFragment : BaseMvpFragment<GankMeiZiDetailContract.Presente
     private var mImageBean: DisplayMeiZiImageBean? = null
 
     override fun onDestroy() {
-        StatusBarUtil.showStatusBar(activity)
+        showStatusBar()
         super.onDestroy()
     }
 
@@ -78,14 +79,14 @@ class GankMeiZiDetailFragment : BaseMvpFragment<GankMeiZiDetailContract.Presente
                     .translationY((-mToolbar.height).toFloat())
                     .setInterpolator(AccelerateInterpolator())
                     .start()
-            StatusBarUtil.hideStatusBar(activity)
+            hideStatusBar()
         } else {
             //显示
             mToolbar.animate()
                     .translationY(0f)
                     .setInterpolator(AccelerateInterpolator())
                     .start()
-            StatusBarUtil.showStatusBar(activity)
+            showStatusBar()
         }
         isHideToolBar = !isHideToolBar
     }

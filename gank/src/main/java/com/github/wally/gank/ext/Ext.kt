@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
+import com.github.wally.base.util.StatusBarUtil
 import com.github.wally.gank.AppContext
 import com.github.wally.gank.R
 
@@ -45,7 +46,7 @@ fun Fragment.showSnackMsg(msg: String) {
 }
 
 fun getAppContext(): AppContext {
-    return AppContext.instance!!
+    return AppContext.instance
 }
 
 fun getLayoutInflater(): LayoutInflater {
@@ -54,4 +55,20 @@ fun getLayoutInflater(): LayoutInflater {
 
 fun inflateView(layoutId: Int, parentView: ViewGroup): View {
     return getLayoutInflater().inflate(layoutId, parentView, false)
+}
+
+fun Activity.hideStatusBar() {
+    StatusBarUtil.hideStatusBar(this)
+}
+
+fun Activity.showStatusBar() {
+    StatusBarUtil.showStatusBar(this)
+}
+
+fun Fragment.hideStatusBar() {
+    StatusBarUtil.hideStatusBar(this.activity)
+}
+
+fun Fragment.showStatusBar() {
+    StatusBarUtil.showStatusBar(this.activity)
 }
