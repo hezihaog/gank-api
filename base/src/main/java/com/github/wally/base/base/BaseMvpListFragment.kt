@@ -17,15 +17,11 @@ import me.drakeet.multitype.MultiTypeAdapter
  * Descirbe:
  * Email: hezihao@linghit.com
  */
-abstract class BaseMvpListFragment<P : IPresenter<V>, V : IBaseView> : BaseMvpFragment<P, V>(), ListLayoutCallback {
-    var refreshLayout: SwipeRefreshLayout? = null
-        private set
-    var recyclerView: RecyclerView? = null
-        private set
-    var adapter: MultiTypeAdapter? = null
-        private set
-    var recyclerViewHelper: RecyclerViewHelper? = null
-        private set
+abstract class BaseMvpListFragment<P : IPresenter<V>, V : IView> : BaseMvpFragment<P, V>(), ListLayoutCallback {
+    private lateinit var refreshLayout: SwipeRefreshLayout
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var adapter: MultiTypeAdapter
+    private lateinit var recyclerViewHelper: RecyclerViewHelper
 
     override fun onLayoutId(): Int {
         return R.layout.fragment_base_list
@@ -40,7 +36,7 @@ abstract class BaseMvpListFragment<P : IPresenter<V>, V : IBaseView> : BaseMvpFr
     override fun onBindViewContent() {
         super.onBindViewContent()
         //配置RecyclerView
-        setupRecyclerView(recyclerView!!)
+        setupRecyclerView(recyclerView)
         //配置加载帮助类，封装下拉刷新和加载更多
         setupRecyclerViewHelper()
         //通知子类加载帮助类已经初始化完毕，可做一些滚动监听
@@ -56,9 +52,9 @@ abstract class BaseMvpListFragment<P : IPresenter<V>, V : IBaseView> : BaseMvpFr
         adapter = MultiTypeAdapter()
         recyclerView.adapter = adapter
         //配置多type的映射
-        onRegisterRecyclerViewTypeMapper(adapter!!)
+        onRegisterRecyclerViewTypeMapper(adapter)
         //通知子类列表已经初始化完毕，可以对列表进行下一步自定义，例如增加分割线等
-        onRecyclerViewReady(this.recyclerView)
+        onRecyclerViewReady(recyclerView)
     }
 
     /**
@@ -88,12 +84,18 @@ abstract class BaseMvpListFragment<P : IPresenter<V>, V : IBaseView> : BaseMvpFr
         recyclerViewHelper = onSetupRecyclerViewHelper(refreshLayout, recyclerView, adapter)
     }
 
-    protected abstract fun onSetupRecyclerViewHelper(refreshLayout: SwipeRefreshLayout?, recyclerView: RecyclerView?, adapter: MultiTypeAdapter?): RecyclerViewHelper
+    protected abstract fun onSetupRecyclerViewHelper(refreshLayout: SwipeRefreshLayout,
+                                                     recyclerView: RecyclerView,
+                                                     adapter: MultiTypeAdapter): RecyclerViewHelper
 
     /**
      * 加载帮助类初始化完毕，子类复写可设置一些滚动监听
      */
-    protected open fun onRecyclerViewHelperReady(recyclerViewHelper: RecyclerViewHelper?) {
+    protected open fun onRecyclerViewHelperReady(recyclerViewHelper: RecyclerViewHelper) {
 
+    }
+
+    protected fun getRecyclerViewHelper(): RecyclerViewHelper {
+        return recyclerViewHelper
     }
 }

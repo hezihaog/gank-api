@@ -16,7 +16,7 @@ import com.github.wally.base.util.WaitDialogHelper
  * Descirbe:
  * Email: hezihao@linghit.com
  */
-abstract class BaseMvpFragment<P : IPresenter<V>, V : IBaseView> : BaseRxFragment(), IBaseView {
+abstract class BaseMvpFragment<P : IPresenter<V>, V : IView> : BaseRxFragment(), IView {
     protected lateinit var presenter: P
     protected lateinit var mWaitDialogHelper: WaitDialogHelper
 
@@ -27,7 +27,7 @@ abstract class BaseMvpFragment<P : IPresenter<V>, V : IBaseView> : BaseRxFragmen
 
     override fun onAttach(activity: Activity?) {
         super.onAttach(activity)
-        mWaitDialogHelper = WaitDialogHelper.create(activity)
+        mWaitDialogHelper = WaitDialogHelper.create(activity!!)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

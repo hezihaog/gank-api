@@ -1,7 +1,7 @@
 package com.github.wally.gank.mvp.contract
 
-import com.github.wally.base.base.IBaseModel
-import com.github.wally.base.base.IBaseView
+import com.github.wally.base.base.IModel
+import com.github.wally.base.base.IView
 import com.github.wally.base.base.IPresenter
 import com.github.wally.gank.bean.gank.GankRandomListBean
 import com.github.wally.gank.enums.GankRandomCategory
@@ -18,7 +18,7 @@ import io.reactivex.Observable
  * Email: hezihao@linghit.com
  */
 interface RandomMeiZiListContract {
-    interface View : IBaseView {
+    interface View : IView {
         fun showRandomMeiZiList(bean: IDataSource<GankRandomListBean>, isRefresh: Boolean)
     }
 
@@ -26,7 +26,7 @@ interface RandomMeiZiListContract {
         fun getRandomMeiZiList(category: GankRandomCategory, size: Int, isRefresh: Boolean)
     }
 
-    interface Model : IBaseModel {
+    interface Model : IModel {
         fun requestRandomMeiZiList(category: GankRandomCategory, size: Int): Observable<IDataSource<GankRandomListBean>>
     }
 }

@@ -6,8 +6,9 @@ import org.reactivestreams.Publisher
 /**
  * desc:RxJava基础类型封装
  */
-abstract class BaseScheduler<T> protected constructor(private val subscribeOnScheduler: Scheduler,
-                                                      private val observeOnScheduler: Scheduler) : ObservableTransformer<T, T>,
+abstract class BaseScheduler<T> protected constructor(
+        private val subscribeOnScheduler: Scheduler,
+        private val observeOnScheduler: Scheduler) : ObservableTransformer<T, T>,
         SingleTransformer<T, T>,
         MaybeTransformer<T, T>,
         CompletableTransformer,

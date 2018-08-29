@@ -2,8 +2,8 @@ package com.github.wally.gank.mvp.contract
 
 import android.os.Bundle
 
-import com.github.wally.base.base.IBaseModel
-import com.github.wally.base.base.IBaseView
+import com.github.wally.base.base.IModel
+import com.github.wally.base.base.IView
 import com.github.wally.base.base.IPresenter
 import com.github.wally.gank.bean.gank.DisplayMeiZiImageBean
 
@@ -18,7 +18,7 @@ import io.reactivex.Observable
  * Email: hezihao@linghit.com
  */
 interface GankMeiZiDetailContract {
-    interface View : IBaseView {
+    interface View : IView {
         fun showMeiZiDetail(bean: DisplayMeiZiImageBean)
     }
 
@@ -26,7 +26,7 @@ interface GankMeiZiDetailContract {
         fun getMeiZiDetail(bundle: Bundle)
     }
 
-    interface Model : IBaseModel {
+    interface Model : IModel {
         fun requestMeiZiDetail(bundle: Bundle): Observable<DisplayMeiZiImageBean>
     }
 }

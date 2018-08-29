@@ -152,12 +152,10 @@ public class RandomMeiZiFragment extends BaseMvpListFragment<RandomMeiZiListCont
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
-                if (getRecyclerView() != null) {
-                    if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                        //停止时，保存位置
-                        ((StaggeredGridLayoutManager) getRecyclerView().getLayoutManager())
-                                .invalidateSpanAssignments();
-                    }
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    //停止时，保存位置
+                    ((StaggeredGridLayoutManager) getRecyclerView().getLayoutManager())
+                            .invalidateSpanAssignments();
                 }
             }
         });

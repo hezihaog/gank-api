@@ -1,6 +1,6 @@
 package com.github.wally.gank.mvp.model
 
-import com.github.wally.base.base.IBaseModel
+import com.github.wally.base.base.IModel
 import com.github.wally.base.http.BaseDataSource
 import com.github.wally.base.http.IDataSource
 import com.github.wally.base.http.scheduler.SchedulerUtils
@@ -18,7 +18,7 @@ import io.reactivex.Observable
  * Descirbe:
  * Email: hezihao@linghit.com
  */
-class GankRandomMeiZiListModel : IBaseModel, RandomMeiZiListContract.Model {
+class GankRandomMeiZiListModel : IModel, RandomMeiZiListContract.Model {
 
     override fun requestRandomMeiZiList(category: GankRandomCategory, size: Int): Observable<IDataSource<GankRandomListBean>> {
         return RetrofitManager.instance

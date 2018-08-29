@@ -8,7 +8,7 @@ package com.github.wally.base.base
  * Descirbe:
  * Email: hezihao@linghit.com
  */
-interface IPresenter<V : IBaseView> {
+interface IPresenter<V : IView> {
     /**
      * 给Presenter注释V层视图
      */

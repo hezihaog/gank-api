@@ -1,7 +1,7 @@
 package com.github.wally.gank.mvp.contract
 
-import com.github.wally.base.base.IBaseModel
-import com.github.wally.base.base.IBaseView
+import com.github.wally.base.base.IModel
+import com.github.wally.base.base.IView
 import com.github.wally.base.base.IPresenter
 import com.github.wally.gank.enums.GankSearchCategory
 
@@ -16,7 +16,7 @@ import io.reactivex.Observable
  * Email: hezihao@linghit.com
  */
 interface GankSearchContract {
-    interface View : IBaseView {
+    interface View : IView {
         /**
          * 分配搜索栏目给TabLayout
          *
@@ -32,7 +32,7 @@ interface GankSearchContract {
         fun requestSearchCategoryList()
     }
 
-    interface Model : IBaseModel {
+    interface Model : IModel {
         /**
          * 获取搜索分类列表
          */

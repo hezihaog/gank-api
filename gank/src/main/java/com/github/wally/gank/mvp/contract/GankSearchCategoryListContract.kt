@@ -1,7 +1,7 @@
 package com.github.wally.gank.mvp.contract
 
-import com.github.wally.base.base.IBaseModel
-import com.github.wally.base.base.IBaseView
+import com.github.wally.base.base.IModel
+import com.github.wally.base.base.IView
 import com.github.wally.base.base.IPresenter
 import com.github.wally.gank.bean.gank.GankSearchBean
 import com.github.wally.gank.enums.GankSearchCategory
@@ -18,7 +18,7 @@ import io.reactivex.Observable
  * Email: hezihao@linghit.com
  */
 interface GankSearchCategoryListContract {
-    interface View : IBaseView {
+    interface View : IView {
         /**
          * 展示特定类型的记录列表
          *
@@ -40,7 +40,7 @@ interface GankSearchCategoryListContract {
         fun getSearchCategoryList(page: Int, count: Int, category: GankSearchCategory, isRefresh: Boolean)
     }
 
-    interface Model : IBaseModel {
+    interface Model : IModel {
         /**
          * 请求特定类型的搜索记录列表
          *

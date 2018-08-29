@@ -14,24 +14,20 @@ import com.github.wally.base.adapter.ActivityLifecycleCallbacksAdapter
  * Descirbe:
  * Email: hezihao@linghit.com
  */
-class WaitDialogHelper private constructor(private val mActivity: Activity?) : IWaitDialogHandler {
+class WaitDialogHelper private constructor(private val mActivity: Activity) : IWaitDialogHandler {
     private var mDialog: ProgressDialog? = null
-    private var mMainHandler: Handler? = null
+    private var mMainHandler: Handler = Handler(mActivity.getMainLooper())
 
     init {
-        this.mMainHandler = Handler(mActivity?.getMainLooper())
-        val application = mActivity!!.application
+        val application = mActivity.application
         application.registerActivityLifecycleCallbacks(object : ActivityLifecycleCallbacksAdapter() {
             override fun onActivityDestroyed(activity: Activity) {
                 super.onActivityDestroyed(activity)
-                if (mMainHandler != null) {
-                    mMainHandler!!.removeCallbacks(null)
+                mMainHandler.removeCallbacks(null)
+                mDialog.let {
+                    it!!.dismiss()
+                    mDialog = null
                 }
-                mMainHandler = null
-                if (mDialog != null) {
-                    mDialog!!.dismiss()
-                }
-                mDialog = null
                 application.unregisterActivityLifecycleCallbacks(this)
             }
         })
@@ -39,15 +35,19 @@ class WaitDialogHelper private constructor(private val mActivity: Activity?) : I
 
     override fun showWaitDialog(msg: String?) {
         val runnable = Runnable {
-            if (mActivity == null || mActivity.isFinishing) {
-                return@Runnable
-            }
-            if (mDialog == null) {
-                mDialog = ProgressDialog(mActivity)
-            }
-            if (!mDialog!!.isShowing) {
-                mDialog?.setMessage(msg.toString() ?: "")
-                mDialog!!.show()
+            mActivity.run {
+                if (mActivity.isFinishing) {
+                    return@Runnable
+                }
+                if (mDialog == null) {
+                    mDialog = ProgressDialog(mActivity)
+                }
+                mDialog.let {
+                    if (!(it!!.isShowing)) {
+                        it.setMessage(msg.toString())
+                        it.show()
+                    }
+                }
             }
         }
         handlePostMainThread(runnable)
@@ -55,11 +55,10 @@ class WaitDialogHelper private constructor(private val mActivity: Activity?) : I
 
     override fun hideWaitDialog() {
         val runnable = Runnable {
-            if (mDialog == null) {
-                return@Runnable
-            }
-            if (mDialog!!.isShowing) {
-                mDialog!!.dismiss()
+            mDialog.let {
+                if (it!!.isShowing) {
+                    it.dismiss()
+                }
             }
         }
         handlePostMainThread(runnable)
@@ -69,15 +68,12 @@ class WaitDialogHelper private constructor(private val mActivity: Activity?) : I
         if (Looper.myLooper() == Looper.getMainLooper()) {
             runnable.run()
         } else {
-            mMainHandler!!.post(runnable)
+            mMainHandler.post(runnable)
         }
     }
 
     companion object {
-        fun create(activity: Activity?): WaitDialogHelper {
-            if (activity == null) {
-                throw NullPointerException("activity is null")
-            }
+        fun create(activity: Activity): WaitDialogHelper {
             return WaitDialogHelper(activity)
         }
     }

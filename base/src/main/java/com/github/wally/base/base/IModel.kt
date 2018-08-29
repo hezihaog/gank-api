@@ -8,4 +8,4 @@ package com.github.wally.base.base
  * Descirbe:
  * Email: hezihao@linghit.com
  */
-interface IBaseModel
+interface IModel

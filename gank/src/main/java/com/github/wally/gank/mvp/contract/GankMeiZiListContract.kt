@@ -1,7 +1,7 @@
 package com.github.wally.gank.mvp.contract
 
-import com.github.wally.base.base.IBaseModel
-import com.github.wally.base.base.IBaseView
+import com.github.wally.base.base.IModel
+import com.github.wally.base.base.IView
 import com.github.wally.base.base.IPresenter
 import com.github.wally.gank.bean.gank.GankMeiZiListBean
 import com.github.wally.base.http.IDataSource
@@ -17,7 +17,7 @@ import io.reactivex.Observable
  * Email: hezihao@linghit.com
  */
 interface GankMeiZiListContract {
-    interface View : IBaseView {
+    interface View : IView {
         fun showMeiZiList(meiziGankBean: IDataSource<GankMeiZiListBean>, isRefresh: Boolean)
     }
 
@@ -25,7 +25,7 @@ interface GankMeiZiListContract {
         fun getMeiZiList(page: Int, size: Int, isRefresh: Boolean)
     }
 
-    interface Model : IBaseModel {
+    interface Model : IModel {
         fun requestMeiZiList(page: Int, size: Int): Observable<IDataSource<GankMeiZiListBean>>
     }
 }

@@ -11,9 +11,8 @@ import io.reactivex.disposables.Disposable
  * Descirbe:
  * Email: hezihao@linghit.com
  */
-abstract class BasePresenter<T : IBaseView> : IPresenter<T> {
+abstract class BasePresenter<T : IView> : IPresenter<T> {
     protected var mRootView: T? = null
-
     private val compositeDisposable = CompositeDisposable()
 
     /**

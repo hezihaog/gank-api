@@ -8,7 +8,7 @@ package com.github.wally.base.base
  * Descirbe:
  * Email: hezihao@linghit.com
  */
-interface IBaseView {
+interface IView {
     /**
      * 显示加载中
      */
