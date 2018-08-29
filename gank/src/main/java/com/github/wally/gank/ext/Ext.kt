@@ -72,3 +72,11 @@ fun Fragment.hideStatusBar() {
 fun Fragment.showStatusBar() {
     StatusBarUtil.showStatusBar(this.activity)
 }
+
+fun Activity.getActivity(): Activity {
+    return this
+}
+
+fun Fragment.getActivity(): Activity {
+    return this.getActivity() as Activity
+}

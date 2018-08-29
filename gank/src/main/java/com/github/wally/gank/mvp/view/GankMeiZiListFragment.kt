@@ -15,6 +15,7 @@ import com.github.wally.base.util.PositionUtil
 import com.github.wally.base.widget.recyclerview.manager.delegate.FastScrollDelegate
 import com.github.wally.gank.R
 import com.github.wally.gank.bean.gank.GankMeiZiListBean
+import com.github.wally.gank.ext.findView
 import com.github.wally.gank.mvp.contract.GankMeiZiListContract
 import com.github.wally.gank.mvp.presenter.GankMeiZiListPresenter
 import com.github.wally.gank.viewbinder.GankMeiZiViewBinder
@@ -106,7 +107,7 @@ class GankMeiZiListFragment : BaseMvpListFragment<GankMeiZiListContract.Presente
                 mFloatingActionButton!!.show()
             }
         })
-        recyclerView!!.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView?, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
                 if (recyclerView != null) {
@@ -136,7 +137,7 @@ class GankMeiZiListFragment : BaseMvpListFragment<GankMeiZiListContract.Presente
 
     override fun showMeiZiList(meiziGankBean: IDataSource<GankMeiZiListBean>, isRefresh: Boolean) {
         //必须调用设置数据集的方法进行更新数据
-        recyclerViewHelper!!.updateDataSource(isRefresh, meiziGankBean.data.results, meiziGankBean.hasNext())
+        recyclerViewHelper.updateDataSource(isRefresh, meiziGankBean.data.results, meiziGankBean.hasNext())
     }
 
     override fun showError(throwable: Throwable) {

@@ -16,6 +16,7 @@ import com.github.wally.base.util.ImageDownloadUtil
 import com.github.wally.base.util.ToolBarHelper
 import com.github.wally.gank.R
 import com.github.wally.gank.bean.gank.DisplayMeiZiImageBean
+import com.github.wally.gank.ext.findView
 import com.github.wally.gank.ext.hideStatusBar
 import com.github.wally.gank.ext.showStatusBar
 import com.github.wally.gank.mvp.contract.GankMeiZiDetailContract

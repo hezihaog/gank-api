@@ -18,10 +18,10 @@ import me.drakeet.multitype.MultiTypeAdapter
  * Email: hezihao@linghit.com
  */
 abstract class BaseMvpListFragment<P : IPresenter<V>, V : IView> : BaseMvpFragment<P, V>(), ListLayoutCallback {
-    private lateinit var refreshLayout: SwipeRefreshLayout
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var adapter: MultiTypeAdapter
-    private lateinit var recyclerViewHelper: RecyclerViewHelper
+    protected lateinit var refreshLayout: SwipeRefreshLayout
+    protected lateinit var recyclerView: RecyclerView
+    protected lateinit var adapter: MultiTypeAdapter
+    protected lateinit var recyclerViewHelper: RecyclerViewHelper
 
     override fun onLayoutId(): Int {
         return R.layout.fragment_base_list
@@ -29,8 +29,8 @@ abstract class BaseMvpListFragment<P : IPresenter<V>, V : IView> : BaseMvpFragme
 
     override fun onFindView(rootView: View) {
         super.onFindView(rootView)
-        refreshLayout = findView(R.id.base_refresh_layout)
-        recyclerView = findView(R.id.base_list)
+        refreshLayout = getViewFinder().findView(R.id.base_refresh_layout)
+        recyclerView = getViewFinder().findView(R.id.base_list)
     }
 
     override fun onBindViewContent() {
@@ -93,9 +93,5 @@ abstract class BaseMvpListFragment<P : IPresenter<V>, V : IView> : BaseMvpFragme
      */
     protected open fun onRecyclerViewHelperReady(recyclerViewHelper: RecyclerViewHelper) {
 
-    }
-
-    protected fun getRecyclerViewHelper(): RecyclerViewHelper {
-        return recyclerViewHelper
     }
 }

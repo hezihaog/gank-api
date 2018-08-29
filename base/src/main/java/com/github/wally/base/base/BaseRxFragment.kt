@@ -5,6 +5,8 @@ import android.support.annotation.CheckResult
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.github.wally.base.util.ViewFinder
+import com.github.wally.base.util.ViewFinderHost
 
 import com.trello.rxlifecycle2.LifecycleProvider
 import com.trello.rxlifecycle2.LifecycleTransformer
@@ -24,8 +26,9 @@ import me.yokeyword.fragmentation_swipeback.SwipeBackFragment
  * Descirbe:基础RxFragment
  * Email: hezihao@linghit.com
  */
-abstract class BaseRxFragment : SwipeBackFragment(), LayoutCallback, LifecycleProvider<FragmentEvent> {
+abstract class BaseRxFragment : SwipeBackFragment(), LayoutCallback, LifecycleProvider<FragmentEvent>, ViewFinderHost {
     private val lifecycleSubject = BehaviorSubject.create<FragmentEvent>()
+    private lateinit var mViewFinder: ViewFinder
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -37,11 +40,16 @@ abstract class BaseRxFragment : SwipeBackFragment(), LayoutCallback, LifecyclePr
         }
     }
 
+    override fun getViewFinder(): ViewFinder {
+        return mViewFinder
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val layout = inflater.inflate(onLayoutId(), container, false)
+        val rootLayout = inflater.inflate(onLayoutId(), container, false)
+        mViewFinder = ViewFinder(context!!, rootLayout)
         //设置为true才能回调onCreateOptionsMenu
         setHasOptionsMenu(true)
-        return layout
+        return rootLayout
     }
 
     /**
@@ -49,10 +57,6 @@ abstract class BaseRxFragment : SwipeBackFragment(), LayoutCallback, LifecyclePr
      */
     protected open fun setupSwipeBackEnable(): Boolean {
         return false
-    }
-
-    fun <W : View> findView(id: Int): W {
-        return view!!.findViewById(id)
     }
 
     override fun onLayoutBefore() {

@@ -5,6 +5,8 @@ import android.support.annotation.CallSuper
 import android.support.annotation.CheckResult
 import android.view.LayoutInflater
 import android.view.View
+import com.github.wally.base.util.ViewFinder
+import com.github.wally.base.util.ViewFinderHost
 
 import com.trello.rxlifecycle2.LifecycleProvider
 import com.trello.rxlifecycle2.LifecycleTransformer
@@ -24,8 +26,9 @@ import me.yokeyword.fragmentation.SupportActivity
  * Descirbe:
  * Email: hezihao@linghit.com
  */
-abstract class BaseRxActivity : SupportActivity(), LifecycleProvider<ActivityEvent>, LayoutCallback {
+abstract class BaseRxActivity : SupportActivity(), LifecycleProvider<ActivityEvent>, LayoutCallback, ViewFinderHost {
     private val lifecycleSubject = BehaviorSubject.create<ActivityEvent>()
+    private lateinit var mViewFinder: ViewFinder
 
     override fun onLayoutBefore() {
 
@@ -41,6 +44,10 @@ abstract class BaseRxActivity : SupportActivity(), LifecycleProvider<ActivityEve
 
     override fun onBindViewContent() {
 
+    }
+
+    override fun getViewFinder(): ViewFinder {
+        return mViewFinder
     }
 
     @CheckResult
@@ -65,6 +72,7 @@ abstract class BaseRxActivity : SupportActivity(), LifecycleProvider<ActivityEve
         onLayoutBefore()
         val rootLayout = LayoutInflater.from(applicationContext).inflate(onLayoutId(), null)
         setContentView(rootLayout)
+        mViewFinder = ViewFinder(this, rootLayout)
         onFindView(rootLayout)
         onLayoutAfter()
         onBindViewContent()

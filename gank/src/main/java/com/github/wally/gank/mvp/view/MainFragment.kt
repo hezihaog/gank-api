@@ -12,6 +12,7 @@ import android.view.View
 import com.github.wally.base.base.BaseRxFragment
 import com.github.wally.base.util.ToolBarHelper
 import com.github.wally.gank.R
+import com.github.wally.gank.ext.findView
 import com.github.wally.gank.util.UIHelper
 import com.gyf.barlibrary.ImmersionBar
 import me.yokeyword.fragmentation.SupportActivity

@@ -12,6 +12,7 @@ import com.github.wally.base.base.BasePresenter
 import com.github.wally.base.util.ToolBarHelper
 import com.github.wally.gank.R
 import com.github.wally.gank.enums.GankSearchCategory
+import com.github.wally.gank.ext.findView
 import com.github.wally.gank.mvp.contract.GankSearchContract
 import com.github.wally.gank.mvp.presenter.GankSearchPresenter
 import com.gyf.barlibrary.ImmersionBar
