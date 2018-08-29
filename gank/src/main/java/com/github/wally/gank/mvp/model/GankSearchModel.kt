@@ -14,6 +14,8 @@ import io.reactivex.Observable
  * Email: hezihao@linghit.com
  */
 class GankSearchModel : GankSearchContract.Model {
-    override val searchCategoryList: Observable<ArrayList<GankSearchCategory>>
-        get() = SearchCategoryHelper.searchCategory
+    //只获取一次，后续直接返回
+    override val searchCategoryList: Observable<ArrayList<GankSearchCategory>> by lazy {
+        SearchCategoryHelper.searchCategory
+    }
 }

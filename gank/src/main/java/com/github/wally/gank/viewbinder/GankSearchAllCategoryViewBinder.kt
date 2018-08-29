@@ -27,10 +27,12 @@ internal class GankSearchAllCategoryViewBinder : ItemViewBinder<GankSearchBean.M
     }
 
     override fun onBindViewHolder(holder: ViewHolder, gankSearchAllCategory: GankSearchBean.Msg) {
-        val desc = gankSearchAllCategory.desc
-        val who = gankSearchAllCategory.who
-        holder.mDescTv.text = desc
-        holder.mWhoTv.text = who
+        gankSearchAllCategory.desc.let {
+            holder.mDescTv.text = it
+        }
+        gankSearchAllCategory.who.let {
+            holder.mWhoTv.text = it
+        }
     }
 
     internal class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

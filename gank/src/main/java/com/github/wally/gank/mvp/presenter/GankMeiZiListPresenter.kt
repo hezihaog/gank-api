@@ -20,8 +20,11 @@ class GankMeiZiListPresenter : BasePresenter<GankMeiZiListContract.View>(), Gank
     }
 
     override fun getMeiZiList(page: Int, size: Int, isRefresh: Boolean) {
-        val disposable = mModel.requestMeiZiList(page, size)
-                .subscribe({ gankMeiZiListBeanIDataSource -> mRootView!!.showMeiZiList(gankMeiZiListBeanIDataSource, isRefresh) }, { throwable -> mRootView!!.showError(throwable) })
-        addSubscription(disposable)
+        mRootView.let {
+            val disposable = mModel.requestMeiZiList(page, size)
+                    .subscribe({ gankMeiZiListBeanIDataSource -> it!!.showMeiZiList(gankMeiZiListBeanIDataSource, isRefresh) }
+                            , { throwable -> it!!.showError(throwable) })
+            addSubscription(disposable)
+        }
     }
 }

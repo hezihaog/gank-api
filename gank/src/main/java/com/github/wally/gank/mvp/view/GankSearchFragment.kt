@@ -6,17 +6,16 @@ import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.View
-import com.github.wally.gank.R
 import com.github.wally.base.adapter.PageFragmentStateAdapter
 import com.github.wally.base.base.BaseMvpFragment
 import com.github.wally.base.base.BasePresenter
+import com.github.wally.base.util.ToolBarHelper
+import com.github.wally.gank.R
 import com.github.wally.gank.enums.GankSearchCategory
 import com.github.wally.gank.mvp.contract.GankSearchContract
 import com.github.wally.gank.mvp.presenter.GankSearchPresenter
-import com.github.wally.base.util.ToolBarHelper
 import com.gyf.barlibrary.ImmersionBar
 import io.reactivex.Observable
-import java.util.*
 
 /**
  * Package: com.github.wally.gank.ui.fragment
@@ -27,13 +26,13 @@ import java.util.*
  * Email: hezihao@linghit.com
  */
 class GankSearchFragment : BaseMvpFragment<GankSearchContract.Presenter, GankSearchContract.View>(), GankSearchContract.View {
-    private var mToolbar: Toolbar? = null
-    private var mTabLayout: TabLayout? = null
-    private var mViewPager: ViewPager? = null
+    private lateinit var mToolbar: Toolbar
+    private lateinit var mTabLayout: TabLayout
+    private lateinit var mViewPager: ViewPager
 
     private var mTabTitles: MutableList<String>? = null
     private var mFragments: MutableList<Fragment>? = null
-    private var mPageAdapter: PageFragmentStateAdapter? = null
+    private lateinit var mPageAdapter: PageFragmentStateAdapter
 
     override fun setupSwipeBackEnable(): Boolean {
         return true
@@ -62,15 +61,15 @@ class GankSearchFragment : BaseMvpFragment<GankSearchContract.Presenter, GankSea
                 .withNavigationIconOnClick { activity!!.onBackPressed() }.build()
         ImmersionBar.with(this).titleBar(mToolbar!!)
         mPageAdapter = PageFragmentStateAdapter(childFragmentManager)
-        mViewPager!!.adapter = mPageAdapter
+        mViewPager.adapter = mPageAdapter
         //Tab较多，要切换为可混动的模式
-        mTabLayout!!.tabMode = TabLayout.MODE_SCROLLABLE
-        mTabLayout!!.setupWithViewPager(mViewPager)
+        mTabLayout.tabMode = TabLayout.MODE_SCROLLABLE
+        mTabLayout.setupWithViewPager(mViewPager)
     }
 
     override fun onLayoutAfter() {
         super.onLayoutAfter()
-        presenter!!.requestSearchCategoryList()
+        presenter.requestSearchCategoryList()
     }
 
     override fun onCreatePresenter(): GankSearchContract.Presenter {
@@ -89,19 +88,19 @@ class GankSearchFragment : BaseMvpFragment<GankSearchContract.Presenter, GankSea
                 .map { gankSearchCategory -> gankSearchCategory.category }
                 .subscribe { category ->
                     if (mTabTitles == null) {
-                        mTabTitles = ArrayList()
+                        mTabTitles = mutableListOf()
                     }
                     mTabTitles!!.add(category)
                 }
         val fragmentDisposable = Observable.fromIterable(categoryList)
                 .doOnTerminate {
                     //Title和Fragment分配好后，更新Page
-                    mPageAdapter!!.setDatas(mFragments!!, mTabTitles!!)
-                    mPageAdapter!!.notifyDataSetChanged()
+                    mPageAdapter.setDatas(mFragments!!, mTabTitles!!)
+                    mPageAdapter.notifyDataSetChanged()
                 }
                 .subscribe { gankSearchCategory ->
                     if (mFragments == null) {
-                        mFragments = ArrayList()
+                        mFragments = mutableListOf()
                     }
                     mFragments!!.add(GankSearchCategoryListFragment.newInstance(gankSearchCategory))
                 }

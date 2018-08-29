@@ -20,9 +20,11 @@ class GankSearchPresenter : BasePresenter<GankSearchContract.View>(), GankSearch
     }
 
     override fun requestSearchCategoryList() {
-        val disposable = mModel.searchCategoryList
-                .subscribe({ categoryList -> mRootView!!.allocSearchCategory(categoryList) },
-                        { throwable -> mRootView!!.showError(throwable) }, { })
-        addSubscription(disposable)
+        mRootView.let {
+            val disposable = mModel.searchCategoryList
+                    .subscribe({ categoryList -> it!!.allocSearchCategory(categoryList) },
+                            { throwable -> it!!.showError(throwable) }, { })
+            addSubscription(disposable)
+        }
     }
 }

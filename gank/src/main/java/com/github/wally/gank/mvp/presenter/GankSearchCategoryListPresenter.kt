@@ -21,7 +21,10 @@ class GankSearchCategoryListPresenter : BasePresenter<GankSearchCategoryListCont
     }
 
     override fun getSearchCategoryList(page: Int, count: Int, category: GankSearchCategory, isRefresh: Boolean) {
-        mModel.requestSearchCategoryList(page, count, category)
-                .subscribe({ dataSource -> mRootView!!.showSearchCategoryList(dataSource, isRefresh) }, { throwable -> mRootView!!.showError(throwable) })
+        mRootView.let {
+            mModel.requestSearchCategoryList(page, count, category)
+                    .subscribe({ dataSource -> it!!.showSearchCategoryList(dataSource, isRefresh) }
+                            , { throwable -> it!!.showError(throwable) })
+        }
     }
 }

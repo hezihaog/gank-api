@@ -21,9 +21,11 @@ class GankRandomMeiZiListPresenter : BasePresenter<RandomMeiZiListContract.View>
     }
 
     override fun getRandomMeiZiList(category: GankRandomCategory, size: Int, isRefresh: Boolean) {
-        val disposable = mModel.requestRandomMeiZiList(category, size)
-                .doOnError { throwable -> mRootView!!.showError(throwable) }
-                .subscribe { gankRandomListBeanDataSource -> mRootView!!.showRandomMeiZiList(gankRandomListBeanDataSource, isRefresh) }
-        addSubscription(disposable)
+        mRootView.let {
+            val disposable = mModel.requestRandomMeiZiList(category, size)
+                    .doOnError { throwable -> it!!.showError(throwable) }
+                    .subscribe { gankRandomListBeanDataSource -> it!!.showRandomMeiZiList(gankRandomListBeanDataSource, isRefresh) }
+            addSubscription(disposable)
+        }
     }
 }

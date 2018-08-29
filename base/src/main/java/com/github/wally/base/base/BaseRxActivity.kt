@@ -3,6 +3,8 @@ package com.github.wally.base.base
 import android.os.Bundle
 import android.support.annotation.CallSuper
 import android.support.annotation.CheckResult
+import android.view.LayoutInflater
+import android.view.View
 
 import com.trello.rxlifecycle2.LifecycleProvider
 import com.trello.rxlifecycle2.LifecycleTransformer
@@ -22,8 +24,24 @@ import me.yokeyword.fragmentation.SupportActivity
  * Descirbe:
  * Email: hezihao@linghit.com
  */
-abstract class BaseRxActivity : SupportActivity(), LifecycleProvider<ActivityEvent> {
+abstract class BaseRxActivity : SupportActivity(), LifecycleProvider<ActivityEvent>, LayoutCallback {
     private val lifecycleSubject = BehaviorSubject.create<ActivityEvent>()
+
+    override fun onLayoutBefore() {
+
+    }
+
+    override fun onLayoutAfter() {
+
+    }
+
+    override fun onFindView(rootView: View) {
+
+    }
+
+    override fun onBindViewContent() {
+
+    }
 
     @CheckResult
     override fun lifecycle(): Observable<ActivityEvent> {
@@ -44,6 +62,12 @@ abstract class BaseRxActivity : SupportActivity(), LifecycleProvider<ActivityEve
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         lifecycleSubject.onNext(ActivityEvent.CREATE)
+        onLayoutBefore()
+        val rootLayout = LayoutInflater.from(applicationContext).inflate(onLayoutId(), null)
+        setContentView(rootLayout)
+        onFindView(rootLayout)
+        onLayoutAfter()
+        onBindViewContent()
     }
 
     @CallSuper

@@ -9,13 +9,11 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-
-import com.github.wally.gank.R
 import com.github.wally.base.base.BaseRxFragment
 import com.github.wally.base.util.ToolBarHelper
+import com.github.wally.gank.R
 import com.github.wally.gank.util.UIHelper
 import com.gyf.barlibrary.ImmersionBar
-
 import me.yokeyword.fragmentation.SupportActivity
 
 /**
@@ -27,8 +25,8 @@ import me.yokeyword.fragmentation.SupportActivity
  * Email: hezihao@linghit.com
  */
 class MainFragment : BaseRxFragment() {
-    private var mDrawerLayout: DrawerLayout? = null
-    private var mNavigationView: NavigationView? = null
+    private lateinit var mDrawerLayout: DrawerLayout
+    private lateinit var mNavigationView: NavigationView
 
     override fun onLayoutId(): Int {
         return R.layout.fragment_main
@@ -49,17 +47,17 @@ class MainFragment : BaseRxFragment() {
             }
         })
                 .withNavigationIconDrawable(R.drawable.ic_action_menu)
-                .withNavigationIconOnClick { mDrawerLayout!!.openDrawer(GravityCompat.START) }
+                .withNavigationIconOnClick { mDrawerLayout.openDrawer(GravityCompat.START) }
                 .build()
         //透明状态栏适配ToolBar
         ImmersionBar.with(this@MainFragment).titleBar(toolBarHelper.toolbar)
-        mNavigationView!!.setNavigationItemSelectedListener { item ->
+        mNavigationView.setNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.random_mei_zi -> UIHelper.showRandomMeiZiList((activity as SupportActivity?)!!)
                 else -> {
                 }
             }
-            mDrawerLayout!!.closeDrawer(GravityCompat.START)
+            mDrawerLayout.closeDrawer(GravityCompat.START)
             false
         }
         loadRootFragment(R.id.main_content, GankMeiZiListFragment())
@@ -67,28 +65,30 @@ class MainFragment : BaseRxFragment() {
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         super.onCreateOptionsMenu(menu, inflater)
-        inflater!!.inflate(R.menu.tool_bar_menu, menu)
+        inflater?.inflate(R.menu.tool_bar_menu, menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when (item!!.itemId) {
-            R.id.menu_search -> {
-                UIHelper.showSearchCategory((activity as SupportActivity?)!!)
-                return true
-            }
-            R.id.random_mei_zi -> {
-                UIHelper.showRandomMeiZiList((activity as SupportActivity?)!!)
-                return true
-            }
-            else -> {
+        item.let {
+            when (it!!.itemId) {
+                R.id.menu_search -> {
+                    UIHelper.showSearchCategory((activity as SupportActivity?)!!)
+                    return true
+                }
+                R.id.random_mei_zi -> {
+                    UIHelper.showRandomMeiZiList((activity as SupportActivity?)!!)
+                    return true
+                }
+                else -> {
+                }
             }
         }
         return super.onOptionsItemSelected(item)
     }
 
     override fun onBackPressedSupport(): Boolean {
-        if (mDrawerLayout!!.isDrawerOpen(GravityCompat.START)) {
-            mDrawerLayout!!.closeDrawer(GravityCompat.START)
+        if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+            mDrawerLayout.closeDrawer(GravityCompat.START)
             return true
         } else {
             return super.onBackPressedSupport()

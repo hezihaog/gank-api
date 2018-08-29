@@ -17,9 +17,8 @@ import com.github.wally.base.util.WaitDialogHelper
  * Email: hezihao@linghit.com
  */
 abstract class BaseMvpFragment<P : IPresenter<V>, V : IBaseView> : BaseRxFragment(), IBaseView {
-    var presenter: P? = null
-        protected set
-    private var mWaitDialogHelper: WaitDialogHelper? = null
+    protected lateinit var presenter: P
+    protected lateinit var mWaitDialogHelper: WaitDialogHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,14 +36,14 @@ abstract class BaseMvpFragment<P : IPresenter<V>, V : IBaseView> : BaseRxFragmen
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        presenter!!.attachView(this as V)
+        presenter.attachView(this as V)
         super.onViewCreated(view, savedInstanceState)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        if (presenter != null) {
-            presenter!!.detachView()
+        presenter.let {
+            it.detachView()
         }
     }
 
@@ -54,14 +53,14 @@ abstract class BaseMvpFragment<P : IPresenter<V>, V : IBaseView> : BaseRxFragmen
     protected abstract fun onCreatePresenter(): P
 
     override fun showLoading(msg: String?) {
-        if (mWaitDialogHelper != null) {
-            mWaitDialogHelper!!.showWaitDialog(msg)
+        mWaitDialogHelper.let {
+            it.showWaitDialog(msg)
         }
     }
 
     override fun hideLoading() {
-        if (mWaitDialogHelper != null) {
-            mWaitDialogHelper!!.hideWaitDialog()
+        mWaitDialogHelper.let {
+            it.hideWaitDialog()
         }
     }
 }

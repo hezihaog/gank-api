@@ -17,11 +17,11 @@ import com.haoge.easyandroid.EasyAndroid
  * Email: hezihao@linghit.com
  */
 class AppContext : Application() {
-    var repository: Repository? = null
+    lateinit var repository: Repository
         private set
 
     companion object {
-        var instance: AppContext? = null
+        lateinit var instance: AppContext
     }
 
     override fun onCreate() {

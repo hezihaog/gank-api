@@ -21,8 +21,11 @@ class GankMeiZiDetailPresenter : BasePresenter<GankMeiZiDetailContract.View>(), 
     }
 
     override fun getMeiZiDetail(bundle: Bundle) {
-        mModel.requestMeiZiDetail(bundle)
-                .doOnSubscribe { disposable -> addSubscription(disposable) }
-                .subscribe({ bean -> mRootView!!.showMeiZiDetail(bean) }, { throwable -> mRootView!!.showError(throwable) })
+        mRootView.let {
+            mModel.requestMeiZiDetail(bundle)
+                    .doOnSubscribe { disposable -> addSubscription(disposable) }
+                    .subscribe({ bean -> it!!.showMeiZiDetail(bean) },
+                            { throwable -> it!!.showError(throwable) })
+        }
     }
 }

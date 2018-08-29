@@ -38,12 +38,14 @@ internal class GankMeiZiViewBinder : ItemViewBinder<GankMeiZiListBean.MeiZi, Gan
         } else {
             holder.mImageView.setOriginalSize(50, 80)
         }
-        holder.mImageView.requestLayout()
-        Glide.with(holder.itemView.context)
-                .load(meiZi.url)
-                .placeholder(R.drawable.ic_default_image)
-                .skipMemoryCache(true).diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(holder.mImageView)
+        meiZi.url.let {
+            holder.mImageView.requestLayout()
+            Glide.with(holder.itemView.context)
+                    .load(it)
+                    .placeholder(R.drawable.ic_default_image)
+                    .skipMemoryCache(true).diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(holder.mImageView)
+        }
         holder.itemView.setOnClickListener {
             val bean = DisplayMeiZiImageBean().apply {
                 id = meiZi.id

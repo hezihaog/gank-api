@@ -8,7 +8,6 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.util.*
 import java.util.concurrent.TimeUnit
 
 /**
@@ -20,16 +19,13 @@ import java.util.concurrent.TimeUnit
  * Email: hezihao@linghit.com
  */
 class RetrofitManager private constructor() {
-    private val mRetrofits = HashMap<String, Retrofit>()
-    private var mGankApiService: GankApiService? = null
+    private val mRetrofits by lazy {
+        mutableMapOf<String, Retrofit>()
+    }
 
-    val gankApiService: GankApiService?
-        get() {
-            if (mGankApiService == null) {
-                mGankApiService = getRetrofit(Constants.Api.GANK_DOMAIN)?.create(GankApiService::class.java)
-            }
-            return mGankApiService
-        }
+    val gankApiService: GankApiService by lazy {
+        getRetrofit(Constants.Api.GANK_DOMAIN)?.create(GankApiService::class.java)!!
+    }
 
     /**
      * 自定义拦截器打Log
