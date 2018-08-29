@@ -3,6 +3,7 @@ package com.github.wally.gank.ext
 import android.content.Context
 import android.support.annotation.IdRes
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import com.github.wally.base.util.ViewFinderHost
 
@@ -34,10 +35,14 @@ fun ViewFinderHost.isNotEmpty(str: CharSequence): Boolean {
     return this.getViewFinder().isNotEmpty(str)
 }
 
-fun ViewFinderHost.setViewText(text: CharSequence, defaultText: CharSequence = "", @IdRes viewId: Int) {
-    return this.getViewFinder().setViewText(text, defaultText, viewId)
+fun ViewFinderHost.setViewText(@IdRes viewId: Int, text: CharSequence, defaultText: CharSequence? = "") {
+    return this.getViewFinder().setViewText(viewId, text, defaultText)
 }
 
-fun ViewFinderHost.setViewText(text: CharSequence?, defaultText: CharSequence = "", view: TextView) {
-    return this.getViewFinder().setViewText(text, defaultText, view)
+fun ViewFinderHost.setViewText(view: TextView, text: CharSequence, defaultText: CharSequence? = "") {
+    return this.getViewFinder().setViewText(view, text, defaultText)
+}
+
+fun ViewFinderHost.loadUrlImage(url: String, imageView: ImageView, @IdRes defaultImage: Int = -1) {
+    return this.getViewFinder().loadUrlImage(url, imageView, defaultImage)
 }

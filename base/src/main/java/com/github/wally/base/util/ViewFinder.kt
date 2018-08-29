@@ -23,11 +23,15 @@
 package com.github.wally.base.util
 
 import android.content.Context
+import android.support.annotation.DrawableRes
 import android.support.annotation.IdRes
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
+import com.github.wally.base.image.ImageLoader
+import com.github.wally.base.image.LoadImageCallback
 
 
 /**
@@ -36,13 +40,13 @@ import android.widget.TextView
  * @author 子和
  */
 class ViewFinder {
-    private var mViews: EasySparseArrayCompat<View>
+    private var mViews: HashMap<Int, View>
+
     /**
      * 获取布局View
      *
      * @return 布局View
      */
-
     private var rootView: View
     /**
      * 获取Context
@@ -69,8 +73,8 @@ class ViewFinder {
         return rootView
     }
 
-    private fun createCacheMap(): EasySparseArrayCompat<View> {
-        return EasySparseArrayCompat(5)
+    private fun createCacheMap(): HashMap<Int, View> {
+        return HashMap(5)
     }
 
     /**
@@ -163,17 +167,19 @@ class ViewFinder {
      * @param defaultText 如果传入文字的值为null，设置的默认文字
      * @param viewId      控件id，必须是TextView以及子类
      */
-    fun setViewText(text: CharSequence, defaultText: CharSequence = "", @IdRes viewId: Int) {
+    @JvmOverloads
+    fun setViewText(@IdRes viewId: Int, text: CharSequence, defaultText: CharSequence? = "") {
         val view = findView<View>(viewId)
         if (view is TextView) {
-            setViewText(text, defaultText, view)
+            setViewText(view, text, defaultText)
         }
     }
 
     /**
      * 为TextView设置文字，如果传入的Text为null，则设置为默认值
      */
-    fun setViewText(text: CharSequence?, defaultText: CharSequence = "", view: TextView) {
+    @JvmOverloads
+    fun setViewText(view: TextView, text: CharSequence, defaultText: CharSequence? = "") {
         with(view) {
             view.text = text ?: defaultText
         }
@@ -365,5 +371,64 @@ class ViewFinder {
         for (view in views) {
             view.visibility = View.GONE
         }
+    }
+
+    //-------------------------------- 图片加载 --------------------------------
+
+    fun getImageLoader(): ImageLoader {
+        return ImageLoader.getInstance()
+    }
+
+    /**
+     * 加载网络图片
+     */
+    fun loadUrlImage(url: String, imageView: ImageView, @IdRes defaultImage: Int = -1) {
+        getImageLoader().getLoader().loadUrlImage(getContext(), imageView, url, defaultImage)
+    }
+
+    /**
+     * 加载网络圆形图片
+     */
+    fun loadUrlImageToRound(url: String, imageView: ImageView, @IdRes defaultImage: Int = -1) {
+        getImageLoader().getLoader().loadUrlImageToRound(getContext(), imageView, url, defaultImage)
+    }
+
+    /**
+     * 加载网络圆角图片
+     */
+    fun loadUrlImageToCorner(url: String, imageView: ImageView, @IdRes defaultImage: Int = -1) {
+        getImageLoader().getLoader().loadUrlImageToCorner(getContext(), imageView, url, defaultImage)
+    }
+
+    /**
+     * 加载内存卡图片
+     */
+    fun loadFileImage(filePath: String, imageView: ImageView, @IdRes defaultImage: Int = -1) {
+        getImageLoader().getLoader().loadFileImage(getContext(), imageView, filePath, defaultImage)
+    }
+
+    /**
+     * 加载图片bitmap
+     */
+    fun loadImageToBitmap(url: String, loadImageCallback: LoadImageCallback) {
+        getImageLoader().getLoader().loadImageToBitmap(getContext(), url, loadImageCallback)
+    }
+
+    fun loadDrawableResId(@IdRes imageViewId: Int, @DrawableRes resId: Int) {
+        val view = findView<View>(imageViewId)
+        if (view is ImageView) {
+            loadDrawableResId(view, resId)
+        }
+    }
+
+    fun loadDrawableResId(imageView: ImageView, @DrawableRes resId: Int) {
+        getImageLoader().getLoader().loadDrawableResId(getContext(), imageView, resId)
+    }
+
+    /**
+     * 清除图片缓存
+     */
+    fun clearImageMemoryCache() {
+        getImageLoader().getLoader().clearMemoryCache(getContext())
     }
 }

@@ -6,10 +6,10 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.StaggeredGridLayoutManager
 import android.support.v7.widget.Toolbar
-import android.view.View
 import com.github.wally.base.RecyclerViewHelper
 import com.github.wally.base.RecyclerViewScrollHelper
 import com.github.wally.base.base.BaseMvpListFragment
+import com.github.wally.base.base.IPresenter
 import com.github.wally.base.http.IDataSource
 import com.github.wally.base.util.ToolBarHelper
 import com.github.wally.base.widget.recyclerview.manager.delegate.FastScrollDelegate
@@ -32,9 +32,14 @@ import me.drakeet.multitype.MultiTypeAdapter
  * Descirbe:
  * Email: hezihao@linghit.com
  */
-class RandomMeiZiFragment : BaseMvpListFragment<RandomMeiZiListContract.Presenter, RandomMeiZiListContract.View>(), RandomMeiZiListContract.View {
-    private lateinit var mRefreshBtn: FloatingActionButton
-
+class RandomMeiZiFragment : BaseMvpListFragment<RandomMeiZiListContract.View>(), RandomMeiZiListContract.View {
+    private val mRefreshBtn: FloatingActionButton
+        get() {
+            return findView(R.id.refresh_action_btn)
+        }
+    private val presenter :RandomMeiZiListContract.Presenter by lazy {
+        GankRandomMeiZiListPresenter()
+    }
     override fun setupSwipeBackEnable(): Boolean {
         return true
     }
@@ -46,11 +51,6 @@ class RandomMeiZiFragment : BaseMvpListFragment<RandomMeiZiListContract.Presente
     override fun onLayoutAfter() {
         super.onLayoutAfter()
         recyclerViewHelper.startRefresh()
-    }
-
-    override fun onFindView(rootView: View) {
-        super.onFindView(rootView)
-        mRefreshBtn = findView(R.id.refresh_action_btn)
     }
 
     override fun onBindViewContent() {
@@ -66,7 +66,7 @@ class RandomMeiZiFragment : BaseMvpListFragment<RandomMeiZiListContract.Presente
                 .build()
         val toolbar = toolBarHelper.toolbar
         ImmersionBar.with(this).titleBar(toolbar)
-        mRefreshBtn!!.setOnClickListener {
+        mRefreshBtn.setOnClickListener {
             recyclerViewHelper.moveToTop()
             recyclerViewHelper.startRefreshWithLoading()
         }
@@ -131,8 +131,8 @@ class RandomMeiZiFragment : BaseMvpListFragment<RandomMeiZiListContract.Presente
         })
     }
 
-    override fun onCreatePresenter(): RandomMeiZiListContract.Presenter {
-        return GankRandomMeiZiListPresenter()
+    override fun onCreatePresenter(): MutableList<IPresenter<RandomMeiZiListContract.View>> {
+        return mutableListOf(presenter)
     }
 
     override fun onRecyclerViewReady(recyclerView: RecyclerView?) {

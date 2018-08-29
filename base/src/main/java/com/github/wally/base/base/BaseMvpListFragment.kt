@@ -2,11 +2,8 @@ package com.github.wally.base.base
 
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.RecyclerView
-import android.view.View
 import com.github.wally.base.R
-
 import com.github.wally.base.RecyclerViewHelper
-
 import me.drakeet.multitype.MultiTypeAdapter
 
 /**
@@ -17,20 +14,22 @@ import me.drakeet.multitype.MultiTypeAdapter
  * Descirbe:
  * Email: hezihao@linghit.com
  */
-abstract class BaseMvpListFragment<P : IPresenter<V>, V : IView> : BaseMvpFragment<P, V>(), ListLayoutCallback {
-    protected lateinit var refreshLayout: SwipeRefreshLayout
-    protected lateinit var recyclerView: RecyclerView
-    protected lateinit var adapter: MultiTypeAdapter
+abstract class BaseMvpListFragment<V : IView> : BaseMvpFragment<V>(), ListLayoutCallback {
+    protected val refreshLayout: SwipeRefreshLayout
+        get() {
+            return getViewFinder().findView(R.id.base_refresh_layout)
+        }
+    protected val recyclerView: RecyclerView
+        get() {
+            return getViewFinder().findView(R.id.base_list)
+        }
+    protected val adapter: MultiTypeAdapter by lazy {
+        MultiTypeAdapter()
+    }
     protected lateinit var recyclerViewHelper: RecyclerViewHelper
 
     override fun onLayoutId(): Int {
         return R.layout.fragment_base_list
-    }
-
-    override fun onFindView(rootView: View) {
-        super.onFindView(rootView)
-        refreshLayout = getViewFinder().findView(R.id.base_refresh_layout)
-        recyclerView = getViewFinder().findView(R.id.base_list)
     }
 
     override fun onBindViewContent() {
@@ -49,7 +48,6 @@ abstract class BaseMvpListFragment<P : IPresenter<V>, V : IView> : BaseMvpFragme
     private fun setupRecyclerView(recyclerView: RecyclerView) {
         val layoutManager = onSetupRecyclerViewLayoutManager()
         recyclerView.layoutManager = layoutManager
-        adapter = MultiTypeAdapter()
         recyclerView.adapter = adapter
         //配置多type的映射
         onRegisterRecyclerViewTypeMapper(adapter)

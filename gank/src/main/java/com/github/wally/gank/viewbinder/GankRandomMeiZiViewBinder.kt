@@ -1,17 +1,13 @@
 package com.github.wally.gank.viewbinder
 
 import android.support.v7.widget.RecyclerView
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.github.wally.gank.R
 import com.github.wally.gank.bean.gank.DisplayMeiZiImageBean
 import com.github.wally.gank.bean.gank.GankRandomListBean
+import com.github.wally.gank.ext.loadUrlImage
 import com.github.wally.gank.util.UIHelper
 import com.github.wally.gank.widget.RatioImageView
-import me.drakeet.multitype.ItemViewBinder
 import me.yokeyword.fragmentation.SupportActivity
 
 /**
@@ -22,11 +18,13 @@ import me.yokeyword.fragmentation.SupportActivity
  * Descirbe:
  * Email: hezihao@linghit.com
  */
-internal class GankRandomMeiZiViewBinder : ItemViewBinder<GankRandomListBean.MeiZi, GankRandomMeiZiViewBinder.ViewHolder>() {
-
-    override fun onCreateViewHolder(inflater: LayoutInflater, parent: ViewGroup): ViewHolder {
-        val root = inflater.inflate(R.layout.item_gank_random_mei_zi_content, parent, false)
+internal class GankRandomMeiZiViewBinder : BaseItemViewBinder<GankRandomListBean.MeiZi, GankRandomMeiZiViewBinder.ViewHolder>() {
+    override fun onCreateViewHolder(root: View): ViewHolder {
         return ViewHolder(root)
+    }
+
+    override fun onLayoutId(): Int {
+        return R.layout.item_gank_random_mei_zi_content
     }
 
     override fun onBindViewHolder(holder: ViewHolder, meiZi: GankRandomListBean.MeiZi) {
@@ -38,11 +36,7 @@ internal class GankRandomMeiZiViewBinder : ItemViewBinder<GankRandomListBean.Mei
         }
         holder.mImageView.requestLayout()
         meiZi.url.let {
-            Glide.with(holder.itemView.context)
-                    .load(it)
-                    .placeholder(R.drawable.ic_default_image)
-                    .skipMemoryCache(true).diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .into(holder.mImageView)
+            loadUrlImage(it, holder.mImageView, R.drawable.ic_default_image)
         }
         holder.itemView.setOnClickListener {
             val bean = DisplayMeiZiImageBean().apply {
@@ -60,8 +54,8 @@ internal class GankRandomMeiZiViewBinder : ItemViewBinder<GankRandomListBean.Mei
         }
     }
 
-    internal class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        internal val mImageView: RatioImageView
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val mImageView: RatioImageView
 
         init {
             mImageView = itemView.findViewById(R.id.image_iv)

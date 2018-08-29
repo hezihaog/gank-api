@@ -1,15 +1,11 @@
 package com.github.wally.gank.viewbinder
 
 import android.support.v7.widget.RecyclerView
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.TextView
-
 import com.github.wally.gank.R
 import com.github.wally.gank.bean.gank.GankSearchBean
-
-import me.drakeet.multitype.ItemViewBinder
+import com.github.wally.gank.ext.setViewText
 
 /**
  * Package: com.github.wally.gank.viewbinder
@@ -19,25 +15,27 @@ import me.drakeet.multitype.ItemViewBinder
  * Descirbe:所有类型的条目
  * Email: hezihao@linghit.com
  */
-internal class GankSearchAllCategoryViewBinder : ItemViewBinder<GankSearchBean.Msg, GankSearchAllCategoryViewBinder.ViewHolder>() {
+class GankSearchAllCategoryViewBinder : BaseItemViewBinder<GankSearchBean.Msg, GankSearchAllCategoryViewBinder.ViewHolder>() {
+    override fun onLayoutId(): Int {
+        return R.layout.item_gank_search_all_category
+    }
 
-    override fun onCreateViewHolder(inflater: LayoutInflater, parent: ViewGroup): ViewHolder {
-        val root = inflater.inflate(R.layout.item_gank_search_all_category, parent, false)
+    override fun onCreateViewHolder(root: View): ViewHolder {
         return ViewHolder(root)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, gankSearchAllCategory: GankSearchBean.Msg) {
         gankSearchAllCategory.desc.let {
-            holder.mDescTv.text = it
+            setViewText(holder.mDescTv, it)
         }
         gankSearchAllCategory.who.let {
-            holder.mWhoTv.text = it
+            setViewText(holder.mWhoTv, it)
         }
     }
 
-    internal class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        internal val mDescTv: TextView
-        internal val mWhoTv: TextView
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val mDescTv: TextView
+        val mWhoTv: TextView
 
         init {
             mDescTv = itemView.findViewById(R.id.desc_tv)

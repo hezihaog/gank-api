@@ -5,10 +5,10 @@ import android.support.v4.app.Fragment
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
-import android.view.View
 import com.github.wally.base.adapter.PageFragmentStateAdapter
 import com.github.wally.base.base.BaseMvpFragment
 import com.github.wally.base.base.BasePresenter
+import com.github.wally.base.base.IPresenter
 import com.github.wally.base.util.ToolBarHelper
 import com.github.wally.gank.R
 import com.github.wally.gank.enums.GankSearchCategory
@@ -26,11 +26,22 @@ import io.reactivex.Observable
  * Descirbe:搜索页面
  * Email: hezihao@linghit.com
  */
-class GankSearchFragment : BaseMvpFragment<GankSearchContract.Presenter, GankSearchContract.View>(), GankSearchContract.View {
-    private lateinit var mToolbar: Toolbar
-    private lateinit var mTabLayout: TabLayout
-    private lateinit var mViewPager: ViewPager
-
+class GankSearchFragment : BaseMvpFragment<GankSearchContract.View>(), GankSearchContract.View {
+    private val mToolbar: Toolbar
+        get() {
+            return findView(R.id.tool_bar)
+        }
+    private val mTabLayout: TabLayout
+        get() {
+            return findView(R.id.tab_layout)
+        }
+    private val mViewPager: ViewPager
+        get() {
+            return findView(R.id.view_pager)
+        }
+    private val presenter: GankSearchContract.Presenter by lazy {
+        GankSearchPresenter()
+    }
     private var mTabTitles: MutableList<String>? = null
     private var mFragments: MutableList<Fragment>? = null
     private lateinit var mPageAdapter: PageFragmentStateAdapter
@@ -43,13 +54,6 @@ class GankSearchFragment : BaseMvpFragment<GankSearchContract.Presenter, GankSea
         return R.layout.fragment_gank_search
     }
 
-    override fun onFindView(rootView: View) {
-        super.onFindView(rootView)
-        mToolbar = findView(R.id.tool_bar)
-        mTabLayout = findView(R.id.tab_layout)
-        mViewPager = findView(R.id.view_pager)
-    }
-
     override fun onBindViewContent() {
         super.onBindViewContent()
         ToolBarHelper.newBuilder(view, R.id.tool_bar, object : ToolBarHelper.ConfigCallbackAdapter() {
@@ -60,7 +64,7 @@ class GankSearchFragment : BaseMvpFragment<GankSearchContract.Presenter, GankSea
         })
                 .withNavigationIconDrawable(R.drawable.ic_action_back)
                 .withNavigationIconOnClick { activity!!.onBackPressed() }.build()
-        ImmersionBar.with(this).titleBar(mToolbar!!)
+        ImmersionBar.with(this).titleBar(mToolbar)
         mPageAdapter = PageFragmentStateAdapter(childFragmentManager)
         mViewPager.adapter = mPageAdapter
         //Tab较多，要切换为可混动的模式
@@ -73,8 +77,8 @@ class GankSearchFragment : BaseMvpFragment<GankSearchContract.Presenter, GankSea
         presenter.requestSearchCategoryList()
     }
 
-    override fun onCreatePresenter(): GankSearchContract.Presenter {
-        return GankSearchPresenter()
+    override fun onCreatePresenter(): MutableList<IPresenter<GankSearchContract.View>> {
+        return mutableListOf(presenter)
     }
 
     override fun showError(throwable: Throwable) {

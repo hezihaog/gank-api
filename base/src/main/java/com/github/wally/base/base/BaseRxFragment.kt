@@ -46,7 +46,7 @@ abstract class BaseRxFragment : SwipeBackFragment(), LayoutCallback, LifecyclePr
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootLayout = inflater.inflate(onLayoutId(), container, false)
-        mViewFinder = ViewFinder(context!!, rootLayout)
+        mViewFinder = ViewFinder(rootLayout.context, rootLayout)
         //设置为true才能回调onCreateOptionsMenu
         setHasOptionsMenu(true)
         return rootLayout

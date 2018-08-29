@@ -11,6 +11,7 @@ import android.view.animation.AccelerateInterpolator
 import com.github.chrisbanes.photoview.PhotoView
 import com.github.wally.base.base.BaseMvpFragment
 import com.github.wally.base.base.BasePresenter
+import com.github.wally.base.base.IPresenter
 import com.github.wally.base.util.ImageDisplayUtil
 import com.github.wally.base.util.ImageDownloadUtil
 import com.github.wally.base.util.ToolBarHelper
@@ -34,10 +35,19 @@ import java.io.File
  * Descirbe:
  * Email: hezihao@linghit.com
  */
-class GankMeiZiDetailFragment : BaseMvpFragment<GankMeiZiDetailContract.Presenter, GankMeiZiDetailContract.View>(), GankMeiZiDetailContract.View {
-    private lateinit var mImageView: PhotoView
+class GankMeiZiDetailFragment : BaseMvpFragment<GankMeiZiDetailContract.View>(), GankMeiZiDetailContract.View {
+    private val presenter:GankMeiZiDetailContract.Presenter by lazy {
+        GankMeiZiDetailPresenter()
+    }
+    private val mImageView: PhotoView
+        get() {
+            return findView(R.id.image_iv)
+        }
+    private val mLoadingView: RotateCircleProgressBar
+        get() {
+            return findView(R.id.loading_iv)
+        }
     private lateinit var mToolbar: Toolbar
-    private lateinit var mLoadingView: RotateCircleProgressBar
 
     private var isHideToolBar = false
     private var mImageBean: DisplayMeiZiImageBean? = null
@@ -49,12 +59,6 @@ class GankMeiZiDetailFragment : BaseMvpFragment<GankMeiZiDetailContract.Presente
 
     override fun onLayoutId(): Int {
         return R.layout.fragment_gank_meizi_detail
-    }
-
-    override fun onFindView(rootView: View) {
-        super.onFindView(rootView)
-        mImageView = findView(R.id.image_iv)
-        mLoadingView = findView(R.id.loading_iv)
     }
 
     override fun onBindViewContent() {
@@ -96,8 +100,8 @@ class GankMeiZiDetailFragment : BaseMvpFragment<GankMeiZiDetailContract.Presente
         return true
     }
 
-    override fun onCreatePresenter(): GankMeiZiDetailContract.Presenter {
-        return GankMeiZiDetailPresenter()
+    override fun onCreatePresenter(): MutableList<IPresenter<GankMeiZiDetailContract.View>> {
+        return mutableListOf(presenter)
     }
 
     override fun onLayoutAfter() {

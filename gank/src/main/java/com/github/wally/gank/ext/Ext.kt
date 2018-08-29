@@ -22,12 +22,8 @@ import com.github.wally.gank.R
  * Descirbe:
  * Email: hezihao@linghit.com
  */
-fun showToast(msg: String) {
-    Toast.makeText(getAppContext().applicationContext, msg, Toast.LENGTH_SHORT).show()
-}
-
-fun showToastLong(msg: String) {
-    Toast.makeText(getAppContext().applicationContext, msg, Toast.LENGTH_LONG).show()
+fun showToast(msg: String, duration: Int = Toast.LENGTH_SHORT) {
+    Toast.makeText(getAppContext().applicationContext, msg, duration).show()
 }
 
 fun Activity.showSnackMsg(msg: String) {

@@ -5,11 +5,10 @@ import android.support.design.widget.FloatingActionButton
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.StaggeredGridLayoutManager
-import android.view.View
-
 import com.github.wally.base.RecyclerViewHelper
 import com.github.wally.base.RecyclerViewScrollHelper
 import com.github.wally.base.base.BaseMvpListFragment
+import com.github.wally.base.base.IPresenter
 import com.github.wally.base.http.IDataSource
 import com.github.wally.base.util.PositionUtil
 import com.github.wally.base.widget.recyclerview.manager.delegate.FastScrollDelegate
@@ -19,7 +18,6 @@ import com.github.wally.gank.ext.findView
 import com.github.wally.gank.mvp.contract.GankMeiZiListContract
 import com.github.wally.gank.mvp.presenter.GankMeiZiListPresenter
 import com.github.wally.gank.viewbinder.GankMeiZiViewBinder
-
 import me.drakeet.multitype.MultiTypeAdapter
 
 /**
@@ -30,25 +28,25 @@ import me.drakeet.multitype.MultiTypeAdapter
  * Descirbe:
  * Email: hezihao@linghit.com
  */
-class GankMeiZiListFragment : BaseMvpListFragment<GankMeiZiListContract.Presenter, GankMeiZiListContract.View>(), GankMeiZiListContract.View {
+class GankMeiZiListFragment : BaseMvpListFragment<GankMeiZiListContract.View>(), GankMeiZiListContract.View {
     companion object {
         private var KEY = "key_position"
     }
-
+    private val mFloatingActionButton: FloatingActionButton
+        get() {
+            return findView(R.id.floating_action_btn)
+        }
+    private val presenter:GankMeiZiListContract.Presenter by lazy {
+        GankMeiZiListPresenter()
+    }
     private var mLastListPosition: Int = 0
-    private lateinit var mFloatingActionButton: FloatingActionButton
 
     override fun onLayoutId(): Int {
         return R.layout.fragment_gank_mei_zi_list
     }
 
-    override fun onFindView(rootView: View) {
-        super.onFindView(rootView)
-        mFloatingActionButton = findView(R.id.floating_action_btn)
-    }
-
-    override fun onCreatePresenter(): GankMeiZiListContract.Presenter {
-        return GankMeiZiListPresenter()
+    override fun onCreatePresenter(): MutableList<IPresenter<GankMeiZiListContract.View>> {
+        return mutableListOf(presenter)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -60,7 +58,7 @@ class GankMeiZiListFragment : BaseMvpListFragment<GankMeiZiListContract.Presente
         super.onViewStateRestored(savedInstanceState)
         if (savedInstanceState != null) {
             mLastListPosition = savedInstanceState.getInt(KEY)
-            recyclerView!!.scrollToPosition(mLastListPosition)
+            recyclerView.scrollToPosition(mLastListPosition)
         }
     }
 
@@ -95,16 +93,16 @@ class GankMeiZiListFragment : BaseMvpListFragment<GankMeiZiListContract.Presente
     override fun onRecyclerViewHelperReady(recyclerViewHelper: RecyclerViewHelper) {
         super.onRecyclerViewHelperReady(recyclerViewHelper)
         //滚动监听
-        recyclerViewHelper!!.addScrollListener(object : RecyclerViewScrollHelper.SimpleScrollAdapter() {
+        recyclerViewHelper.addScrollListener(object : RecyclerViewScrollHelper.SimpleScrollAdapter() {
 
             override fun onScrolledToUp() {
                 super.onScrolledToUp()
-                mFloatingActionButton!!.hide()
+                mFloatingActionButton.hide()
             }
 
             override fun onScrolledToDown() {
                 super.onScrolledToDown()
-                mFloatingActionButton!!.show()
+                mFloatingActionButton.show()
             }
         })
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {

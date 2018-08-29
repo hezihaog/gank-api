@@ -8,7 +8,6 @@ import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
-import android.view.View
 import com.github.wally.base.base.BaseRxFragment
 import com.github.wally.base.util.ToolBarHelper
 import com.github.wally.gank.R
@@ -26,17 +25,17 @@ import me.yokeyword.fragmentation.SupportActivity
  * Email: hezihao@linghit.com
  */
 class MainFragment : BaseRxFragment() {
-    private lateinit var mDrawerLayout: DrawerLayout
-    private lateinit var mNavigationView: NavigationView
+    private val mDrawerLayout: DrawerLayout
+        get() {
+            return findView(R.id.drawer_layout)
+        }
+    private val mNavigationView: NavigationView
+        get() {
+            return findView(R.id.navigation_view)
+        }
 
     override fun onLayoutId(): Int {
         return R.layout.fragment_main
-    }
-
-    override fun onFindView(rootView: View) {
-        super.onFindView(rootView)
-        mDrawerLayout = findView(R.id.drawer_layout)
-        mNavigationView = findView(R.id.navigation_view)
     }
 
     override fun onBindViewContent() {

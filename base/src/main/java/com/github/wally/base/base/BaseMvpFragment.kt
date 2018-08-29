@@ -16,13 +16,13 @@ import com.github.wally.base.util.WaitDialogHelper
  * Descirbe:
  * Email: hezihao@linghit.com
  */
-abstract class BaseMvpFragment<P : IPresenter<V>, V : IView> : BaseRxFragment(), IView {
-    protected lateinit var presenter: P
+abstract class BaseMvpFragment<V : IView> : BaseRxFragment(), IView {
+    protected lateinit var presenters: MutableList<IPresenter<V>>
     protected lateinit var mWaitDialogHelper: WaitDialogHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        presenter = onCreatePresenter()
+        presenters = onCreatePresenter()
     }
 
     override fun onAttach(activity: Activity?) {
@@ -36,13 +36,15 @@ abstract class BaseMvpFragment<P : IPresenter<V>, V : IView> : BaseRxFragment(),
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        presenter.attachView(this as V)
+        presenters.forEach {
+            it.attachView(this as V)
+        }
         super.onViewCreated(view, savedInstanceState)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        presenter.let {
+        presenters.forEach {
             it.detachView()
         }
     }
@@ -50,7 +52,7 @@ abstract class BaseMvpFragment<P : IPresenter<V>, V : IView> : BaseRxFragment(),
     /**
      * 创建Presenter回调
      */
-    protected abstract fun onCreatePresenter(): P
+    protected abstract fun onCreatePresenter(): MutableList<IPresenter<V>>
 
     override fun showLoading(msg: String?) {
         mWaitDialogHelper.let {
