@@ -1,1 +1,1 @@
-include ':gank', ':base'
+include ':gank', ':base', ':image-loader'

@@ -1,4 +1,4 @@
-package com.github.wally.base.image
+package me.wally.imageloader
 
 /**
  * Package: com.github.wally.base.image

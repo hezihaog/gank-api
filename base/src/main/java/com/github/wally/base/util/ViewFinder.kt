@@ -30,8 +30,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import com.github.wally.base.image.ImageLoader
-import com.github.wally.base.image.LoadImageCallback
+import me.wally.imageloader.ImageLoader
+import me.wally.imageloader.LoadImageCallback
 
 
 /**
